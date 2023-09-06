@@ -12,7 +12,7 @@ variables:
   # Container registry service connection established during pipeline creation
   
   imageRepository: 'stuffpackerwebtest' 
-  dockerfilePath: 'src/WebSiteDockerfile'
+  dockerfilePath: '**/WebSiteDockerfile'
   tag: '$(Build.BuildId)'
 
   # Agent VM image name
@@ -35,7 +35,7 @@ stages:
       inputs:
         command: build
         repository: $(imageRepository)
-        dockerfile: $(dockerfilePath)#        
+        dockerfile: $(dockerfilePath)
         tags: |
           $(tag)  
     - task: ECRPushImage@1
