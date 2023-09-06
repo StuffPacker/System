@@ -9,21 +9,32 @@ resources:
 - repo: self
 
 variables:
-  tag: '$(Build.BuildId)'
+  # Container registry service connection established during pipeline creation
+  dockerfilePath: '**/WebSiteDockerfile'
 
 stages:
 - stage: Build
-  displayName: Build image
+  displayName: Build
   jobs:
   - job: Build
     displayName: Build
     pool:
-      vmImage: ubuntu-latest
+      vmImage: $(vmImageName)
     steps:
     - task: Docker@2
-      displayName: Build an image
+      displayName: Build and push an image to container registry
       inputs:
         command: build
-        dockerfile: '**/WebSiteDockerfile'
+        dockerfile: $(dockerfilePath)
         tags: |
           $(tag)
+
+    - task: ECRPushImage@1
+      inputs:
+        awsCredentials: 'AwsContainer'
+        regionName: 'eu-west-1'
+        imageSource: 'imagename'
+        sourceImageName: 'StuffPackerWebSiteTest'
+        repositoryName: 'StuffPackerWebSiteTest'
+        autoCreateRepository: true
+        forceDockerNamingConventions: true
