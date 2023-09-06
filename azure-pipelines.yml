@@ -35,7 +35,7 @@ stages:
       inputs:
         command: build
         repository: $(imageRepository)
-        dockerfile: $(dockerfilePath)#        
+        dockerfile: $(dockerfilePath)
         tags: |
           $(tag)  
     - task: ECRPushImage@1
