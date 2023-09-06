@@ -12,7 +12,7 @@ variables:
   # Container registry service connection established during pipeline creation
   
   imageRepository: 'stuffpackerwebtest' 
-  dockerfilePath: '**/WebSiteDockerfile'
+  dockerfilePath: 'src/WebSiteDockerfile'
   tag: '$(Build.BuildId)'
 
   # Agent VM image name
