@@ -1,0 +1,49 @@
+@model string
+@{
+    Layout = "_Layout";
+    
+}
+<div id="PackingList">
+    <h1 data-bind="text:Name" class="page-header">List</h1>
+     <!-- ko foreach: Groups -->
+             <div class="row" style="background-color: #0a58ca;">
+                        <div class="container-fluid" style="background-color: #0dcaf0;">
+                            <div class="row" style="background-color: #1a1e21; color: white;"><h2 data-bind="text:Name"></h2></div>
+                            <div class="row">
+                                <div class="table-responsive">
+                                    <table class="table table-striped">
+                                        <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Name</th>
+                                            <th>Weight</th>
+                                            <th>Amount</th>
+                                            <th>#</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody data-bind="foreach: Items">
+                                        <tr>
+                                            <td>1,001</td>
+                                            <td><span data-bind="text:Name"></span></td>
+                                             <td><span data-bind="text:Weight"></span>&nbsp;<span data-bind="text:WeightSufix"></span></td>
+                                            <td>fff</td>
+                                            <td>dolor</td>
+                                            <td>sit</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                
+                            </div>    
+                        </div>
+                    </div>
+        <!-- /ko -->
+</div> 
+
+@section footerjs
+{
+    <script src="/js/ViewModel/PackingListViewModel.js"></script>
+    <script type="text/javascript">  
+  ko.applyBindings(PackingListViewModel('@Model'), document.getElementById('PackingList'));  
+  </script>
+}

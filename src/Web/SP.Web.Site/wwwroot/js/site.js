@@ -1,4 +1,26 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿function ManageResultData(obj) {
+    const code = obj.Meta.Code;
+    if (code == "200") {
+        return obj.ResultData;
+    }
+    if (code == "400") {
+        alert("Error valedating data", obj.ResultData);
+        return null;
+    }
+    if (code == "404") {
+        window.location.replace("/404");
+    }
+    else {
+        alert("A error has accured, please try later");
+    }
+}
+function SPApiGet(url, callback) {
 
-// Write your JavaScript code.
+    fetch(url)
+        .then(response => response.json())
+        .then(response => {
+
+            var obj = ManageResultData(response);
+            callback(obj);
+        });
+}

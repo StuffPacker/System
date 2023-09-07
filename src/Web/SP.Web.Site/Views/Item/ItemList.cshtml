@@ -1,0 +1,43 @@
+@{
+    Layout = "_Layout";
+}
+<div id="ItemList">
+    
+
+    <h1 class="page-header">Items</h1>
+    <h2 class="sub-header">All items</h2>
+    
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Weight</th>
+                <th>test</th>
+                <th>test2</th>
+            </tr>
+            </thead>
+            <tbody data-bind="foreach: Items">
+            <tr>
+                <td>1,001</td>
+                <td><span data-bind="text:Name"></span></td>
+                <td><span data-bind="text:Weight"></span>&nbsp;<span data-bind="text:WeightSufix"></span></td>
+                <td>fff</td>
+                <td>dolor</td>
+                <td>sit</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section footerjs
+{
+    <script src="/js/ViewModel/ItemListViewModel.js"></script>
+    <script type="text/javascript">  
+  ko.applyBindings(ItemListViewModel, document.getElementById('ItemList'));  
+  </script>
+}
+
+
