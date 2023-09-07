@@ -1,8 +1,20 @@
+using System.Text.Json;
+using Microsoft.AspNetCore.Mvc.Formatters;
+using SP.Web.Site.Features.Item;
+using SP.Web.Site.Features.PackingList;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
-
+builder.Services.AddControllers().AddJsonOptions(options =>
+{
+    // Global settings: use the defaults, but serialize enums as strings
+    // (because it really should be the default)
+    options.JsonSerializerOptions.PropertyNamingPolicy = null;
+});
+builder.Services.AddSingleton<IItemService, ItemServiceFake>();
+builder.Services.AddSingleton<IPackingListService, PackingListServiceFake>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
