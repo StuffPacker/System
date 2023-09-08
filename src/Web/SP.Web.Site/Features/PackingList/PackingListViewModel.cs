@@ -9,6 +9,7 @@ public class PackingListViewModel
         Id = model.Id.ToString();
         Name = model.Name;
         Groups = GetGroups(model.Groups);
+        UserId = model.UserId.ToString();
     }
 
     public string Id { get; set; } = string.Empty;
@@ -16,6 +17,8 @@ public class PackingListViewModel
     public string Name { get; set; } = string.Empty;
 
     public List<PackingListGroupViewModel> Groups { get; set; } = null!;
+
+    public string UserId { get; set; } = string.Empty;
 
     private List<PackingListGroupViewModel> GetGroups(List<PackListGroupModel> modelGroups)
     {

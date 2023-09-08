@@ -7,4 +7,6 @@ public class PackingListModel
     public string Name { get; set; } = string.Empty;
 
     public List<PackListGroupModel> Groups { get; set; } = null!;
+
+    public Guid UserId { get; set; }
 }
