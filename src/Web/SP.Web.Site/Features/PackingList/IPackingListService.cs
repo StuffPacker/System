@@ -4,5 +4,5 @@ namespace SP.Web.Site.Features.PackingList;
 
 public interface IPackingListService
 {
-    PackingListViewModel GetPackingListById(Guid parse);
+    PackingListViewModel GetPackingListById(Guid id, Guid userId);
 }
