@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:  
+  mssql:
+    image: mcr.microsoft.com/azure-sql-edge-developer
+    restart: always
+    ports:
+      - "41433:1433"
+    environment:
+      SA_PASSWORD: "8yNMaSUTtiNNVNvS"
+      ACCEPT_EULA: "Y"
+ 
