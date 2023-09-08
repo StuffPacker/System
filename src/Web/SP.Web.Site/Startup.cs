@@ -21,13 +21,14 @@ public class Startup
 
     public IConfiguration Configuration { get; }
 
+    public string ConnectionString { get; set; } = null!;
+
     public void ConfigureServices(IServiceCollection services)
     {
-        var connectionString = Configuration.GetConnectionString("SPWebSiteDataContextConnection") ?? throw new InvalidOperationException("Connection string 'SPWebSiteDataContextConnection' not found.");
-        Console.WriteLine(connectionString);
-        services.AddDbContext<SPWebSiteDataContext>(options => options.UseSqlServer(connectionString));
+        ConnectionString = Configuration.GetConnectionString("SPWebSiteDataContextConnection") ?? throw new InvalidOperationException("Connection string 'SPWebSiteDataContextConnection' not found.");
+        services.AddDbContext<SPWebSiteDataContext>(options => options.UseSqlServer(ConnectionString));
 
-        services.AddDbContext<SPWebSiteDataContext>(options => options.UseSqlServer(connectionString, ef => ef.MigrationsAssembly(typeof(SPWebSiteDataContext).Assembly.FullName)));
+        services.AddDbContext<SPWebSiteDataContext>(options => options.UseSqlServer(ConnectionString, ef => ef.MigrationsAssembly(typeof(SPWebSiteDataContext).Assembly.FullName)));
 
         services.AddIdentity<StuffPackerUser, IdentityRole>().AddEntityFrameworkStores<SPWebSiteDataContext>().AddDefaultTokenProviders();
 
@@ -45,6 +46,8 @@ public class Startup
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
+        var logger = app.ApplicationServices.GetService<ILogger<Program>>();
+        logger!.LogWarning("connstring " + ConnectionString);
         if (!env.IsDevelopment())
         {
             app.UseExceptionHandler("/Error");
