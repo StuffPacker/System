@@ -24,7 +24,7 @@ public class Startup
     public void ConfigureServices(IServiceCollection services)
     {
         var connectionString = Configuration.GetConnectionString("SPWebSiteDataContextConnection") ?? throw new InvalidOperationException("Connection string 'SPWebSiteDataContextConnection' not found.");
-
+        Console.WriteLine(connectionString);
         services.AddDbContext<SPWebSiteDataContext>(options => options.UseSqlServer(connectionString));
 
         services.AddDbContext<SPWebSiteDataContext>(options => options.UseSqlServer(connectionString, ef => ef.MigrationsAssembly(typeof(SPWebSiteDataContext).Assembly.FullName)));
