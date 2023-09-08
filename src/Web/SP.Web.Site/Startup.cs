@@ -41,6 +41,10 @@ public class Startup
             // (because it really should be the default)
             options.JsonSerializerOptions.PropertyNamingPolicy = null;
         });
+        services.ConfigureApplicationCookie(conf =>
+        {
+            conf.LoginPath = "/login";
+        });
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
