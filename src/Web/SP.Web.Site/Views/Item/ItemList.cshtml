@@ -6,6 +6,10 @@
 
     <h1 class="page-header">Items</h1>
     <input type="button" data-bind="click:Create" value="Create New Item"></input>
+  
+    
+    
+    @await Html.PartialAsync("ItemEdit")
     <h2 class="sub-header">All items</h2>
     
     <div class="table-responsive">
@@ -15,18 +19,15 @@
                 <th>#</th>
                 <th>Name</th>
                 <th>Weight</th>
-                <th>test</th>
-                <th>test2</th>
+                <th></th>
             </tr>
             </thead>
             <tbody data-bind="foreach: Items">
             <tr>
-                <td>1,001</td>
+                <td>&nbsp;</td>
                 <td><span data-bind="text:Name"></span></td>
                 <td><span data-bind="text:Weight"></span>&nbsp;<span data-bind="text:WeightSufix"></span></td>
-                <td>fff</td>
-                <td>dolor</td>
-                <td>sit</td>
+                <td><input type="button" value="edit" data-bind="click:Edit"/></td>
             </tr>
             </tbody>
         </table>

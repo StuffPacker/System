@@ -36,4 +36,15 @@ public class ItemApiController : ControllerBase
             ResultData = items
         });
     }
+
+    [HttpPut("{id}")]
+    public async Task<ActionResult> Update(string id, [FromBody] ItemEditInputViewModel model)
+    {
+        await _itemService.UpdateItem(id, GetUserId(), model);
+        return Ok(new ResultJsonModel
+        {
+            Meta = new MetaModel { Code = 200 },
+            ResultData = string.Empty
+        });
+    }
 }

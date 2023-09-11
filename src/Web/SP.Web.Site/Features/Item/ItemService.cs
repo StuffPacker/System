@@ -1,3 +1,4 @@
+using System.Security.Authentication;
 using SP.Shared.Common.Feature.Database.UserItem;
 using SP.Shared.Common.Feature.Item.Model;
 
@@ -35,5 +36,17 @@ public class ItemService : IItemService
         };
         var item = await _userItemRepository.Create(model);
         return new ItemViewModel(item);
+    }
+
+    public async Task UpdateItem(string id, Guid userId, ItemEditInputViewModel inputModel)
+    {
+        var model = await _userItemRepository.GetById(id);
+        if (model.UserId != userId)
+        {
+            throw new AuthenticationException();
+        }
+
+        model.Name = inputModel.Name;
+        await _userItemRepository.Update(model);
     }
 }
