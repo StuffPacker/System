@@ -56,3 +56,16 @@ function SPApiPut(url,data, callback) {
             callback(obj);
         });
 }
+function SPApiDelete(url, callback) {
+
+    fetch(url,
+        {
+            method: 'DELETE'
+        })
+        .then(response => response.json())
+        .then(response => {
+
+            var obj = ManageResultData(response);
+            callback(obj);
+        });
+}

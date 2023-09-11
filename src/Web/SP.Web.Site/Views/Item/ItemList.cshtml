@@ -27,7 +27,10 @@
                 <td>&nbsp;</td>
                 <td><span data-bind="text:Name"></span></td>
                 <td><span data-bind="text:Weight"></span>&nbsp;<span data-bind="text:WeightSufix"></span></td>
-                <td><input type="button" value="edit" data-bind="click:Edit"/></td>
+                <td>
+                    <input type="button" value="edit" data-bind="click:Edit"/>
+                    <input type="button" value="Delete" class="btn-danger" data-bind="click:Delete"/>
+                </td>
             </tr>
             </tbody>
         </table>
