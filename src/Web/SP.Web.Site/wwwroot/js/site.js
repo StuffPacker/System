@@ -40,3 +40,19 @@ function SPApiGet(url, callback) {
             callback(obj);
         });
 }
+function SPApiPut(url,data, callback) {
+    fetch(url, {
+        method: 'PUT',
+        cache: 'no-cache',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+
+        .then(response => response.json())
+        .then(response => {
+            var obj = ManageResultData(response);
+            callback(obj);
+        });
+}
