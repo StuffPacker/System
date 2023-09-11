@@ -2,7 +2,22 @@ function ItemListViewModel() {
     var self = this;
     var Items = [];
     self.Items = ko.observableArray(Items);
-    GetAllItems(self);    
+    GetAllItems(self);   
+    self.Create = function ()
+    {
+        CreateUserItem(self);
+    }
+}
+function CreateUserItem(self)
+{
+    SPApiPost('/api/v1/items/',"", function (obj) {
+        if (obj != null) {            
+                AddItem(self,obj);            
+        }
+    });
+
+
+    
 }
 function GetAllItems(self)
 {

@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using SP.Database.Mongo;
 using SP.Web.Site.Data;
 using SP.Web.Site.Features.Item;
 using SP.Web.Site.Features.PackingList;
@@ -17,6 +18,10 @@ public class Startup
         var migrationConnection =
             Configuration.GetConnectionString("SPWebSiteDataContextConnection");
         new StuffPackingDbContextMigrator().Migrate(null!, migrationConnection!);
+
+        // var mongoDbDatabaseOptions = new MongoDbDatabaseOptions();
+        // configuration.GetSection("MongoDbDatabaseOptions").Bind(mongoDbDatabaseOptions);
+        // var test = mongoDbDatabaseOptions.MongoDbConnectionString;
     }
 
     public IConfiguration Configuration { get; }
@@ -32,7 +37,7 @@ public class Startup
 
         services.AddIdentity<StuffPackerUser, IdentityRole>().AddEntityFrameworkStores<SPWebSiteDataContext>().AddDefaultTokenProviders();
 
-        services.AddSingleton<IItemService, ItemServiceFake>();
+        services.AddSingleton<IItemService, ItemService>();
         services.AddSingleton<IPackingListService, PackingListServiceFake>();
         services.AddRazorPages();
         services.AddControllers().AddJsonOptions(options =>
@@ -45,6 +50,7 @@ public class Startup
         {
             conf.LoginPath = "/login";
         });
+        services.AddInfrastructureMongoDb(Configuration);
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -5,7 +5,7 @@ namespace SP.Web.Site;
 
 public class ControllerBase : Controller
 {
-    public Guid GetUserId()
+    protected Guid GetUserId()
     {
         if (User.FindFirst(ClaimTypes.NameIdentifier) != null)
         {
