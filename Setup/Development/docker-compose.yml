@@ -9,4 +9,12 @@ services:
     environment:
       SA_PASSWORD: "8yNMaSUTtiNNVNvS"
       ACCEPT_EULA: "Y"
+  mongodb:
+    image: mongo
+    container_name: StuffPackerDev
+    hostname: azurite
+    restart: always
+    ports:
+      - "41017:27017"
+
  

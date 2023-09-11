@@ -14,6 +14,22 @@
         alert("A error has accured, please try later");
     }
 }
+function SPApiPost(url,data, callback) {
+    fetch(url, {
+        method: 'POST',
+        cache: 'no-cache',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+
+        .then(response => response.json())
+        .then(response => {
+            var obj = ManageResultData(response);
+            callback(obj);
+        });
+}
 function SPApiGet(url, callback) {
 
     fetch(url)
