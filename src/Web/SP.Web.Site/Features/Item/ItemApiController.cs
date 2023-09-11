@@ -37,6 +37,17 @@ public class ItemApiController : ControllerBase
         });
     }
 
+    [HttpDelete("{id}")]
+    public async Task<ActionResult> Delete(string id)
+    {
+        await _itemService.Delete(id, GetUserId());
+        return Ok(new ResultJsonModel
+        {
+            Meta = new MetaModel { Code = 200 },
+            ResultData = string.Empty
+        });
+    }
+
     [HttpPut("{id}")]
     public async Task<ActionResult> Update(string id, [FromBody] ItemEditInputViewModel model)
     {

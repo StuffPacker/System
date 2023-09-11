@@ -49,4 +49,15 @@ public class ItemService : IItemService
         model.Name = inputModel.Name;
         await _userItemRepository.Update(model);
     }
+
+    public async Task Delete(string id, Guid userId)
+    {
+        var model = await _userItemRepository.GetById(id);
+        if (model.UserId != userId)
+        {
+            throw new AuthenticationException();
+        }
+
+        await _userItemRepository.Delete(id);
+    }
 }

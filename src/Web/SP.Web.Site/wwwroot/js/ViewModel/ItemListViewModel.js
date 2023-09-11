@@ -39,6 +39,15 @@ function AddItem(self,dto)
     item.Name=dto.Name;
     item.Weight=dto.Weight;
     item.WeightSufix=dto.WeightSufix;
+    item.Delete = function ()
+    {
+        SPApiDelete('/api/v1/items/'+dto.Id,function (obj) {
+            if (obj != null) {
+                self.Items.removeAll();
+                GetAllItems(self);                
+            }
+        });
+    }
     item.Edit = function ()
     {
         self.EditItem(true);

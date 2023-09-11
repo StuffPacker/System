@@ -7,4 +7,6 @@ public interface IItemService
     Task<ItemViewModel> CreateItem(Guid userId);
 
     Task UpdateItem(string id, Guid userId, ItemEditInputViewModel inputModel);
+
+    Task Delete(string id, Guid getUserId);
 }
