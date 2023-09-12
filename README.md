@@ -30,12 +30,18 @@ Download project
 ```
 Step 2 
 ```
-Change Connectionstrings if needed 
+Add Enviroment variables 
 ```
 Step 3 
 ```
+Run Docker compose
+```
+Step 4
+```
 Run app
 ```
+## Test site
+- [Test site](http://test.stuffpacker.net)
 
 ## Sponsors & Backers
 Stuff packer is not owned by any company or anything like that.
