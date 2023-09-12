@@ -1,4 +1,4 @@
-namespace SP.Web.Site.Features.PackingList;
+namespace SP.Shared.Common.Feature.PackingList.Model;
 
 public class PackingListGroupItemModel
 {
@@ -7,4 +7,6 @@ public class PackingListGroupItemModel
     public decimal Weight { get; set; }
 
     public string WeightSufix { get; set; } = string.Empty;
+
+    public string RefId { get; set; } = string.Empty;
 }

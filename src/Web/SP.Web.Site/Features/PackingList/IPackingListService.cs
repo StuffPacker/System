@@ -4,5 +4,11 @@ namespace SP.Web.Site.Features.PackingList;
 
 public interface IPackingListService
 {
-    PackingListViewModel GetPackingListById(Guid id, Guid userId);
+    Task<PackingListViewModel> GetPackingListById(string id, Guid userId);
+
+    Task<List<PackingListViewModel>> GetPackingLists(Guid userId);
+
+    Task<PackingListViewModel> CreatePackingList(Guid userId);
+
+    Task Delete(string id, Guid getUserId);
 }
