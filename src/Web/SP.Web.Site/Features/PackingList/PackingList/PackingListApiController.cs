@@ -17,9 +17,9 @@ public class PackingListApiController : ControllerBase
     }
 
     [Route("{id}")]
-    public ActionResult PackingList(string id)
+    public async Task<ActionResult> PackingList(string id)
     {
-        var result = _packingListService.GetPackingListById(Guid.Parse(id), GetUserId());
+        var result = await _packingListService.GetPackingListById(id, GetUserId());
         return Ok(new ResultJsonModel
         {
             Meta = new MetaModel { Code = 200 },

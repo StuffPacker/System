@@ -38,7 +38,7 @@ public class Startup
         services.AddIdentity<StuffPackerUser, IdentityRole>().AddEntityFrameworkStores<SPWebSiteDataContext>().AddDefaultTokenProviders();
 
         services.AddSingleton<IItemService, ItemService>();
-        services.AddSingleton<IPackingListService, PackingListServiceFake>();
+        services.AddSingleton<IPackingListService, PackingListService>();
         services.AddRazorPages();
         services.AddControllers().AddJsonOptions(options =>
         {

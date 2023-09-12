@@ -1,0 +1,43 @@
+@{
+    Layout = "_Layout";
+}
+<div id="PackingLists">
+    
+
+    <h1 class="page-header">Packing lists</h1>
+    <input type="button" data-bind="click:Create" value="Create New Item"></input>
+  
+    
+    
+    @* @await Html.PartialAsync("ItemEdit") *@
+    <h2 class="sub-header">All packing lists</h2>
+    
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody data-bind="foreach: PackingLists">
+            <tr>
+                <td>&nbsp;</td>
+                <td><a data-bind="attr:{href:Link, title:Name},text:Name"></a></td>
+                <td>
+                    <input type="button" value="Delete" class="btn-danger" data-bind="click:Delete"/>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section footerjs
+{
+    <script src="/js/ViewModel/PackingListsViewModel.js"></script>
+    <script type="text/javascript">  
+  ko.applyBindings(PackingListsViewModel, document.getElementById('PackingLists'));  
+  </script>
+}
