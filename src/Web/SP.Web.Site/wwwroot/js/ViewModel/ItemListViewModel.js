@@ -54,10 +54,12 @@ function AddItem(self,dto)
         var m = self.EditModel();
         m.Name=dto.Name;
         m.Id = dto.Id;
+        m.Weight = dto.Weight;
         m.Save = function ()
         {
             var data= {};
-            data.Name=m.Name;            
+            data.Name=m.Name; 
+            data.Weight=m.Weight;
             SPApiPut('/api/v1/items/'+m.Id,data, function (obj) {
                 if (obj != null) {
                     self.Items.removeAll();
@@ -70,6 +72,7 @@ function AddItem(self,dto)
             {
                 m.Name="";
                 m.Id = "";
+                m.Weight="";
                 self.EditItem(false);
             };
         self.EditModel(m);
