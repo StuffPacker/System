@@ -47,6 +47,7 @@ public class ItemService : IItemService
         }
 
         model.Name = inputModel.Name;
+        model.ChangeWeight(inputModel.Weight);
         await _userItemRepository.Update(model);
     }
 

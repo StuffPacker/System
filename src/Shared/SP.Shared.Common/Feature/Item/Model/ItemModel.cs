@@ -11,4 +11,11 @@ public class ItemModel
     public string WeightSufix { get; set; } = string.Empty;
 
     public Guid UserId { get; set; }
+
+    public void ChangeWeight(string weight)
+    {
+        weight = weight.Replace(".", ",");
+        Weight = Convert.ToDecimal(weight);
+        Weight = Math.Round(Weight, 2);
+    }
 }
