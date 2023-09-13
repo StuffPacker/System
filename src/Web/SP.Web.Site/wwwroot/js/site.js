@@ -69,3 +69,23 @@ function SPApiDelete(url, callback) {
             callback(obj);
         });
 }
+function SPApiPatch(url, data, callback) {
+    fetch(url, {
+        method: 'PATCH',
+       
+        cache: 'no-cache',
+       
+        headers: {
+            'Content-Type': 'application/json'
+        },
+      
+        body: JSON.stringify(data) 
+    })
+
+        .then(response => response.json())
+        .then(response => {
+
+            var obj = ManageResultData(response);
+            callback(obj);
+        });
+}

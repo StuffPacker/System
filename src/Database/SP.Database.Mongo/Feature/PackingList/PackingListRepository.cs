@@ -89,7 +89,8 @@ public class PackingListRepository : DataBaseFetchBase, IPackingListRepository
             list.Add(new PackingListGroupsEntity
             {
                 Name = item.Name,
-                Items = GetItems(item.Items)
+                Items = GetItems(item.Items),
+                Id = item.Id
             });
         }
 
@@ -106,7 +107,8 @@ public class PackingListRepository : DataBaseFetchBase, IPackingListRepository
                 Name = item.Name,
                 Weight = item.Weight,
                 WeightSufix = item.WeightSufix,
-                RefId = item.RefId
+                RefId = item.RefId,
+                Quantity = item.Quantity
             });
         }
 
@@ -132,6 +134,7 @@ public class PackingListRepository : DataBaseFetchBase, IPackingListRepository
             list.Add(new PackListGroupModel
             {
                 Name = item.Name,
+                Id = item.Id,
                 Items = GetItemsModel(item.Items)
             });
         }
@@ -149,7 +152,8 @@ public class PackingListRepository : DataBaseFetchBase, IPackingListRepository
                 Name = item.Name,
                 RefId = item.RefId,
                 WeightSufix = item.WeightSufix,
-                Weight = item.Weight
+                Weight = item.Weight,
+                Quantity = item.Quantity
             });
         }
 
