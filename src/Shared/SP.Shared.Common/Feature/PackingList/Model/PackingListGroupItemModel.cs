@@ -9,4 +9,6 @@ public class PackingListGroupItemModel
     public string WeightSufix { get; set; } = string.Empty;
 
     public string RefId { get; set; } = string.Empty;
+
+    public int Quantity { get; set; }
 }

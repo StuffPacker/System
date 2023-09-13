@@ -9,4 +9,6 @@ public interface IItemService
     Task UpdateItem(string id, Guid userId, ItemEditInputViewModel inputModel);
 
     Task Delete(string id, Guid getUserId);
+
+    Task<ItemViewModel> GetItemById(string id, Guid userId);
 }

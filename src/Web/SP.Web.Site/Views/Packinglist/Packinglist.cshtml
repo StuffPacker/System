@@ -4,36 +4,57 @@
     
 }
 <div id="PackingList">
-    <h1 data-bind="text:Name" class="page-header">List</h1>
+    <h1 data-bind="text:Name, hidden:EditName, click:ChangeEditNameState" class="page-header">List</h1>
+    <div data-bind="visible:EditName">
+        <input type="text" data-bind="value:Name"/>
+        <input type="button" class="btn-primary" value="Save" data-bind="click:SaveName"/>
+        <input type="button" class="btn-primary" value="Cancel" data-bind="click:CancelName"/>
+    </div>
+    <input type="button" class="btn-primary" value="Add group" data-bind="click:AddNewGroup"></input>
      <!-- ko foreach: Groups -->
-             <div class="row" style="background-color: #0a58ca;">
-                        <div class="container-fluid" style="background-color: #0dcaf0;">
-                            <div class="row" style="background-color: #1a1e21; color: white;"><h2 data-bind="text:Name"></h2></div>
+             <div class="row">
+                        <div class="container-fluid">
+                            <div class="row" style="background-color: #1a1e21; color: white;">
+                                <div style="float: left;">
+                                    <h2  data-bind="text:Name, hidden:EditGroupName, click:ChangeEditGroupNameState"></h2>
+                                    <div data-bind="visible:EditGroupName">
+                                        <input type="text" data-bind="value:Name" style="color: black;"/>
+                                        <input type="button" class="btn-primary" value="Save" data-bind="click:Save"/>
+                                         <input type="button" class="btn-primary" value="Cancel" data-bind="click:Cancel"/>
+                                    </div>
+                                </div>
+                                <div style="float: right;">
+                                    <input type="button" class="btn-danger" value="Delete" data-bind="click:Delete"/>
+                                </div>
+                            </div>
                             <div class="row">
+                                <div style="background-color: lightgrey">
+                                    <ul data-bind="foreach: ExistingItems">
+                                        <li><span data-bind="text:Name"></span> <input data-bind="click: AddToList" type="button" value="Add to list"/></li>
+                                  
+                                        </ul>
+                                </div>
                                 <div class="table-responsive">
                                     <table class="table table-striped">
                                         <thead>
                                         <tr>
-                                            <th>#</th>
                                             <th>Name</th>
                                             <th>Weight</th>
-                                            <th>Amount</th>
+                                            <th>Quantity</th>
                                             <th>#</th>
                                         </tr>
                                         </thead>
                                         <tbody data-bind="foreach: Items">
                                         <tr>
-                                            <td>1,001</td>
-                                            <td><span data-bind="text:Name"></span></td>
-                                             <td><span data-bind="text:Weight"></span>&nbsp;<span data-bind="text:WeightSufix"></span></td>
-                                            <td>fff</td>
-                                            <td>dolor</td>
-                                            <td>sit</td>
+                                            <td><a target="_blank" data-bind="attr:{href:LinkBack}"><span data-bind="text:Name"></span></a></td>
+                                            <td><span data-bind="text:Weight"></span>&nbsp;<span data-bind="text:WeightSufix"></span></td>
+                                            <td><span data-bind="text:Quantity"></span></td>
+                                            <td><input type="button" class="btn-danger" value="Delete" data-bind="click:Delete"/></td>
                                         </tr>
                                         </tbody>
                                     </table>
                                 </div>
-                                
+
                             </div>    
                         </div>
                     </div>

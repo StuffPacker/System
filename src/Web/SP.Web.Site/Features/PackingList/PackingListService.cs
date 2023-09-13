@@ -42,6 +42,7 @@ public class PackingListService : IPackingListService
             {
                 new PackListGroupModel
                 {
+                    Id = Guid.NewGuid().ToString(),
                     Name = "New Group",
                     Items = new List<PackingListGroupItemModel>()
                 }
@@ -61,6 +62,57 @@ public class PackingListService : IPackingListService
         }
 
         await _packingListRepository.Delete(id);
+    }
+
+    public async Task Update(PackingListViewModel viewModel)
+    {
+        var model = GetModel(viewModel);
+        await _packingListRepository.Update(model);
+    }
+
+    private PackingListModel GetModel(PackingListViewModel viewModel)
+    {
+        return new PackingListModel
+        {
+            UserId = Guid.Parse(viewModel.UserId),
+            Name = viewModel.Name,
+            Groups = GetGroupModel(viewModel.Groups),
+            Id = viewModel.Id
+        };
+    }
+
+    private List<PackListGroupModel> GetGroupModel(List<PackingListGroupViewModel> viewModelGroups)
+    {
+        var list = new List<PackListGroupModel>();
+        foreach (var item in viewModelGroups)
+        {
+            list.Add(new PackListGroupModel
+            {
+                Name = item.Name,
+                Items = GetItems(item.Items),
+                Id = item.Id
+            });
+        }
+
+        return list;
+    }
+
+    private List<PackingListGroupItemModel> GetItems(List<PackingListGroupItemViewModel> itemItems)
+    {
+        var list = new List<PackingListGroupItemModel>();
+        foreach (var item in itemItems)
+        {
+            list.Add(new PackingListGroupItemModel
+            {
+                Name = item.Name,
+                WeightSufix = item.WeightSufix,
+                RefId = item.Id,
+                Weight = Convert.ToDecimal(item.Weight),
+                Quantity = 1
+            });
+        }
+
+        return list;
     }
 
     private async Task<PackingListViewModel> GetById(string id, Guid userId)

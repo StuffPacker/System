@@ -9,4 +9,6 @@ public class PackingListGroupsItemEntity
     public string WeightSufix { get; set; }
 
     public string RefId { get; set; }
+
+    public int Quantity { get; set; }
 }
