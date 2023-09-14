@@ -28,11 +28,13 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div style="background-color: lightgrey">
+                                <input type="button" class="btn-primary" value="Add item" data-bind="click:ChangeShowExistingItemsStatus"/>
+                                <div style="background-color: lightgrey" data-bind="visible:ShowExistingItems">
                                     <ul data-bind="foreach: ExistingItems">
                                         <li><span data-bind="text:Name"></span> <input data-bind="click: AddToList" type="button" value="Add to list"/></li>
-                                  
-                                        </ul>
+
+                                    </ul>
+                                    <input type="button" class="btn-primary" value="Close" data-bind="visible:ShowExistingItems,click:ChangeShowExistingItemsStatus"/>
                                 </div>
                                 <div class="table-responsive">
                                     <table class="table table-striped">

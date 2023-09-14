@@ -102,10 +102,12 @@ public class PackingListApiController : ControllerBase
         packingList.AddItemToGroup(groupid, item);
 
         await _packingListService.Update(packingList);
+        var group = packingList.Groups.First(x => x.Id == groupid);
+        var itemOut = group.Items.First(x => x.Id == input.Id);
         return Ok(new ResultJsonModel
         {
             Meta = new MetaModel { Code = 200 },
-            ResultData = string.Empty
+            ResultData = itemOut
         });
     }
 
