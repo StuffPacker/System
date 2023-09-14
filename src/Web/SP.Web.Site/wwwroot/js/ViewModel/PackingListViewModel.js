@@ -110,11 +110,12 @@ function AddGroup(self,id,dto)
              addItemdata.Id = eitem.Id;   
              SPApiPost('/api/v1/packinglist/'+id+'/group/'+item.Id+'/item',addItemdata, function (obj) {
                  if (obj != null) {
-                     self.Groups.removeAll();
-                     GetPackingList(self,id);
+                     AddItem(self,item,id,item.Id,obj);
                  }
              });             
          }
+         item.ShowExistingItems=ko.observable(false);
+         item.ChangeShowExistingItemsStatus=function (){item.ShowExistingItems(!item.ShowExistingItems())}
          item.ExistingItems.push(eitem);
     });
    
