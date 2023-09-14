@@ -1,3 +1,7 @@
+@using Microsoft.Extensions.Options
+@using SP.Web.Site
+@inject IOptions<GoogleAnalytics> googleAnalytics
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -6,6 +10,15 @@
     <title>Stuff packer</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/site.css"/>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-TTQVBJ2GV6"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+    
+      gtag('config', '@googleAnalytics.Value.Code');
+    </script>
 </head>
  <body>
 @await Html.PartialAsync("_TopMenu")
