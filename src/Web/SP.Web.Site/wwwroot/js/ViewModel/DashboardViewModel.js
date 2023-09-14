@@ -19,6 +19,7 @@ function AddItem(self,dto)
     var item = new Object();
     item.Name=dto.Name;
     item.Weight=dto.Weight;
-    item.WeightSufix=dto.WeightSufix;    
+    item.WeightSufix=dto.WeightSufix;
+    item.Link="/item/"+dto.Id;
     self.Items.push(item);
 }

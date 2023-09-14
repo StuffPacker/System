@@ -14,7 +14,7 @@
             </thead>
             <tbody data-bind="foreach: Items">
             <tr>
-                <td><span data-bind="text:Name"></span></td>
+                <td><a target="_blank" data-bind="attr:{href:Link}"><span data-bind="text:Name"></span></a></td>
                 <td><span data-bind="text:Weight"></span>&nbsp;<span data-bind="text:WeightSufix"></span></td>
             </tr>
             </tbody>
