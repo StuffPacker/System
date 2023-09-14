@@ -1,4 +1,5 @@
 using System.Security;
+using SP.Shared.Common.Feature.PackingList.Model;
 
 namespace SP.Web.Site.Features.PackingList;
 

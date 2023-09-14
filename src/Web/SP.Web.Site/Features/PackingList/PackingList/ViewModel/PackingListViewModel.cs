@@ -6,14 +6,6 @@ namespace SP.Web.Site.Features.Packinglist;
 
 public class PackingListViewModel
 {
-    public PackingListViewModel(PackingListModel model)
-    {
-        Id = model.Id.ToString();
-        Name = model.Name;
-        Groups = GetGroups(model.Groups);
-        UserId = model.UserId.ToString();
-    }
-
     public string Id { get; set; } = string.Empty;
 
     public string Name { get; set; } = string.Empty;
@@ -51,39 +43,5 @@ public class PackingListViewModel
             WeightSufix = vm.WeightSufix,
             Id = vm.Id
         });
-    }
-
-    private List<PackingListGroupViewModel> GetGroups(List<PackListGroupModel> modelGroups)
-    {
-        var list = new List<PackingListGroupViewModel>();
-        foreach (var item in modelGroups)
-        {
-            list.Add(new PackingListGroupViewModel
-            {
-                Id = item.Id,
-                Name = item.Name,
-                Items = GetItems(item.Items)
-            });
-        }
-
-        return list;
-    }
-
-    private List<PackingListGroupItemViewModel> GetItems(List<PackingListGroupItemModel> itemItems)
-    {
-        var list = new List<PackingListGroupItemViewModel>();
-        foreach (var item in itemItems)
-        {
-            list.Add(new PackingListGroupItemViewModel
-            {
-                Name = item.Name,
-                Weight = item.Weight.ToString(),
-                WeightSufix = item.WeightSufix,
-                Id = item.RefId,
-                Quantity = item.Quantity
-            });
-        }
-
-        return list;
     }
 }
