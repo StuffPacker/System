@@ -3,6 +3,7 @@ using SP.Database.Mongo.Feature.PackingList;
 using SP.Shared.Common.Feature.PackingList.Model;
 using SP.Web.Site.Features.Item;
 using SP.Web.Site.Features.Packinglist;
+using SP.Web.Site.Features.PackingList.PackingList.Mapper;
 
 namespace SP.Web.Site.Features.PackingList;
 
@@ -26,7 +27,7 @@ public class PackingListService : IPackingListService
         var list = new List<PackingListViewModel>();
         foreach (var item in result)
         {
-            list.Add(new PackingListViewModel(item));
+            list.Add(PackingListViewModelMapper.Map(item));
         }
 
         return list;
@@ -50,13 +51,13 @@ public class PackingListService : IPackingListService
         };
         var result = await _packingListRepository.Create(model);
 
-        return new PackingListViewModel(result);
+        return PackingListViewModelMapper.Map(result);
     }
 
     public async Task Delete(string id, Guid userId)
     {
         var model = await _packingListRepository.GetById(id);
-        if (!Access(new PackingListViewModel(model), userId))
+        if (!Access(PackingListViewModelMapper.Map(model), userId))
         {
             throw new AuthenticationException();
         }
@@ -118,7 +119,7 @@ public class PackingListService : IPackingListService
     private async Task<PackingListViewModel> GetById(string id, Guid userId)
     {
         var result = await _packingListRepository.GetById(id);
-        var vm = new PackingListViewModel(result);
+        var vm = PackingListViewModelMapper.Map(result);
         if (!Access(vm, userId))
         {
             return null!;
