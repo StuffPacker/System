@@ -1,5 +1,8 @@
 function PackingListViewModel(id) {
-    var self = this;   
+    var self = this;
+    var existingItems = [];
+    self.ExistingItemsList = existingItems;
+    LoadExistingItems(self);
     var Groups = [];
     self.Name = ko.observable("");
     self.Groups = ko.observableArray(Groups);
@@ -30,9 +33,7 @@ function PackingListViewModel(id) {
        
     }
 
-    var existingItems = [];   
-    self.ExistingItemsList = ko.observableArray(existingItems);
-    LoadExistingItems(self);
+  
 
     
 } 
@@ -43,7 +44,7 @@ function AddExistingItems  (p1,p2)
 function LoadExistingItems(self)
 {
     SPApiGet('/api/v1/items/', function (obj) {
-        if (obj != null) {
+        if (obj != null) {          
             ko.utils.arrayForEach(obj, function (dto) {
                 var item = new Object();
                 item.Name=dto.Name;
@@ -100,7 +101,8 @@ function AddGroup(self,id,dto)
      }
     var existingItems = [];
     item.ExistingItems = ko.observableArray(existingItems);
-     ko.utils.arrayForEach(self.ExistingItemsList(), function (existingItemsListItem) {
+  
+     ko.utils.arrayForEach(self.ExistingItemsList, function (existingItemsListItem) {
          var eitem = new Object();
          eitem.Name=existingItemsListItem.Name;
          eitem.Id=existingItemsListItem.Id;
@@ -114,7 +116,7 @@ function AddGroup(self,id,dto)
                  }
              });             
          }
-         item.ShowExistingItems=ko.observable(false);
+         item.ShowExistingItems=ko.observable(false);        
          item.ChangeShowExistingItemsStatus=function (){item.ShowExistingItems(!item.ShowExistingItems())}
          item.ExistingItems.push(eitem);
     });
