@@ -51,6 +51,7 @@ public class Startup
             conf.LoginPath = "/login";
         });
         services.AddInfrastructureMongoDb(Configuration);
+        services.Configure<GoogleAnalytics>(Configuration.GetSection("GoogleAnalytics"));
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
