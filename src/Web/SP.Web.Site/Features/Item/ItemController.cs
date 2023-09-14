@@ -11,4 +11,10 @@ public class ItemController : Controller
     {
         return View("ItemList");
     }
+
+    [Route("item/{id}")]
+    public ActionResult GetById(string id)
+    {
+        return View("Item", id);
+    }
 }

@@ -58,4 +58,15 @@ public class ItemApiController : ControllerBase
             ResultData = string.Empty
         });
     }
+
+    [Route("{id}")]
+    public async Task<ActionResult> GetById(string id)
+    {
+        var item = await _itemService.GetItemById(id, GetUserId());
+        return Ok(new ResultJsonModel
+        {
+            Meta = new MetaModel { Code = 200 },
+            ResultData = item
+        });
+    }
 }

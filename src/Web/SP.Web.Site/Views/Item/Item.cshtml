@@ -1,0 +1,18 @@
+@{
+    Layout = "_Layout";
+}
+<div id="Item">
+    
+
+    <h1 class="page-header" data-bind="text:Name"></h1>
+    
+  
+</div>
+
+@section footerjs
+{
+    <script src="/js/ViewModel/ItemViewModel.js"></script>
+    <script type="text/javascript">  
+  ko.applyBindings(ItemViewModel('@Model'), document.getElementById('Item'));  
+  </script>
+}
