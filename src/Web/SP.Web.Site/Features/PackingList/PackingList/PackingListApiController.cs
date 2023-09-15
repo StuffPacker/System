@@ -1,6 +1,8 @@
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SP.Web.Business.Feature.Item;
+using SP.Web.Business.Feature.Item.GetItemById;
 using SP.Web.Business.Feature.PackingList;
 using SP.Web.Business.Feature.PackingList.ViewModel;
 using SP.Web.Business.ViewModel;
@@ -13,12 +15,12 @@ namespace SP.Web.Site.Features.PackingList.PackingList;
 public class PackingListApiController : ControllerBase
 {
     private readonly IPackingListService _packingListService;
-    private readonly IItemService _itemService;
+    private readonly IMediator _mediator;
 
-    public PackingListApiController(IPackingListService packingListService, IItemService itemService)
+    public PackingListApiController(IPackingListService packingListService, IMediator mediator)
     {
         _packingListService = packingListService;
-        _itemService = itemService;
+        _mediator = mediator;
     }
 
     [Route("{id}")]
@@ -95,7 +97,7 @@ public class PackingListApiController : ControllerBase
     public async Task<ActionResult> AddItemToGroup(string id, string groupid, [FromBody] AddItemToGroupInputViewModel input)
     {
         var packingList = await _packingListService.GetPackingListById(id, GetUserId());
-        var item = await _itemService.GetItemById(input.Id, GetUserId());
+        var item = await _mediator.Send(new GetItemByIdCommand(input.Id, GetUserId()));
         if (packingList == null || item == null)
         {
             throw new Exception();
