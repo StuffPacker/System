@@ -1,10 +1,9 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace SP.Web.Site.Features.Account.Login;
+namespace SP.Web.Business.Feature.Account.Login;
 
 public class LoginViewModel
 {
-    [Microsoft.Build.Framework.Required]
     [EmailAddress]
     [Display(Name = "Email")]
     public string Email { get; set; } = string.Empty;

@@ -1,4 +1,4 @@
-namespace SP.Web.Site.Features.Item;
+namespace SP.Web.Business.Feature.Item;
 
 public class ItemEditInputViewModel
 {

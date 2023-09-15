@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using SP.Database.Mongo;
-using SP.Web.Site.Data;
+using SP.Web.Business;
 using SP.Web.Site.Features.Item;
 using SP.Web.Site.Features.PackingList;
 using SP.Web.Site.Model;
@@ -37,8 +36,6 @@ public class Startup
 
         services.AddIdentity<StuffPackerUser, IdentityRole>().AddEntityFrameworkStores<SPWebSiteDataContext>().AddDefaultTokenProviders();
 
-        services.AddSingleton<IItemService, ItemService>();
-        services.AddSingleton<IPackingListService, PackingListService>();
         services.AddRazorPages();
         services.AddControllers().AddJsonOptions(options =>
         {
@@ -50,7 +47,7 @@ public class Startup
         {
             conf.LoginPath = "/login";
         });
-        services.AddInfrastructureMongoDb(Configuration);
+        services.AddInfrastructureBusiness(Configuration);
         services.Configure<GoogleAnalytics>(Configuration.GetSection("GoogleAnalytics"));
     }
 

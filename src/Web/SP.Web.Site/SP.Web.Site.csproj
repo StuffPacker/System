@@ -21,9 +21,9 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="7.0.9" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\Database\SP.Database.Mongo\SP.Database.Mongo.csproj" />
+  <ItemGroup>   
     <ProjectReference Include="..\..\Shared\SP.Shared.Common\SP.Shared.Common.csproj" />
+    <ProjectReference Include="..\SP.Web.Business\SP.Web.Business.csproj" />
   </ItemGroup>
 
 </Project>

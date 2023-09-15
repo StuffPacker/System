@@ -1,6 +1,6 @@
 using SP.Shared.Common.Feature.Item.Model;
 
-namespace SP.Web.Site.Features.Item;
+namespace SP.Web.Business.Feature.Item;
 
 public class ItemViewModel
 {

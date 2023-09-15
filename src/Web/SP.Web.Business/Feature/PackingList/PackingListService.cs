@@ -1,11 +1,10 @@
 using System.Security.Authentication;
 using SP.Database.Mongo.Feature.PackingList;
 using SP.Shared.Common.Feature.PackingList.Model;
-using SP.Web.Site.Features.Item;
-using SP.Web.Site.Features.Packinglist;
-using SP.Web.Site.Features.PackingList.PackingList.Mapper;
+using SP.Web.Business.Feature.PackingList.Mapper;
+using SP.Web.Business.Feature.PackingList.ViewModel;
 
-namespace SP.Web.Site.Features.PackingList;
+namespace SP.Web.Business.Feature.PackingList;
 
 public class PackingListService : IPackingListService
 {

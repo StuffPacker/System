@@ -1,5 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-using SP.Web.Site.Data;
 
 namespace SP.Web.Site;
 
