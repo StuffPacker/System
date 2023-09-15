@@ -1,7 +1,4 @@
-using System.Security;
-using SP.Shared.Common.Feature.PackingList.Model;
-
-namespace SP.Web.Site.Features.PackingList;
+namespace SP.Web.Business.Feature.PackingList.ViewModel;
 
 public class PackingListGroupItemViewModel
 {

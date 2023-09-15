@@ -1,9 +1,8 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using SP.Web.Site.Model;
 
-namespace SP.Web.Site.Data;
+namespace SP.Web.Site;
 
 public class SPWebSiteDataContext : IdentityDbContext<StuffPackerUser>
 {

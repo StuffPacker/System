@@ -1,4 +1,4 @@
-namespace SP.Web.Site.Features.PackingList.PackingList;
+namespace SP.Web.Business.Feature.PackingList.ViewModel;
 
 public class ChangeNameInputViewModel
 {

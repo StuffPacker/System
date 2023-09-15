@@ -1,6 +1,6 @@
-using SP.Web.Site.Features.Packinglist;
+using SP.Web.Business.Feature.PackingList.ViewModel;
 
-namespace SP.Web.Site.Features.PackingList;
+namespace SP.Web.Business.Feature.PackingList;
 
 public interface IPackingListService
 {

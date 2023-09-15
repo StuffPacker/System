@@ -1,4 +1,4 @@
-namespace SP.Web.Site.ViewModel;
+namespace SP.Web.Business.ViewModel;
 
 public class MetaModel
 {

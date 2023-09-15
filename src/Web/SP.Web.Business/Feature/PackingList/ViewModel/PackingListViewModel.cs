@@ -1,8 +1,6 @@
-using SP.Shared.Common.Feature.PackingList.Model;
-using SP.Web.Site.Features.Item;
-using SP.Web.Site.Features.PackingList;
+using SP.Web.Business.Feature.Item;
 
-namespace SP.Web.Site.Features.Packinglist;
+namespace SP.Web.Business.Feature.PackingList.ViewModel;
 
 public class PackingListViewModel
 {

@@ -1,6 +1,7 @@
 using SP.Shared.Common.Feature.PackingList.Model;
+using SP.Web.Business.Feature.PackingList.ViewModel;
 
-namespace SP.Web.Site.Features.PackingList.PackingList.Mapper;
+namespace SP.Web.Business.Feature.PackingList.Mapper;
 
 public static class PackingListGroupItemViewModelMapper
 {

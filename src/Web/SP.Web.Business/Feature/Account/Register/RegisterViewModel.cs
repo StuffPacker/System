@@ -1,10 +1,9 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace SP.Web.Site.Features.Account.Register;
+namespace SP.Web.Business.Feature.Account.Register;
 
 public class RegisterViewModel
 {
-    [Microsoft.Build.Framework.Required]
     [EmailAddress]
     [Display(Name = "Email")]
     public string Email { get; set; } = string.Empty;

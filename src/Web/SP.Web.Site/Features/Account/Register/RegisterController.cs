@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using SP.Web.Business.Feature.Account.Register;
 using SP.Web.Site.Model;
 
 namespace SP.Web.Site.Features.Account.Register;
