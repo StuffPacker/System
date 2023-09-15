@@ -1,13 +1,23 @@
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using SP.Web.Business.Feature.Health;
 
 namespace SP.Web.Site.Features.Home;
 
 public class HomeController : Controller
 {
-    [Route("health")]
-    public string Health()
+    private readonly IMediator _mediator;
+
+    public HomeController(IMediator mediator)
     {
-        return "Health " + DateTime.UtcNow.ToLongDateString();
+        _mediator = mediator;
+    }
+
+    [Route("health")]
+    public async Task<string> Health()
+    {
+        var result = await _mediator.Send(new HealthCommand());
+        return result;
     }
 
     [Route("")]

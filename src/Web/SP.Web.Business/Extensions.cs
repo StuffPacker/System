@@ -1,3 +1,4 @@
+using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SP.Database.Mongo;
@@ -15,8 +16,8 @@ public static class Extensions
         this IServiceCollection services,
         IConfiguration configuration)
     {
+        services.AddMediatR(typeof(Extensions));
         services.AddInfrastructureMongoDb(configuration);
-        services.AddSingleton<IItemService, ItemService>();
         services.AddSingleton<IPackingListService, PackingListService>();
         return services;
     }
