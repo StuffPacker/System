@@ -112,6 +112,23 @@ function AddGroup(self,id,dto)
              addItemdata.Id = eitem.Id;   
              SPApiPost('/api/v1/packinglist/'+id+'/group/'+item.Id+'/item',addItemdata, function (obj) {
                  if (obj != null) {
+                     //if row allready exist, remove                    
+                     var list = ko.observableArray([]);                    
+                     var nr=0;
+                     var finalNumber=0;
+                     var spliceCheck=false;
+                     ko.utils.arrayForEach(item.Items(), function (i) {
+                         nr=nr+1;
+                        if(i.Id==obj.Id)
+                        {
+                            spliceCheck=true;
+                            finalNumber=nr;
+                        }                                            
+                     });
+                     if(spliceCheck)
+                     {                         
+                         item.Items.splice(finalNumber-1, 1)
+                     }   
                      AddItem(self,item,id,item.Id,obj);
                  }
              });             
@@ -129,11 +146,22 @@ function AddItem(self,group,id,groupid,dto)
 {   
     
     var item = new Object();
+    item.Id=dto.Id;
     item.Name=dto.Name;
     item.Weight=dto.Weight;
     item.WeightSufix=dto.WeightSufix;
     item.LinkBack="/item/"+dto.Id;
     item.Quantity=dto.Quantity;
+    item.Save=function ()
+    {
+        var data = {};
+        data.Quantity = item.Quantity;
+        SPApiPatch('/api/v1/packinglist/' + id + '/group/'+groupid+'/item/'+dto.Id+'/Quantity', data, function (obj) {
+            if (obj != null) {
+alert("Saved");
+            }
+        });
+    }    
     item.Delete=function ()
     {
         SPApiDelete('/api/v1/packinglist/'+id+'/Group/'+groupid+'/item/'+dto.Id,function (obj) {

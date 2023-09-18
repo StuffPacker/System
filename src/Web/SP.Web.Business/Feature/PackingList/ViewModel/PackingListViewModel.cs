@@ -33,13 +33,27 @@ public class PackingListViewModel
 
     public void AddItemToGroup(string groupid, ItemViewModel vm)
     {
-        var item = Groups.First(x => x.Id == groupid);
-        item.Items.Add(new PackingListGroupItemViewModel
+        var group = Groups.First(x => x.Id == groupid);
+        var item = group.Items.FirstOrDefault(x => x.Id == vm.Id);
+        if (item != null)
+        {
+            item.Quantity++;
+            return;
+        }
+
+        group.Items.Add(new PackingListGroupItemViewModel
         {
             Name = vm.Name,
             Weight = vm.Weight.ToString(),
             WeightSufix = vm.WeightSufix,
             Id = vm.Id
         });
+    }
+
+    public void UpdateGroupItemQuantity(string groupId, string itemId, int quantity)
+    {
+        var group = Groups.First(x => x.Id == groupId);
+        var item = group.Items.First(x => x.Id == itemId);
+        item.Quantity = quantity;
     }
 }

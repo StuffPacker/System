@@ -50,7 +50,10 @@
                                         <tr>
                                             <td><a target="_blank" data-bind="attr:{href:LinkBack}"><span data-bind="text:Name"></span></a></td>
                                             <td><span data-bind="text:Weight"></span>&nbsp;<span data-bind="text:WeightSufix"></span></td>
-                                            <td><span data-bind="text:Quantity"></span></td>
+                                            <td>
+                                                <input type="number" data-bind="value:Quantity"/>
+                                                <input type="button" value="Update" class="btn-primary" data-bind="click:Save" />
+                                            </td>
                                             <td><input type="button" class="btn-danger" value="Delete" data-bind="click:Delete"/></td>
                                         </tr>
                                         </tbody>

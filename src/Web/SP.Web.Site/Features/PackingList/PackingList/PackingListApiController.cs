@@ -128,4 +128,18 @@ public class PackingListApiController : ControllerBase
             ResultData = string.Empty
         });
     }
+
+    [HttpPatch("{id}/Group/{groupid}/item/{itemid}/Quantity")]
+    public async Task<ActionResult> UpdateGroupItemQuantity(string id, string groupid, string itemid, [FromBody] UpdateGroupItemQuantityInputViewModel input)
+    {
+        var model = await _packingListService.GetPackingListById(id, GetUserId());
+        model.UpdateGroupItemQuantity(groupid, itemid, input.Quantity);
+
+        await _packingListService.Update(model);
+        return Ok(new ResultJsonModel
+        {
+            Meta = new MetaModel { Code = 200 },
+            ResultData = string.Empty
+        });
+    }
 }

@@ -108,7 +108,7 @@ public class PackingListService : IPackingListService
                 WeightSufix = item.WeightSufix,
                 RefId = item.Id,
                 Weight = Convert.ToDecimal(item.Weight),
-                Quantity = 1
+                Quantity = item.Quantity
             });
         }
 
