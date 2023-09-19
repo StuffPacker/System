@@ -101,15 +101,15 @@ function AddGroup(self,id,dto)
      }
     var existingItems = [];
     item.ExistingItems = ko.observableArray(existingItems);
-  
+    
      ko.utils.arrayForEach(self.ExistingItemsList, function (existingItemsListItem) {
          var eitem = new Object();
          eitem.Name=existingItemsListItem.Name;
          eitem.Id=existingItemsListItem.Id;
-         eitem.AddToList=function ()
-         {
+         item.AddToList=function ()
+         {             
              var addItemdata = {};
-             addItemdata.Id = eitem.Id;   
+             addItemdata.Id = item.ExistingItemsSelectedValue().Id;   
              SPApiPost('/api/v1/packinglist/'+id+'/group/'+item.Id+'/item',addItemdata, function (obj) {
                  if (obj != null) {
                      var list=[];
@@ -131,10 +131,10 @@ function AddGroup(self,id,dto)
                     ReloadItems(self,item,item.Items);
                  }
              });             
-         }
-         item.ShowExistingItems=ko.observable(false);        
-         item.ChangeShowExistingItemsStatus=function (){item.ShowExistingItems(!item.ShowExistingItems())}
+         }        
+         
          item.ExistingItems.push(eitem);
+         item.ExistingItemsSelectedValue=ko.observable("");
     });
    
      
