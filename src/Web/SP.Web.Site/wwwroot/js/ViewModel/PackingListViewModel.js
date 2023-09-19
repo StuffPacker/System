@@ -112,24 +112,23 @@ function AddGroup(self,id,dto)
              addItemdata.Id = eitem.Id;   
              SPApiPost('/api/v1/packinglist/'+id+'/group/'+item.Id+'/item',addItemdata, function (obj) {
                  if (obj != null) {
-                     //if row allready exist, remove                    
-                     var list = ko.observableArray([]);                    
-                     var nr=0;
-                     var finalNumber=0;
-                     var spliceCheck=false;
-                     ko.utils.arrayForEach(item.Items(), function (i) {
-                         nr=nr+1;
+                     var list=[];
+                     var itemExist=false;
+                     ko.utils.arrayForEach(item.Items(), function (i) {  
                         if(i.Id==obj.Id)
                         {
-                            spliceCheck=true;
-                            finalNumber=nr;
-                        }                                            
+                            itemExist=true; 
+                            i.Quantity=obj.Quantity;
+                        }    
+                        list.push(i);
                      });
-                     if(spliceCheck)
-                     {                         
-                         item.Items.splice(finalNumber-1, 1)
-                     }   
-                     AddItem(self,item,id,item.Id,obj);
+                     if(!itemExist)
+                     {
+                         AddItem(self,item,id,item.Id,obj);
+                        
+                     } 
+                    
+                    ReloadItems(self,item,item.Items);
                  }
              });             
          }
@@ -141,6 +140,20 @@ function AddGroup(self,id,dto)
      
      
     self.Groups.push(item);
+}
+function ReloadItems(self,group,items)
+{
+    
+    var list=[];
+    ko.utils.arrayForEach(items(), function (i) {
+        list.push(i);
+    });
+
+
+    group.Items.removeAll();
+    ko.utils.arrayForEach(list, function (i) {
+        group.Items.push(i);
+    });
 }
 function AddItem(self,group,id,groupid,dto)
 {   
