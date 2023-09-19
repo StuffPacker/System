@@ -60,7 +60,8 @@ function AddItem(self,dto)
         {
             var data= {};
             data.Name=m.Name; 
-            data.Weight=m.Weight;
+            data.Weight=m.Weight.toString();
+            
             SPApiPut('/api/v1/items/'+m.Id,data, function (obj) {
                 if (obj != null) {
                     self.Items.removeAll();
