@@ -46,7 +46,8 @@ public class PackingListViewModel
             Name = vm.Name,
             Weight = vm.Weight.ToString(),
             WeightSufix = vm.WeightSufix,
-            Id = vm.Id
+            Id = vm.Id,
+            Quantity = 1
         });
     }
 
