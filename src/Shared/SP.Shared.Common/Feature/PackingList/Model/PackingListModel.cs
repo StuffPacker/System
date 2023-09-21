@@ -9,4 +9,6 @@ public class PackingListModel
     public List<PackListGroupModel> Groups { get; set; } = null!;
 
     public Guid UserId { get; set; }
+
+    public bool IsPublic { get; set; }
 }

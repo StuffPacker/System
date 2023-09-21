@@ -77,7 +77,8 @@ public class PackingListService : IPackingListService
             UserId = Guid.Parse(viewModel.UserId),
             Name = viewModel.Name,
             Groups = GetGroupModel(viewModel.Groups),
-            Id = viewModel.Id
+            Id = viewModel.Id,
+            IsPublic = viewModel.IsPublic
         };
     }
 

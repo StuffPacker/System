@@ -23,7 +23,12 @@
 </div>
 @section footerjs
 {
-    <script src="/js/ViewModel/DashboardViewModel.js"></script>
+    @{
+        var link = "/js/ViewModel/DashboardViewModel.js?rnd="+DateTime.UtcNow.Ticks.ToString();
+        <script src=@link></script>
+    }
+   
+   
     <script type="text/javascript">  
   ko.applyBindings(DashboardViewModel, document.getElementById('Dashboard'));  
   </script>
