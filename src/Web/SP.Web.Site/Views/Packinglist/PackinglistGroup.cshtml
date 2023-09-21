@@ -1,0 +1,37 @@
+<div class="row">
+    <div class="container-fluid">
+        <div class="row" style="background-color: #5ea379; color: white; border-radius: 15px 15px 0px 0px; box-shadow: 2px 4px 0px 0px #4e8563;">
+            <div style="float: left; padding: 0.5%;">
+                <b style=" font-size: medium" data-bind="text:Name, hidden:EditGroupName, click:ChangeEditGroupNameState"></b>
+                <div data-bind="visible:EditGroupName">
+                    <input type="text" data-bind="value:Name" style="color: black;"/>
+                    <input type="button" class="btn-primary" value="Save" data-bind="click:Save"/>
+                    <input type="button" class="btn-primary" value="Cancel" data-bind="click:Cancel"/>
+                </div>
+            </div>
+            <div style="float: right; padding: 0.5%;">
+                <span title="Delete" style="color: red;" class="glyphicon glyphicon-trash" aria-hidden="true" data-bind="click:Delete"></span>
+            </div>
+        </div>
+        <div class="row" style="margin-top: 1%;">
+            <select style="color: black;" data-bind="options: ExistingItems,optionsText: 'Name' , value: ExistingItemsSelectedValue, optionsCaption: 'Select a Value'"></select>
+            <input data-bind="click: AddToList" type="button" value="Add to list"/>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Weight</th>
+                        <th>Quantity</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody data-bind="foreach: Items">
+                    @await Html.PartialAsync("PackinglistGroupItem")
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -23,52 +23,10 @@
         <input type="button" class="btn-primary" value="Cancel" data-bind="click:CancelName"/>
     </div>
     <input type="button" class="btn-primary" value="Add group" data-bind="click:AddNewGroup"></input>
+    <br />
+     <br />
     <!-- ko foreach: Groups -->
-    <div class="row">
-        <div class="container-fluid">
-            <div class="row" style="background-color: #1a1e21; color: white;">
-                <div style="float: left;">
-                    <h2 data-bind="text:Name, hidden:EditGroupName, click:ChangeEditGroupNameState"></h2>
-                    <div data-bind="visible:EditGroupName">
-                        <input type="text" data-bind="value:Name" style="color: black;"/>
-                        <input type="button" class="btn-primary" value="Save" data-bind="click:Save"/>
-                        <input type="button" class="btn-primary" value="Cancel" data-bind="click:Cancel"/>
-                    </div>
-                </div>
-                <div style="float: right;">
-                    <input type="button" class="btn-danger" value="Delete" data-bind="click:Delete"/>
-                </div>
-            </div>
-            <div class="row">
-                <select style="color: black;" data-bind="options: ExistingItems,optionsText: 'Name' , value: ExistingItemsSelectedValue, optionsCaption: 'Select a Value'"></select>
-                <input data-bind="click: AddToList" type="button" value="Add to list"/>
-                <div class="table-responsive">
-                    <table class="table table-striped">
-                        <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Weight</th>
-                            <th>Quantity</th>
-                            <th>#</th>
-                        </tr>
-                        </thead>
-                        <tbody data-bind="foreach: Items">
-                        <tr>
-                            <td><a target="_blank" data-bind="attr:{href:LinkBack}"><span data-bind="text:Name"></span></a></td>
-                            <td><span data-bind="text:Weight"></span>&nbsp;<span data-bind="text:WeightSufix"></span></td>
-                            <td>
-                                <input type="number" data-bind="value:Quantity"/>
-                                <input type="button" value="Update" class="btn-primary" data-bind="click:Save"/>
-                            </td>
-                            <td><input type="button" class="btn-danger" value="Delete" data-bind="click:Delete"/></td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-            </div>
-        </div>
-    </div>
+      @await Html.PartialAsync("PackinglistGroup")
     <!-- /ko -->
 </div> 
 
