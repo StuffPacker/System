@@ -1,7 +1,10 @@
 <ul class="nav nav-sidebar">
+@if (User.Identity != null && User.Identity.IsAuthenticated)
+{
     <li class="active"><a href="/">Dashboard <span class="sr-only">(current)</span></a></li>
     <li><a href="/item">Items</a></li>
-    <li><a href="/packinglist">Pack lists</a></li>
+    <li><a href="/packinglist">Pack lists</a></li> 
+}
 </ul>
    
    
