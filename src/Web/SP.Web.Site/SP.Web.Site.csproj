@@ -26,4 +26,8 @@
     <ProjectReference Include="..\SP.Web.Business\SP.Web.Business.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\img\" />
+  </ItemGroup>
+
 </Project>

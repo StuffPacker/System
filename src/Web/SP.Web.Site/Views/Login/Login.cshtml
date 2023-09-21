@@ -12,42 +12,24 @@
                 <h1 class="text-uppercase text-white font-weight-bold">Login to Stuffpacker</h1>
                 <hr class="divider my-4">
             </div>
-            <div class="col-lg-8 align-self-baseline">
+            <div class="col-lg-10 align-self-end">
                 <form id="account" method="post">
-
                     <p class="text-white-75 font-weight-light mb-5">
-                        <div class="container">
-                            <div class="row">
-                               
-                                <div class="col-lg-4">
-                                    <b>
-                                        Email
-                                    </b>
-                                    <input asp-for="Email"/>
-                                    <span asp-validation-for="Email" class="text-danger"></span>
-                                </div>
-                            </div>
-                            <div class="row" style="padding-top:5px; padding-bottom:5px;">
-                               
-                                <div class="col-lg-4">
-                                    <b>
-                                        Password
-                                    </b>
-                                    <input asp-for="Password"/>
-                                    <span asp-validation-for="Password" class="text-danger"></span>
-                                </div>
-                            </div>
-                            <div class="row" style="padding-top:5px; padding-bottom:5px;">
-                               
-                                <div class="col-lg-4">
-                                    <b>
-                                        Remember Me
-                                    </b>
-                                    <input asp-for="RememberMe"/>
+                        <table style="align-content: center; width: 100%">
+                            <tr>
+                                <td style="width: 50%; text-align: right; padding-right: 1%"><b>Email</b></td>
+                                <td style="text-align: left"><input class="input-group-text" asp-for="Email"/><span asp-validation-for="Email" class="text-danger"></span></td>
+                            </tr>
+                            <tr>
+                                <td style="width: 50%; text-align: right; padding-right: 1%"><b>Password</b></td>
+                                <td style="text-align: left"><input asp-for="Password"/><span asp-validation-for="Password" class="text-danger"></span></td>
+                            </tr>
+                            <tr>
+                                <td style="width: 50%; text-align: right; padding-right: 1%"><b>Remember Me</b></td>
+                                <td style="text-align: left"><input asp-for="RememberMe"/></td>
+                            </tr>
+                        </table>
 
-                                </div>
-                            </div>
-                        </div>
                         <div asp-validation-summary="All" class="text-danger"></div>
                         <a href="/account/register">Register</a><br/>
                         <a href="/account/ForgotPassword">Forgot your password?</a>
@@ -58,7 +40,6 @@
                     </p>
                 </form>
             </div>
-
         </div>
     </div>
 </header>
