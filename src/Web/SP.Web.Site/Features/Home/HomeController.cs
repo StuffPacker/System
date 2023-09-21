@@ -23,6 +23,14 @@ public class HomeController : Controller
     [Route("")]
     public ActionResult Index()
     {
-        return View("Index");
+        if (User.Identity != null)
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                return View("Index");
+            }
+        }
+
+        return View("Home");
     }
 }
