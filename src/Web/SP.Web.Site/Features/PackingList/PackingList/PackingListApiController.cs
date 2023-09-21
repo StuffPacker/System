@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using SP.Web.Business.Feature.Item;
 using SP.Web.Business.Feature.Item.GetItemById;
 using SP.Web.Business.Feature.PackingList;
+using SP.Web.Business.Feature.PackingList.GetPackingList;
+using SP.Web.Business.Feature.PackingList.Mapper;
 using SP.Web.Business.Feature.PackingList.ViewModel;
 using SP.Web.Business.ViewModel;
 using SP.Web.Site.Features.Item;
@@ -31,6 +33,37 @@ public class PackingListApiController : ControllerBase
         {
             Meta = new MetaModel { Code = 200 },
             ResultData = result
+        });
+    }
+
+    [AllowAnonymous]
+    [Route("{id}/public")]
+    public async Task<ActionResult> PackingListPublic(string id)
+    {
+        var result = await _mediator.Send(new GetPackingListCommand(id));
+        var vm = PackingListViewModelMapper.Map(result);
+        if (result.IsPublic == true)
+        {
+            return Ok(new ResultJsonModel
+            {
+                Meta = new MetaModel { Code = 200 },
+                ResultData = vm
+            });
+        }
+
+        if (result.UserId == GetUserId())
+        {
+            return Ok(new ResultJsonModel
+            {
+                Meta = new MetaModel { Code = 200 },
+                ResultData = vm
+            });
+        }
+
+        return Ok(new ResultJsonModel
+        {
+            Meta = new MetaModel { Code = 404 },
+            ResultData = string.Empty
         });
     }
 
@@ -135,6 +168,19 @@ public class PackingListApiController : ControllerBase
         var model = await _packingListService.GetPackingListById(id, GetUserId());
         model.UpdateGroupItemQuantity(groupid, itemid, input.Quantity);
 
+        await _packingListService.Update(model);
+        return Ok(new ResultJsonModel
+        {
+            Meta = new MetaModel { Code = 200 },
+            ResultData = string.Empty
+        });
+    }
+
+    [HttpPatch("{id}/public")]
+    public async Task<ActionResult> UpdatePublic(string id, [FromBody] ChangePublicInputViewModel input)
+    {
+        var model = await _packingListService.GetPackingListById(id, GetUserId());
+        model.IsPublic = input.MakePublic;
         await _packingListService.Update(model);
         return Ok(new ResultJsonModel
         {

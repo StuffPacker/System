@@ -7,6 +7,32 @@ function PackingListViewModel(id) {
     self.Name = ko.observable("");
     self.Groups = ko.observableArray(Groups);
     self.EditName = ko.observable(false);
+    self.IsPublic=ko.observable(false);
+    self.PublicLink=ko.observable("");        
+    self.MakePublic=function ()
+    {
+        var data = {};
+        data.MakePublic = true;
+        SPApiPatch('/api/v1/packinglist/' + id + '/public', data, function (obj) {
+            if (obj != null) {
+                self.PublicLink("/packinglist/"+id+"/public");
+                self.IsPublic(true);
+            }
+        });
+        
+    }
+    self.MakePrivate=function ()
+    {
+        var data = {};
+        data.MakePublic = false;
+        SPApiPatch('/api/v1/packinglist/' + id + '/public', data, function (obj) {
+            if (obj != null) {
+                self.IsPublic(false);
+                self.PublicLink("");
+            }
+        });
+    }
+    
     GetPackingList(self, id);
     self.ChangeEditNameState = function () {
         self.EditName(!self.EditName());
@@ -58,7 +84,13 @@ function GetPackingList(self,id)
 {    
     SPApiGet('/api/v1/packinglist/'+id, function (obj) {
         if (obj != null) {
-            self.Name(obj.Name);            
+            self.Name(obj.Name);   
+            self.IsPublic(obj.IsPublic);
+            if(self.IsPublic())
+            {
+                self.PublicLink("/packinglist/"+id+"/public");
+            }
+           
             ko.utils.arrayForEach(obj.Groups, function (dto) {              
                AddGroup(self,id,dto);
             });

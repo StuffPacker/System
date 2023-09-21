@@ -9,4 +9,6 @@ public class PackingListEntity : BaseEntity
     public string Name { get; set; }
 
     public List<PackingListGroupsEntity> Groups { get; set; }
+
+    public bool IsPublic { get; set; }
 }

@@ -11,7 +11,10 @@
 
 @section footerjs
 {
-    <script src="/js/ViewModel/ItemViewModel.js"></script>
+     @{
+         var link = "/js/ViewModel/ItemViewModel.js?rnd=" + DateTime.UtcNow.Ticks.ToString();
+         <script src=@link></script>
+     }
     <script type="text/javascript">  
   ko.applyBindings(ItemViewModel('@Model'), document.getElementById('Item'));  
   </script>

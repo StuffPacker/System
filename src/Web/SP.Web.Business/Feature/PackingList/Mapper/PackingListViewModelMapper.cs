@@ -13,6 +13,7 @@ public static class PackingListViewModelMapper
             Name = model.Name,
             Groups = GetGroups(model.Groups),
             UserId = model.UserId.ToString(),
+            IsPublic = model.IsPublic
         };
     }
 
