@@ -4,20 +4,20 @@ function PackingListPublicViewModel(id) {
     self.Name = ko.observable("");
     self.Groups = ko.observableArray(Groups);
 
-    GetPackingList(self, id);
+    PLPVMGetPackingList(self, id);
 }
-function GetPackingList(self,id)
+function PLPVMGetPackingList(self,id)
 {
     SPApiGet('/api/v1/packinglist/'+id+'/public', function (obj) {
         if (obj != null) {
             self.Name(obj.Name);  
             ko.utils.arrayForEach(obj.Groups, function (dto) {
-                AddGroup(self,id,dto);
+                PLPVMAddGroup(self,id,dto);
             });
         }
     });
 }
-function AddGroup(self,id,dto)
+function PLPVMAddGroup(self,id,dto)
 {
     var items = [];
     var item = new Object();
@@ -26,11 +26,11 @@ function AddGroup(self,id,dto)
     item.EditGroupName = ko.observable(false);    
     item.Items=ko.observableArray(items);
     ko.utils.arrayForEach(dto.Items, function (dto2) {
-        AddItem(self,item,id,item.Id,dto2);
+        PLPVMAddItem(self,item,id,item.Id,dto2);
     }); 
     self.Groups.push(item);
 }
-function AddItem(self,group,id,groupid,dto)
+function PLPVMAddItem(self,group,id,groupid,dto)
 {
     var item = new Object();
     item.Id=dto.Id;

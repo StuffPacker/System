@@ -396,3 +396,4 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+/src/Web/SP.Web.Site/wwwroot/js/ViewModel/viewmodel.min.js

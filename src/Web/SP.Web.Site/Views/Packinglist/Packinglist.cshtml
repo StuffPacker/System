@@ -1,7 +1,6 @@
 @model string
 @{
     Layout = "_Layout";
-    
 }
 <div id="PackingList">
     <div class="container-fluid">
@@ -14,15 +13,13 @@
             <a target="_blank" data-bind="attr:{visible:IsPublic, href:PublicLink}">Public link</a>
             <input type="button" class="btn-primary" value="Make private" data-bind="click:MakePrivate,visible:IsPublic"/>
         </div>
-       
     </div>
-    
     <div data-bind="visible:EditName">
         <input type="text" data-bind="value:Name"/>
         <input type="button" class="btn-primary" value="Save" data-bind="click:SaveName"/>
         <input type="button" class="btn-primary" value="Cancel" data-bind="click:CancelName"/>
     </div>
-    <input type="button" class="btn-primary" value="Add group" data-bind="click:AddNewGroup"></input>
+    <input type="button" class="btn-primary" value="Add group" data-bind="click:AddNewGroup"/>
     <br />
      <br />
     <!-- ko foreach: Groups -->
@@ -32,12 +29,6 @@
 
 @section footerjs
 {
-     @{
-             var link = "/js/ViewModel/PackingListViewModel.js?rnd=" + DateTime.UtcNow.Ticks.ToString();
-             <script src=@link></script>
-            
-         }
-   
     <script type="text/javascript">  
   ko.applyBindings(PackingListViewModel('@Model'), document.getElementById('PackingList'));  
   </script>
