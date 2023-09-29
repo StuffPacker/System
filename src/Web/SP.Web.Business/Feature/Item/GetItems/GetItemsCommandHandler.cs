@@ -26,6 +26,6 @@ public class GetItemsCommandHandler : IRequestHandler<GetItemsCommand, List<Item
             result.Add(new ItemViewModel(item));
         }
 
-        return result;
+        return result.OrderBy(o => o.Name).ToList();
     }
 }
