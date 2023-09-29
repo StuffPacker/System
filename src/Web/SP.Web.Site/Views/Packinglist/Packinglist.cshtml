@@ -7,9 +7,10 @@
         <div class="col-sm-8">
             <h1 data-bind="text:Name, hidden:EditName, click:ChangeEditNameState" class="page-header">List</h1>
         </div>
-        <div  class="col-sm-4">
+        <div class="col-sm-4">
+            <a title="Printable" style="font-size:large;" data-bind="attr:{href:PrintLink}" target="_blank" class="glyphicon glyphicon-print" aria-hidden="true"></a>
+            
             <input type="button" class="btn-primary" value="Make public" data-bind="click:MakePublic,hidden:IsPublic"/>
-           
             <a target="_blank" data-bind="visible:IsPublic, attr:{href:PublicLink}">Public link</a>
             <input type="button" class="btn-primary" value="Make private" data-bind="click:MakePrivate,visible:IsPublic"/>
         </div>

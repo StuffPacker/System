@@ -8,7 +8,8 @@ function PackingListViewModel(id) {
     self.Groups = ko.observableArray(Groups);
     self.EditName = ko.observable(false);
     self.IsPublic=ko.observable(false);
-    self.PublicLink=ko.observable("");        
+    self.PublicLink=ko.observable("");       
+    self.PrintLink=ko.observable("/packinglist/"+ id +"/print");
     self.MakePublic=function ()
     {
         var data = {};
