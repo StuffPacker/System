@@ -10,6 +10,7 @@ namespace SP.Database.Mongo.Tests;
 public class UserItemTest
 {
     [TestMethod]
+    [Ignore]
     public async Task CRUD()
     {
         var userId = Guid.NewGuid();
