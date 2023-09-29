@@ -25,6 +25,11 @@ stages:
     displayName: Build
     pool:
       vmImage: $(vmImageName)
+    - task: DotNetCoreCLI@2
+      inputs:
+        command: 'test'
+        projects: '**/*Test.csproj'
+        testRunTitle: 'Run tests'
     steps:       
     - task: DotNetCoreCLI@2
       inputs:
