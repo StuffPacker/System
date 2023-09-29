@@ -1,0 +1,28 @@
+@using Microsoft.EntityFrameworkCore.Metadata.Internal
+@model SP.Web.Business.Feature.PackingList.ViewModel.PackingListViewModel
+@{
+    Layout = "";
+    
+}
+<h1>@Model.Name</h1>
+@{
+    foreach (var group in Model.Groups.OrderBy(x=>x.Name))
+    {
+        <h2>@group.Name</h2>
+        <table>
+            @foreach (var item in group.Items.OrderBy(x => x.Name))
+            {
+                <tr>
+                    <td><input type="checkbox"/></td>
+                    <td>@item.Quantity</td>
+                    <td>@item.Name</td>
+                    
+                </tr>
+            }
+           
+        </table>
+    }
+}
+
+
+
