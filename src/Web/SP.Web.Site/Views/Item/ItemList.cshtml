@@ -5,7 +5,7 @@
     
 
     <h1 class="page-header">Items</h1>
-    <input type="button" data-bind="click:Create" value="Create New Item"></input>
+    <input type="button" class="btn-primary" data-bind="click:Create" value="Create New Item"></input>
   
     
     
@@ -28,8 +28,8 @@
                 <td><a target="_blank" data-bind="attr:{href:Link}"><span data-bind="text:Name"></span></a></td>
                 <td><span data-bind="text:Weight"></span>&nbsp;<span data-bind="text:WeightSufix"></span></td>
                 <td>
-                    <input type="button" value="edit" data-bind="click:Edit"/>
-                    <input type="button" value="Delete" class="btn-danger" data-bind="click:Delete"/>
+                    <input type="button" class="btn-primary" value="edit" data-bind="click:Edit"/>
+                    <span title="Delete" style="color: red; font-size:large;  " class="glyphicon glyphicon-trash" aria-hidden="true" data-bind="click:Delete"></span>
                 </td>
             </tr>
             </tbody>
