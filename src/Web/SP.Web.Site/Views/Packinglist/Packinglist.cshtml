@@ -10,7 +10,7 @@
         <div  class="col-sm-4">
             <input type="button" class="btn-primary" value="Make public" data-bind="click:MakePublic,hidden:IsPublic"/>
            
-            <a target="_blank" data-bind="attr:{visible:IsPublic, href:PublicLink}">Public link</a>
+            <a target="_blank" data-bind="visible:IsPublic, attr:{href:PublicLink}">Public link</a>
             <input type="button" class="btn-primary" value="Make private" data-bind="click:MakePrivate,visible:IsPublic"/>
         </div>
     </div>
