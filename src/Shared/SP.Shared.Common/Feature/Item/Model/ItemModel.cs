@@ -1,3 +1,5 @@
+using System.Globalization;
+
 namespace SP.Shared.Common.Feature.Item.Model;
 
 public class ItemModel
@@ -14,8 +16,8 @@ public class ItemModel
 
     public void ChangeWeight(string weight)
     {
-        weight = weight.Replace(".", ",");
-        Weight = Convert.ToDecimal(weight);
+        weight = weight.Replace(",", ".");
+        Weight = Convert.ToDecimal(weight, CultureInfo.InvariantCulture);
         Weight = Math.Round(Weight, 2);
     }
 }
