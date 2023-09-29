@@ -20,6 +20,25 @@
             </tbody>
         </table>
     </div>
+    <h2 class="sub-header">Packing lists</h2>
+     <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody data-bind="foreach: PackingLists">
+                <tr>
+                    <td><a data-bind="attr:{href:Link, title:Name},text:Name"></a></td>
+                    <td>
+                       
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
 </div>
 @section footerjs
 {
