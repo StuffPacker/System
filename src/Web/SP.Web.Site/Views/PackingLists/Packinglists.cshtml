@@ -36,12 +36,6 @@
 
 @section footerjs
 {
-     @{
-                     var link = "/js/ViewModel/PackingListsViewModel.js?rnd=" + DateTime.UtcNow.Ticks.ToString();
-                     <script src=@link></script>
-                    
-                 }
-   
     <script type="text/javascript">  
   ko.applyBindings(PackingListsViewModel, document.getElementById('PackingLists'));  
   </script>

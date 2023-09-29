@@ -1,10 +1,10 @@
 function ItemViewModel(id) {
     var self = this;
     self.Name=ko.observable("")
-    GetItem(self,id);
+    IVMGetItem(self,id);
 
 }
-function GetItem(self,id)
+function IVMGetItem(self,id)
 {
   
     SPApiGet('/api/v1/items/'+id, function (obj) {

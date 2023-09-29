@@ -2,31 +2,31 @@ function PackingListsViewModel() {
     var self = this;
     var packingLists = [];
     self.PackingLists = ko.observableArray(packingLists);
-    GetAllPackingLists(self);
+    PLSVMGetAllPackingLists(self);
     self.Create = function ()
     {
-        CreatePackingList(self);
+        PLSVMCreatePackingList(self);
     }
 }
-function CreatePackingList(self)
+function PLSVMCreatePackingList(self)
 {
     SPApiPost('/api/v1/packinglist/',"", function (obj) {
         if (obj != null) {
-            AddPackingList(self,obj);
+            PLSVMAddPackingList(self,obj);
         }
     });
 }
-function GetAllPackingLists(self)
+function PLSVMGetAllPackingLists(self)
 {
     SPApiGet('/api/v1/packinglist/', function (obj) {
         if (obj != null) {
             ko.utils.arrayForEach(obj, function (dto) {
-                AddPackingList(self,dto);
+                PLSVMAddPackingList(self,dto);
             });
         }
     });
 }
-function AddPackingList(self,dto)
+function PLSVMAddPackingList(self,dto)
 {
     var item = new Object();
     item.Name=dto.Name;
@@ -36,7 +36,7 @@ function AddPackingList(self,dto)
         SPApiDelete('/api/v1/packinglist/'+dto.Id,function (obj) {
             if (obj != null) {
                 self.PackingLists.removeAll();
-                GetAllPackingLists(self);
+                PLSVMGetAllPackingLists(self);
             }
         });
     }   

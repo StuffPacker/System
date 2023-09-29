@@ -2,19 +2,19 @@ function DashboardViewModel(id) {
     var self = this;
     var Items = [];
     self.Items = ko.observableArray(Items);
-    GetAllItems(self);
+    DBVMGetAllItems(self);
 }
-function GetAllItems(self)
+function DBVMGetAllItems(self)
 {
     SPApiGet('/api/v1/items/', function (obj) {
         if (obj != null) {
             ko.utils.arrayForEach(obj, function (dto) {
-                AddItem(self,dto);
+                DBVMAddItem(self,dto);
             });
         }
     });
 }
-function AddItem(self,dto)
+function DBVMAddItem(self,dto)
 {
     var item = new Object();
     item.Name=dto.Name;

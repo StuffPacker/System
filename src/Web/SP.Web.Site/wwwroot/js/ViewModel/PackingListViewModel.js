@@ -2,7 +2,7 @@ function PackingListViewModel(id) {
     var self = this;
     var existingItems = [];
     self.ExistingItemsList = existingItems;
-    LoadExistingItems(self);
+    PLVMLoadExistingItems(self);
     var Groups = [];
     self.Name = ko.observable("");
     self.Groups = ko.observableArray(Groups);
@@ -32,8 +32,8 @@ function PackingListViewModel(id) {
             }
         });
     }
-    
-    GetPackingList(self, id);
+
+    PLVMGetPackingList(self, id);
     self.ChangeEditNameState = function () {
         self.EditName(!self.EditName());
     }
@@ -52,22 +52,17 @@ function PackingListViewModel(id) {
     }
     self.AddNewGroup = function () {
         SPApiPost('/api/v1/packinglist/'+id+'/group',"", function (obj) {
-            if (obj != null) {              
-                AddGroup(self,id,obj);
+            if (obj != null) {
+                PLVMAddGroup(self,id,obj);
             }
-        });
-       
-    }
-
-  
-
-    
+        });       
+    }    
 } 
-function AddExistingItems  (p1,p2)
+function PLVMAddExistingItems  (p1,p2)
 {
     alert("group: "+item.Id);
 }
-function LoadExistingItems(self)
+function PLVMLoadExistingItems(self)
 {
     SPApiGet('/api/v1/items/', function (obj) {
         if (obj != null) {          
@@ -80,7 +75,7 @@ function LoadExistingItems(self)
         }
     });
 }
-function GetPackingList(self,id)
+function PLVMGetPackingList(self,id)
 {    
     SPApiGet('/api/v1/packinglist/'+id, function (obj) {
         if (obj != null) {
@@ -91,13 +86,13 @@ function GetPackingList(self,id)
                 self.PublicLink("/packinglist/"+id+"/public");
             }
            
-            ko.utils.arrayForEach(obj.Groups, function (dto) {              
-               AddGroup(self,id,dto);
+            ko.utils.arrayForEach(obj.Groups, function (dto) {
+                PLVMAddGroup(self,id,dto);
             });
         }
     });
 }
-function AddGroup(self,id,dto)
+function PLVMAddGroup(self,id,dto)
 {   
     var items = [];
     var item = new Object();
@@ -111,7 +106,7 @@ function AddGroup(self,id,dto)
         SPApiPatch('/api/v1/packinglist/' + id + '/Group/'+dto.Id+'/Name', data, function (obj) {
             if (obj != null) {
                 self.Groups.removeAll();
-                GetPackingList(self,id);
+                PLVMGetPackingList(self,id);
             }
         });
         
@@ -119,7 +114,7 @@ function AddGroup(self,id,dto)
     item.Cancel = function (){item.EditGroupName(!item.EditGroupName());}
     item.Items=ko.observableArray(items); 
      ko.utils.arrayForEach(dto.Items, function (dto2) {
-         AddItem(self,item,id,item.Id,dto2);
+         PLVMAddItem(self,item,id,item.Id,dto2);
          
      });
      item.Delete= function ()
@@ -127,7 +122,7 @@ function AddGroup(self,id,dto)
          SPApiDelete('/api/v1/packinglist/'+id+'/Group/'+item.Id,function (obj) {
              if (obj != null) {
                  self.Groups.removeAll();
-                 GetPackingList(self,id);
+                 PLVMGetPackingList(self,id);
              }
          });
      }
@@ -156,11 +151,11 @@ function AddGroup(self,id,dto)
                      });
                      if(!itemExist)
                      {
-                         AddItem(self,item,id,item.Id,obj);
+                         PLVMAddItem(self,item,id,item.Id,obj);
                         
-                     } 
-                    
-                    ReloadItems(self,item,item.Items);
+                     }
+
+                     PLVMReloadItems(self,item,item.Items);
                  }
              });             
          }        
@@ -173,7 +168,7 @@ function AddGroup(self,id,dto)
      
     self.Groups.push(item);
 }
-function ReloadItems(self,group,items)
+function PLVMReloadItems(self,group,items)
 {
     
     var list=[];
@@ -187,7 +182,7 @@ function ReloadItems(self,group,items)
         group.Items.push(i);
     });
 }
-function AddItem(self,group,id,groupid,dto)
+function PLVMAddItem(self,group,id,groupid,dto)
 {   
     
     var item = new Object();
@@ -212,7 +207,7 @@ alert("Saved");
         SPApiDelete('/api/v1/packinglist/'+id+'/Group/'+groupid+'/item/'+dto.Id,function (obj) {
             if (obj != null) {
                 self.Groups.removeAll();
-                GetPackingList(self,id);
+                PLVMGetPackingList(self,id);
             }
         });
     }
