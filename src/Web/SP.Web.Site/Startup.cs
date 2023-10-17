@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using SP.Web.Business;
-using SP.Web.Site.Features.Item;
-using SP.Web.Site.Features.PackingList;
+using SP.Web.Site.Features.EmailSender;
 using SP.Web.Site.Model;
 
 namespace SP.Web.Site;
@@ -49,6 +49,8 @@ public class Startup
         });
         services.AddInfrastructureBusiness(Configuration);
         services.Configure<GoogleAnalytics>(Configuration.GetSection("GoogleAnalytics"));
+        services.Configure<EmailOptions>(Configuration.GetSection("EmailOptions"));
+        services.AddTransient<IEmailSender, SPEmailSender>();
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
