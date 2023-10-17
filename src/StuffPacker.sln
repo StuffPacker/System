@@ -20,6 +20,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SP.Shared.Common.Tests", "S
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SP.Web.Business", "Web\SP.Web.Business\SP.Web.Business.csproj", "{D70D94A3-C1A6-4701-8292-40412A7D43E6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api", "Api\Api.csproj", "{70A0EF5D-DF6B-49F8-907C-BC8503700899}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -50,6 +52,10 @@ Global
 		{D70D94A3-C1A6-4701-8292-40412A7D43E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D70D94A3-C1A6-4701-8292-40412A7D43E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D70D94A3-C1A6-4701-8292-40412A7D43E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70A0EF5D-DF6B-49F8-907C-BC8503700899}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70A0EF5D-DF6B-49F8-907C-BC8503700899}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70A0EF5D-DF6B-49F8-907C-BC8503700899}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70A0EF5D-DF6B-49F8-907C-BC8503700899}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
