@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace Api.Controllers;
+namespace Sp.Api.Host.Controllers;
 
 [ApiController]
 [Route("[controller]")]
@@ -19,6 +19,6 @@ public class HealthController : ControllerBase
     public ActionResult<string> Get()
     {
         _logger.Log(LogLevel.Information, "Check OK @ {Now}", DateTime.Now);
-        return Ok($"Api " + DateTime.Now);
+        return Ok($"Sp.Api.Host " + DateTime.Now);
     }
 }

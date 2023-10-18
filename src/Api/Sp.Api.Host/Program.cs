@@ -1,4 +1,4 @@
-namespace Api;
+namespace Sp.Api.Host;
 
 public class Program
 {
@@ -8,7 +8,7 @@ public class Program
             .Run();
 
     public static IHostBuilder CreateHostBuilder(string[] args) =>
-        Host.CreateDefaultBuilder(args)
+        Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder(args)
             .ConfigureWebHostDefaults(webBuilder =>
             {
                 webBuilder.UseStaticWebAssets();

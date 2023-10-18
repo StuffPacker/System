@@ -1,4 +1,4 @@
-namespace Api;
+namespace Sp.Api.Host;
 
 public class Startup
 {
@@ -21,7 +21,7 @@ public class Startup
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
         var logger = app.ApplicationServices.GetService<ILogger<Program>>();
-        logger!.LogWarning("Api Starting");
+        logger!.LogWarning("Sp.Api.Host Starting");
         if (!env.IsDevelopment())
         {
             app.UseExceptionHandler("/Error");
