@@ -17,10 +17,6 @@ public class Startup
         var migrationConnection =
             Configuration.GetConnectionString("SPWebSiteDataContextConnection");
         new StuffPackingDbContextMigrator().Migrate(null!, migrationConnection!);
-
-        // var mongoDbDatabaseOptions = new MongoDbDatabaseOptions();
-        // configuration.GetSection("MongoDbDatabaseOptions").Bind(mongoDbDatabaseOptions);
-        // var test = mongoDbDatabaseOptions.MongoDbConnectionString;
     }
 
     public IConfiguration Configuration { get; }
@@ -29,6 +25,10 @@ public class Startup
 
     public void ConfigureServices(IServiceCollection services)
     {
+        services.AddLogging(loggingBuilder =>
+        {
+            loggingBuilder.AddSeq(Configuration.GetSection("Seq"));
+        });
         ConnectionString = Configuration.GetConnectionString("SPWebSiteDataContextConnection") ?? throw new InvalidOperationException("Connection string 'SPWebSiteDataContextConnection' not found.");
         services.AddDbContext<SPWebSiteDataContext>(options => options.UseSqlServer(ConnectionString));
 
@@ -55,7 +55,8 @@ public class Startup
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
         var logger = app.ApplicationServices.GetService<ILogger<Program>>();
-        logger!.LogWarning("connstring " + ConnectionString);
+
+        // logger!.LogWarning("connstring " + ConnectionString);
         if (!env.IsDevelopment())
         {
             app.UseExceptionHandler("/Error");
