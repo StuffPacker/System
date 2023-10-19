@@ -56,7 +56,8 @@ public class Startup
     {
         var logger = app.ApplicationServices.GetService<ILogger<Program>>();
 
-        // logger!.LogWarning("connstring " + ConnectionString);
+        // app.UseExceptionHandler("/Error");
+        app.UseStatusCodePagesWithRedirects("/StatusCode/{0}");
         if (!env.IsDevelopment())
         {
             app.UseExceptionHandler("/Error");
