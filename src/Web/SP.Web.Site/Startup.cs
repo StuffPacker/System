@@ -57,7 +57,8 @@ public class Startup
         var logger = app.ApplicationServices.GetService<ILogger<Program>>();
 
         // app.UseExceptionHandler("/Error");
-        app.UseStatusCodePagesWithRedirects("/StatusCode/{0}");
+        // app.UseStatusCodePagesWithRedirects("/StatusCode/{0}");
+        app.UseStatusCodePagesWithReExecute("/StatusCode", "?statusCode={0}");
         if (!env.IsDevelopment())
         {
             app.UseExceptionHandler("/Error");
