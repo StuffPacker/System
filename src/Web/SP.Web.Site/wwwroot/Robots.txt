@@ -1,0 +1,9 @@
+User-agent: Googlebot
+Allow: /
+
+#Disallow any other bot to crawl the site
+User-agent: *
+Disallow: /
+
+#Add Sitemap link below
+Sitemap: https://beta.stuffpacker.net/sitemap.xml

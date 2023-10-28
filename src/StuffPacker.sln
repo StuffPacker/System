@@ -20,8 +20,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SP.Shared.Common.Tests", "S
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SP.Web.Business", "Web\SP.Web.Business\SP.Web.Business.csproj", "{D70D94A3-C1A6-4701-8292-40412A7D43E6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SP.Web.Site.Tests", "Web\SP.Web.Site.Tests\SP.Web.Site.Tests.csproj", "{DBEB0A4C-39AF-4E57-8520-A7798F8866EB}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -52,10 +50,6 @@ Global
 		{D70D94A3-C1A6-4701-8292-40412A7D43E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D70D94A3-C1A6-4701-8292-40412A7D43E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D70D94A3-C1A6-4701-8292-40412A7D43E6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DBEB0A4C-39AF-4E57-8520-A7798F8866EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DBEB0A4C-39AF-4E57-8520-A7798F8866EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DBEB0A4C-39AF-4E57-8520-A7798F8866EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DBEB0A4C-39AF-4E57-8520-A7798F8866EB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -67,6 +61,5 @@ Global
 		{86D36E34-B764-46DB-B496-377F0E9967BB} = {99A57DBC-3F46-41E4-8D1E-B0BA876238B9}
 		{1C3BC3C2-24AC-4B69-8632-D14B405CE7A2} = {EC931CC9-2C6A-4C81-BC09-879B1A739AAB}
 		{D70D94A3-C1A6-4701-8292-40412A7D43E6} = {8A2B4551-D1A0-47CA-A8F7-C3BEE98D4BAF}
-		{DBEB0A4C-39AF-4E57-8520-A7798F8866EB} = {8A2B4551-D1A0-47CA-A8F7-C3BEE98D4BAF}
 	EndGlobalSection
 EndGlobal

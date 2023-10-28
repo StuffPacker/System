@@ -10,9 +10,12 @@
     <title>Stuff packer</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/site.css"/>
-    <script src="/js/ViewModel/viewmodel.min.js" />
+    <script src="/js/ViewModel/viewmodel.min.js"></script>
     <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-TTQVBJ2GV6"></script>
+    @{
+        var link = "https://www.googletagmanager.com/gtag/js?id=" + googleAnalytics.Value.Code;
+    }
+    <script async src='@link'></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}

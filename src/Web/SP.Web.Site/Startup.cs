@@ -1,3 +1,4 @@
+using AspNetCore.SEOHelper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
@@ -17,10 +18,6 @@ public class Startup
         var migrationConnection =
             Configuration.GetConnectionString("SPWebSiteDataContextConnection");
         new StuffPackingDbContextMigrator().Migrate(null!, migrationConnection!);
-
-        // var mongoDbDatabaseOptions = new MongoDbDatabaseOptions();
-        // configuration.GetSection("MongoDbDatabaseOptions").Bind(mongoDbDatabaseOptions);
-        // var test = mongoDbDatabaseOptions.MongoDbConnectionString;
     }
 
     public IConfiguration Configuration { get; }
@@ -29,6 +26,10 @@ public class Startup
 
     public void ConfigureServices(IServiceCollection services)
     {
+        services.AddLogging(loggingBuilder =>
+        {
+            loggingBuilder.AddSeq(Configuration.GetSection("Seq"));
+        });
         ConnectionString = Configuration.GetConnectionString("SPWebSiteDataContextConnection") ?? throw new InvalidOperationException("Connection string 'SPWebSiteDataContextConnection' not found.");
         services.AddDbContext<SPWebSiteDataContext>(options => options.UseSqlServer(ConnectionString));
 
@@ -57,7 +58,10 @@ public class Startup
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
         var logger = app.ApplicationServices.GetService<ILogger<Program>>();
-        logger!.LogWarning("connstring " + ConnectionString);
+
+        // app.UseExceptionHandler("/Error");
+        // app.UseStatusCodePagesWithRedirects("/StatusCode/{0}");
+        app.UseStatusCodePagesWithReExecute("/StatusCode", "?statusCode={0}");
         if (!env.IsDevelopment())
         {
             app.UseExceptionHandler("/Error");
@@ -68,7 +72,7 @@ public class Startup
 
         app.UseHttpsRedirection();
         app.UseStaticFiles();
-
+        app.UseXMLSitemap(env.ContentRootPath);
         app.UseRouting();
         app.UseAuthentication();
         app.UseAuthorization();
