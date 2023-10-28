@@ -1,3 +1,4 @@
+using AspNetCore.SEOHelper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using SP.Web.Business;
@@ -69,7 +70,7 @@ public class Startup
 
         app.UseHttpsRedirection();
         app.UseStaticFiles();
-
+        app.UseXMLSitemap(env.ContentRootPath);
         app.UseRouting();
         app.UseAuthentication();
         app.UseAuthorization();
