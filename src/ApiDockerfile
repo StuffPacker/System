@@ -5,7 +5,8 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
-COPY ["Api/Sp.Api.Host/Sp.Api.Host.csproj", "Api/Sp.Api.Host"]
+
+COPY ["Api/Sp.Api.Host/Sp.Api.Host.csproj", "Api/Sp.Api.Host/"]
 RUN dotnet restore "Api/Sp.Api.Host/Sp.Api.Host.csproj"
 COPY . .
 WORKDIR "/src/Api/Sp.Api.Host"
@@ -18,3 +19,4 @@ FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "Sp.Api.Host.dll"]
+
