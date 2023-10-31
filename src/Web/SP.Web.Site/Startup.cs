@@ -70,6 +70,7 @@ public class Startup
             app.UseHsts();
         }
 
+        app.UseMiddleware<RedirectionMiddleware>();
         app.UseHttpsRedirection();
         app.UseStaticFiles();
         app.UseXMLSitemap(env.ContentRootPath);
