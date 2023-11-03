@@ -2,6 +2,7 @@ using AspNetCore.SEOHelper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
+using Sp.Api.Client;
 using SP.Web.Business;
 using SP.Web.Site.Features.EmailSender;
 using SP.Web.Site.Model;
@@ -49,6 +50,8 @@ public class Startup
             conf.LoginPath = "/login";
         });
         services.AddInfrastructureBusiness(Configuration);
+        var apiConfig = Configuration.GetSection("SpApiOptions").Get<SpApiOptions>();
+        services.AddInfrastructureApiClient(Configuration, apiConfig!);
         services.Configure<GoogleAnalytics>(Configuration.GetSection("GoogleAnalytics"));
         services.Configure<EmailOptions>(Configuration.GetSection("EmailOptions"));
         services.AddTransient<IEmailSender, SPEmailSender>();
