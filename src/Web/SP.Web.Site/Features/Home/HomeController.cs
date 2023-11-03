@@ -1,6 +1,7 @@
 using AspNetCore.SEOHelper.Sitemap;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Sp.Api.Client.Feature.Health;
 using SP.Web.Business.Feature.Health;
 
 namespace SP.Web.Site.Features.Home;
@@ -19,8 +20,8 @@ public class HomeController : Controller
     [Route("health")]
     public async Task<string> Health()
     {
-        var result = await _mediator.Send(new HealthCommand());
-        return result;
+        var health = await _mediator.Send(new HealthCommand());
+        return health;
     }
 
     [Route("sitemap")]
