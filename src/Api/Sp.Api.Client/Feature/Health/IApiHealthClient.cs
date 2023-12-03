@@ -2,5 +2,7 @@ namespace Sp.Api.Client.Feature.Health;
 
 public interface IApiHealthClient
 {
-    public Task<string> Health();
+    Task<string> Health();
+
+    Task<string> SecureHealth(string userId);
 }

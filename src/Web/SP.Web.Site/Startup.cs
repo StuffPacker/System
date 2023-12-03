@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Sp.Api.Client;
+using SP.Shared.Common.Feature.Jwt;
 using SP.Web.Business;
 using SP.Web.Site.Features.EmailSender;
 using SP.Web.Site.Model;
@@ -37,7 +38,6 @@ public class Startup
         services.AddDbContext<SPWebSiteDataContext>(options => options.UseSqlServer(ConnectionString, ef => ef.MigrationsAssembly(typeof(SPWebSiteDataContext).Assembly.FullName)));
 
         services.AddIdentity<StuffPackerUser, IdentityRole>().AddEntityFrameworkStores<SPWebSiteDataContext>().AddDefaultTokenProviders();
-
         services.AddRazorPages();
         services.AddControllers().AddJsonOptions(options =>
         {
@@ -54,6 +54,7 @@ public class Startup
         services.AddInfrastructureApiClient(Configuration, apiConfig!);
         services.Configure<GoogleAnalytics>(Configuration.GetSection("GoogleAnalytics"));
         services.Configure<EmailOptions>(Configuration.GetSection("EmailOptions"));
+        services.Configure<JwtOptions>(Configuration.GetSection("JwtOptions"));
         services.AddTransient<IEmailSender, SPEmailSender>();
     }
 
