@@ -8,20 +8,11 @@ namespace SP.Web.Site.Features.Home;
 
 public class HomeController : Controller
 {
-    private readonly IMediator _mediator;
     private readonly IWebHostEnvironment _env;
 
-    public HomeController(IMediator mediator, IWebHostEnvironment env)
+    public HomeController(IWebHostEnvironment env)
     {
-        _mediator = mediator;
         _env = env;
-    }
-
-    [Route("health")]
-    public async Task<string> Health()
-    {
-        var health = await _mediator.Send(new HealthCommand());
-        return health;
     }
 
     [Route("sitemap")]

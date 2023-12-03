@@ -64,7 +64,7 @@ public class ForgotPasswordController : Controller
             if (user == null)
             {
                 // Don't reveal that the user does not exist or is not confirmed
-                return RedirectToPage("./ForgotPasswordConfirmation");
+                return Redirect("/account/ForgotPasswordConfirmation");
             }
 
             // For more information on how to enable account confirmation and password reset please
@@ -84,7 +84,7 @@ public class ForgotPasswordController : Controller
                 "Reset Password",
                 $"Please reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl!)}'>clicking here</a>.");
 
-            return RedirectToPage("./ForgotPasswordConfirmation");
+            return Redirect("/account/ForgotPasswordConfirmation");
         }
 
         return View("ForgotPassword", new ForgotPasswordViewModel());
@@ -103,14 +103,14 @@ public class ForgotPasswordController : Controller
         if (user == null)
         {
             // Don't reveal that the user does not exist
-            return RedirectToPage("./ResetPasswordConfirmation");
+            return Redirect("/account/ResetPasswordConfirmation");
         }
 
         var code = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(input.Code));
         var result = await _userManager.ResetPasswordAsync(user, code, input.Password);
         if (result.Succeeded)
         {
-            return RedirectToPage("/ResetPasswordConfirmation");
+            return Redirect("/");
         }
 
         foreach (var error in result.Errors)
@@ -118,6 +118,12 @@ public class ForgotPasswordController : Controller
             ModelState.AddModelError(string.Empty, error.Description);
         }
 
-        return RedirectToPage("/");
+        return Redirect("/account/ResetPassword?code=" + input.Code);
+    }
+
+    [Route("ForgotPasswordConfirmation")]
+    public IActionResult ForgotPasswordConfirmation()
+    {
+        return View("ResetPasswordConfirmation");
     }
 }

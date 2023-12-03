@@ -11,8 +11,8 @@ public static class Extensions
         IConfiguration configuration,
         SpApiOptions options)
     {
-        services.AddSingleton<ISpApiClient, SpApiClient>();
-        services.AddSingleton<IApiHealthClient, ApiHealthClient>();
+        services.AddTransient<ISpApiClient, SpApiClient>();
+        services.AddScoped<IApiHealthClient, ApiHealthClient>();
         services.AddHttpClient("SpApi", httpClient =>
         {
             httpClient.BaseAddress = new Uri(options.BaseUrl);
