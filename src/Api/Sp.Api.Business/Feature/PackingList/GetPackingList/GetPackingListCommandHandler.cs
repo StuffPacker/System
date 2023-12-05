@@ -2,7 +2,7 @@ using MediatR;
 using SP.Database.Mongo.Feature.PackingList;
 using SP.Shared.Common.Feature.PackingList.Model;
 
-namespace SP.Web.Business.Feature.PackingList.GetPackingList;
+namespace Sp.Api.Business.Feature.PackingList.GetPackingList;
 
 public class GetPackingListCommandHandler : IRequestHandler<GetPackingListCommand, PackingListModel>
 {

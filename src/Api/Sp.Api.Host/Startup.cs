@@ -2,6 +2,7 @@ using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using Sp.Api.Business;
 using SP.Shared.Common.Feature.Jwt;
 
 namespace Sp.Api.Host;
@@ -21,7 +22,7 @@ public class Startup
     public void ConfigureServices(IServiceCollection services)
     {
         var key = Configuration.GetValue<string>("JwtOptions:Key");
-
+        services.AddApiInfrastructureBusiness(Configuration);
         services.AddControllers();
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();

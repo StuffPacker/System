@@ -14,6 +14,5 @@
     </ItemGroup>
     <ItemGroup>
       <ProjectReference Include="..\..\Api\Sp.Api.Client\Sp.Api.Client.csproj" />
-      <ProjectReference Include="..\..\Database\SP.Database.Mongo\SP.Database.Mongo.csproj" />
     </ItemGroup>
 </Project>

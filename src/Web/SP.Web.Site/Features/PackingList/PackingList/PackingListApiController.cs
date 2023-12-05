@@ -5,7 +5,6 @@ using SP.Shared.Common;
 using SP.Web.Business.Feature.Item;
 using SP.Web.Business.Feature.Item.GetItemById;
 using SP.Web.Business.Feature.PackingList;
-using SP.Web.Business.Feature.PackingList.GetPackingList;
 using SP.Web.Business.Feature.PackingList.Mapper;
 using SP.Web.Business.Feature.PackingList.ViewModel;
 using SP.Web.Business.ViewModel;

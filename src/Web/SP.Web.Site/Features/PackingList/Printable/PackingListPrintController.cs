@@ -1,9 +1,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using SP.Shared.Common;
-using SP.Web.Business.Feature.Item;
-using SP.Web.Business.Feature.PackingList.GetPackingList;
+using SP.Web.Business.Feature.PackingList;
 using SP.Web.Business.Feature.PackingList.Mapper;
 
 namespace SP.Web.Site.Features.PackingList.Printable;
