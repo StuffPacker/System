@@ -1,7 +1,7 @@
 using FluentAssertions;
+using SP.Shared.Common.Feature.Item.Mapper;
 using SP.Shared.Common.Feature.Item.Model;
 using SP.Shared.Common.Feature.PackingList.Dto;
-using SP.Shared.Common.Feature.PackingList.Mapper;
 
 namespace SP.Shared.Common.Tests.Feature.PackingList;
 

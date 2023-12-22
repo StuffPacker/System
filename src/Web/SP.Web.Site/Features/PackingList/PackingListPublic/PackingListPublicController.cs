@@ -16,7 +16,7 @@ public class PackingListPublicController : ControllerBase
     [Route("packinglist/{id}/public")]
     public async Task<ActionResult> Packinglist(string id)
     {
-        var model = await _mediator.Send(new GetPackingListCommand(id));
+        var model = await _mediator.Send(new GetPackingListPublicCommand(id));
         if (model.IsPublic)
         {
             return View("PackingListPublic", id);

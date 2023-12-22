@@ -1,10 +1,12 @@
 using MediatR;
 using SP.Shared.Common.Feature.Database.UserItem;
 using SP.Shared.Common.Feature.Item.Model;
+using SP.Shared.Common.Feature.PackingList.Dto;
+using SP.Shared.Common.Feature.PackingList.Mapper;
 
-namespace SP.Web.Business.Feature.Item.CreateItem;
+namespace Sp.Api.Business.Feature.Item.CreateItem;
 
-public class CreateItemCommandHandler : IRequestHandler<CreateItemCommand, ItemViewModel>
+public class CreateItemCommandHandler : IRequestHandler<CreateItemCommand, ItemDto>
 {
     private readonly IUserItemRepository _userItemRepository;
 
@@ -13,12 +15,12 @@ public class CreateItemCommandHandler : IRequestHandler<CreateItemCommand, ItemV
         _userItemRepository = userItemRepository;
     }
 
-    public async Task<ItemViewModel> Handle(CreateItemCommand request, CancellationToken cancellationToken)
+    public async Task<ItemDto> Handle(CreateItemCommand request, CancellationToken cancellationToken)
     {
         return await CreateItem(request.UserId);
     }
 
-    private async Task<ItemViewModel> CreateItem(Guid userId)
+    private async Task<ItemDto> CreateItem(Guid userId)
     {
         var model = new ItemModel()
         {
@@ -28,6 +30,6 @@ public class CreateItemCommandHandler : IRequestHandler<CreateItemCommand, ItemV
             WeightSufix = "g"
         };
         var item = await _userItemRepository.Create(model);
-        return new ItemViewModel(item);
+        return null!; // _itemModelMapper.Map(item);
     }
 }

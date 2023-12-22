@@ -1,31 +1,67 @@
+using Sp.Api.Client.Feature.PackingList;
+using SP.Shared.Common.Feature.PackingList.Mapper;
+using SP.Shared.Common.Feature.PackingList.Model;
+using SP.Web.Business.Feature.PackingList.Mapper;
 using SP.Web.Business.Feature.PackingList.ViewModel;
 
 namespace SP.Web.Business.Feature.PackingList;
 
 public class PackingListService : IPackingListService
 {
-    public Task<PackingListViewModel> GetPackingListById(string id, Guid userId)
+    private readonly IApiPackingListClient _apiPackingListClient;
+    private readonly IPackingListMapper _packingListMapper;
+
+    public PackingListService(IApiPackingListClient apiPackingListClient, IPackingListMapper packingListMapper)
     {
-        throw new NotImplementedException();
+        _apiPackingListClient = apiPackingListClient;
+        _packingListMapper = packingListMapper;
     }
 
-    public Task<List<PackingListViewModel>> GetPackingLists(Guid userId)
+    public async Task<PackingListViewModel> GetPackingListById(string id, Guid userId)
     {
-        throw new NotImplementedException();
+       var model = await _apiPackingListClient.GetPackingList(id, userId);
+       return PackingListViewModelMapper.Map(model);
     }
 
-    public Task<PackingListViewModel> CreatePackingList(Guid userId)
+    public async Task<List<PackingListViewModel>> GetPackingLists(Guid userId)
     {
-        throw new NotImplementedException();
+        var models = await _apiPackingListClient.GetPackingLists(userId);
+        var list = new List<PackingListViewModel>();
+        foreach (var item in models)
+        {
+            list.Add(PackingListViewModelMapper.Map(item));
+        }
+
+        return list;
     }
 
-    public Task Delete(string id, Guid getUserId)
+    public async Task<PackingListViewModel> CreatePackingList(Guid userId)
     {
-        throw new NotImplementedException();
+        var model = new PackingListModel
+        {
+            Name = "new packing list",
+            UserId = userId,
+            Groups = new List<PackListGroupModel>
+            {
+                new PackListGroupModel
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    Name = "New Group",
+                    Items = new List<PackingListGroupItemModel>()
+                }
+            }
+        };
+        var response = await _apiPackingListClient.Create(userId, model);
+        return PackingListViewModelMapper.Map(response);
     }
 
-    public Task Update(PackingListViewModel model)
+    public async Task Delete(string id, Guid getUserId)
     {
-        throw new NotImplementedException();
+        await _apiPackingListClient.Delete(id, getUserId);
+    }
+
+    public async Task Update(PackingListViewModel model, Guid userId)
+    {
+        await _apiPackingListClient.Update(PackingListViewModelMapper.Map(model), userId);
     }
 }

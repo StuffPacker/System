@@ -1,8 +1,8 @@
 using MediatR;
 
-namespace SP.Web.Business.Feature.Item.DeleteItem;
+namespace SP.Web.Business.Feature.Item;
 
-public class DeleteItemCommand : IRequest<string>
+public class DeleteItemCommand : IRequest<List<ItemViewModel>>
 {
     public DeleteItemCommand(string id, Guid userId)
     {
@@ -12,5 +12,5 @@ public class DeleteItemCommand : IRequest<string>
 
     public Guid UserId { get; set; }
 
-    public string Id { get; set; }
+    public string Id { get; set; } = string.Empty;
 }

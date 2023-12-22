@@ -1,6 +1,6 @@
 using MediatR;
 
-namespace SP.Web.Business.Feature.Item.GetItems;
+namespace SP.Web.Business.Feature.Item;
 
 public class GetItemsCommand : IRequest<List<ItemViewModel>>
 {

@@ -12,7 +12,8 @@ public static class Extensions
         IConfiguration configuration)
     {
         services.AddMediatR(typeof(Extensions));
-        services.AddSingleton<IPackingListService, PackingListService>();
+        services.AddTransient<IPackingListService, PackingListService>();
+
         return services;
     }
 }

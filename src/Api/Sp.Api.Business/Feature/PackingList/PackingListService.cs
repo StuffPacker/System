@@ -17,9 +17,9 @@ public class PackingListService : IPackingListService
         _packingListMapper = packingListMapper;
     }
 
-    public async Task<PackingListDto> GetPackingListById(string id, Guid userId)
+    public async Task<PackingListDto> GetPackingListById(string id)
     {
-      return await GetById(id, userId);
+      return await GetById(id);
     }
 
     public async Task<List<PackingListDto>> GetPackingLists(Guid userId)
@@ -34,22 +34,8 @@ public class PackingListService : IPackingListService
         return list;
     }
 
-    public async Task<PackingListDto> CreatePackingList(Guid userId)
+    public async Task<PackingListDto> CreatePackingList(Guid userId, PackingListModel model)
     {
-        var model = new PackingListModel
-        {
-            Name = "new packing list",
-            UserId = userId,
-            Groups = new List<PackListGroupModel>
-            {
-                new PackListGroupModel
-                {
-                    Id = Guid.NewGuid().ToString(),
-                    Name = "New Group",
-                    Items = new List<PackingListGroupItemModel>()
-                }
-            }
-        };
         var result = await _packingListRepository.Create(model);
 
         return _packingListMapper.Map(result);
@@ -118,14 +104,10 @@ public class PackingListService : IPackingListService
         return list;
     }
 
-    private async Task<PackingListDto> GetById(string id, Guid userId)
+    private async Task<PackingListDto> GetById(string id)
     {
         var result = await _packingListRepository.GetById(id);
         var vm = _packingListMapper.Map(result);
-        if (!Access(vm, userId))
-        {
-            return null!;
-        }
 
         return vm;
     }

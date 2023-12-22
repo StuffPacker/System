@@ -7,5 +7,9 @@ public interface IPackingListMapper
 {
     PackingListDto Map(PackingListModel model);
 
+    IEnumerable<PackingListDto> Map(IEnumerable<PackingListModel> model);
+
     PackingListModel Map(PackingListDto dto);
+
+    IEnumerable<PackingListModel> Map(IEnumerable<PackingListDto> dto);
 }

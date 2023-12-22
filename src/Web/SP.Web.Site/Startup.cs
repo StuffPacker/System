@@ -3,7 +3,10 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Sp.Api.Client;
+using SP.Shared.Common;
+using SP.Shared.Common.Feature.Item.Mapper;
 using SP.Shared.Common.Feature.Jwt;
+using SP.Shared.Common.Feature.PackingList.Mapper;
 using SP.Web.Business;
 using SP.Web.Site.Features.EmailSender;
 using SP.Web.Site.Model;
@@ -49,13 +52,15 @@ public class Startup
         {
             conf.LoginPath = "/login";
         });
+        services.AddSingleton<IItemModelMapper, ItemModelMapper>();
+        services.AddSingleton<IPackingListMapper, PackingListMapper>();
         services.AddInfrastructureBusiness(Configuration);
         var apiConfig = Configuration.GetSection("SpApiOptions").Get<SpApiOptions>();
         services.AddInfrastructureApiClient(Configuration, apiConfig!);
         services.Configure<GoogleAnalytics>(Configuration.GetSection("GoogleAnalytics"));
         services.Configure<EmailOptions>(Configuration.GetSection("EmailOptions"));
         services.Configure<JwtOptions>(Configuration.GetSection("JwtOptions"));
-        services.AddTransient<IEmailSender, SPEmailSender>();
+        services.AddSingleton<IEmailSender, SPEmailSender>();
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -2,7 +2,7 @@ using System.Security.Authentication;
 using MediatR;
 using SP.Shared.Common.Feature.Database.UserItem;
 
-namespace SP.Web.Business.Feature.Item.UpdateItem;
+namespace Sp.Api.Business.Feature.Item.UpdateItem;
 
 public class UpdateItemCommandHandler : IRequestHandler<UpdateItemCommand, string>
 {
@@ -19,7 +19,7 @@ public class UpdateItemCommandHandler : IRequestHandler<UpdateItemCommand, strin
         return string.Empty;
     }
 
-    private async Task UpdateItem(string id, Guid userId, ItemEditInputViewModel inputModel)
+    private async Task UpdateItem(string id, Guid userId, ItemEditInputDto inputModel)
     {
         var model = await _userItemRepository.GetById(id);
         if (model.UserId != userId)

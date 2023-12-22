@@ -1,17 +1,17 @@
 using MediatR;
 
-namespace SP.Web.Business.Feature.Item.UpdateItem;
+namespace Sp.Api.Business.Feature.Item.UpdateItem;
 
 public class UpdateItemCommand : IRequest<string>
 {
-    public UpdateItemCommand(string id, Guid userId, ItemEditInputViewModel inputModel)
+    public UpdateItemCommand(string id, Guid userId, ItemEditInputDto inputModel)
     {
         Id = id;
         UserId = userId;
         InputModel = inputModel;
     }
 
-    public ItemEditInputViewModel InputModel { get; set; }
+    public ItemEditInputDto InputModel { get; set; }
 
     public Guid UserId { get; set; }
 

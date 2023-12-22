@@ -1,8 +1,9 @@
 using MediatR;
+using SP.Shared.Common.Feature.PackingList.Dto;
 
-namespace SP.Web.Business.Feature.Item.GetItemById;
+namespace Sp.Api.Business.Feature.Item.GetItemById;
 
-public class GetItemByIdCommand : IRequest<ItemViewModel>
+public class GetItemByIdCommand : IRequest<ItemDto>
 {
     public GetItemByIdCommand(string id, Guid userId)
     {

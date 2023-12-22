@@ -15,5 +15,8 @@
     <ItemGroup>
       <ProjectReference Include="..\..\Database\SP.Database.Mongo\SP.Database.Mongo.csproj" />
     </ItemGroup>
+    <ItemGroup>
+      <Folder Include="Feature\Item\" />
+    </ItemGroup>
 
 </Project>

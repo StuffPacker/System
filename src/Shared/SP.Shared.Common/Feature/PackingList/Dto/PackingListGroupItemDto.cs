@@ -8,7 +8,7 @@ public class PackingListGroupItemDto
 
     public string Id { get; set; } = string.Empty;
 
-    public bool Weight { get; set; }
+    public decimal Weight { get; set; }
 
     public int Quantity { get; set; }
 }

@@ -1,9 +1,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using SP.Shared.Common;
 using SP.Web.Business.Feature.Item;
-using SP.Web.Business.Feature.Item.GetItemById;
 using SP.Web.Business.Feature.PackingList;
 using SP.Web.Business.Feature.PackingList.Mapper;
 using SP.Web.Business.Feature.PackingList.ViewModel;
@@ -40,7 +38,7 @@ public class PackingListApiController : ControllerBase
     [Route("{id}/public")]
     public async Task<ActionResult> PackingListPublic(string id)
     {
-        var result = await _mediator.Send(new GetPackingListCommand(id));
+        var result = await _mediator.Send(new GetPackingListPublicCommand(id));
         var vm = PackingListViewModelMapper.Map(result);
         if (result.IsPublic == true)
         {
@@ -78,7 +76,7 @@ public class PackingListApiController : ControllerBase
             Items = new List<PackingListGroupItemViewModel>()
         };
         model.Groups.Add(group);
-        await _packingListService.Update(model);
+        await _packingListService.Update(model, GetUserId());
         return Ok(new ResultJsonModel
         {
             Meta = new MetaModel { Code = 200 },
@@ -92,7 +90,7 @@ public class PackingListApiController : ControllerBase
         var model = await _packingListService.GetPackingListById(id, GetUserId());
 
         model.DeleteGroup(groupid);
-        await _packingListService.Update(model);
+        await _packingListService.Update(model, GetUserId());
         return Ok(new ResultJsonModel
         {
             Meta = new MetaModel { Code = 200 },
@@ -105,7 +103,7 @@ public class PackingListApiController : ControllerBase
     {
         var model = await _packingListService.GetPackingListById(id, GetUserId());
         model.Name = input.Name;
-        await _packingListService.Update(model);
+        await _packingListService.Update(model, GetUserId());
         return Ok(new ResultJsonModel
         {
             Meta = new MetaModel { Code = 200 },
@@ -118,7 +116,7 @@ public class PackingListApiController : ControllerBase
     {
         var model = await _packingListService.GetPackingListById(id, GetUserId());
         model.UpdateGroupName(groupid, input.Name);
-        await _packingListService.Update(model);
+        await _packingListService.Update(model, GetUserId());
         return Ok(new ResultJsonModel
         {
             Meta = new MetaModel { Code = 200 },
@@ -138,7 +136,7 @@ public class PackingListApiController : ControllerBase
 
         packingList.AddItemToGroup(groupid, item);
 
-        await _packingListService.Update(packingList);
+        await _packingListService.Update(packingList, GetUserId());
         var group = packingList.Groups.First(x => x.Id == groupid);
         var itemOut = group.Items.First(x => x.Id == input.Id);
         return Ok(new ResultJsonModel
@@ -154,7 +152,7 @@ public class PackingListApiController : ControllerBase
         var model = await _packingListService.GetPackingListById(id, GetUserId());
 
         model.DeleteGroupItem(groupid, itemid);
-        await _packingListService.Update(model);
+        await _packingListService.Update(model, GetUserId());
         return Ok(new ResultJsonModel
         {
             Meta = new MetaModel { Code = 200 },
@@ -168,7 +166,7 @@ public class PackingListApiController : ControllerBase
         var model = await _packingListService.GetPackingListById(id, GetUserId());
         model.UpdateGroupItemQuantity(groupid, itemid, input.Quantity);
 
-        await _packingListService.Update(model);
+        await _packingListService.Update(model, GetUserId());
         return Ok(new ResultJsonModel
         {
             Meta = new MetaModel { Code = 200 },
@@ -181,7 +179,7 @@ public class PackingListApiController : ControllerBase
     {
         var model = await _packingListService.GetPackingListById(id, GetUserId());
         model.IsPublic = input.MakePublic;
-        await _packingListService.Update(model);
+        await _packingListService.Update(model, GetUserId());
         return Ok(new ResultJsonModel
         {
             Meta = new MetaModel { Code = 200 },

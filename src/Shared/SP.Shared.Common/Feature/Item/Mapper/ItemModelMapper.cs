@@ -1,7 +1,8 @@
 using SP.Shared.Common.Feature.Item.Model;
 using SP.Shared.Common.Feature.PackingList.Dto;
+using SP.Shared.Common.Feature.PackingList.Mapper;
 
-namespace SP.Shared.Common.Feature.PackingList.Mapper;
+namespace SP.Shared.Common.Feature.Item.Mapper;
 
 public class ItemModelMapper : IItemModelMapper
 {

@@ -1,9 +1,10 @@
 using MediatR;
 using SP.Shared.Common.Feature.Database.UserItem;
+using SP.Shared.Common.Feature.PackingList.Dto;
 
-namespace SP.Web.Business.Feature.Item.GetItems;
+namespace Sp.Api.Business.Feature.Item.GetItems;
 
-public class GetItemsCommandHandler : IRequestHandler<GetItemsCommand, List<ItemViewModel>>
+public class GetItemsCommandHandler : IRequestHandler<GetItemsCommand, List<ItemDto>>
 {
     private readonly IUserItemRepository _userItemRepository;
 
@@ -12,18 +13,18 @@ public class GetItemsCommandHandler : IRequestHandler<GetItemsCommand, List<Item
         _userItemRepository = userItemRepository;
     }
 
-    public async Task<List<ItemViewModel>> Handle(GetItemsCommand request, CancellationToken cancellationToken)
+    public async Task<List<ItemDto>> Handle(GetItemsCommand request, CancellationToken cancellationToken)
     {
         return await GetItems(request.UserId);
     }
 
-    private async Task<List<ItemViewModel>> GetItems(Guid userId)
+    private async Task<List<ItemDto>> GetItems(Guid userId)
     {
-        var result = new List<ItemViewModel>();
+        var result = new List<ItemDto>();
         var userItems = await _userItemRepository.GetByUserId(userId);
         foreach (var item in userItems)
         {
-            result.Add(new ItemViewModel(item));
+            // result.Add(_itemModelMapper.Map(item));
         }
 
         return result.OrderBy(o => o.Name).ToList();
