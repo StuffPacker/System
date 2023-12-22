@@ -29,4 +29,15 @@ public class ItemModelMapper : IItemModelMapper
             WeightSufix = model.WeightSufix
         };
     }
+
+    public IEnumerable<ItemModel> Map(IEnumerable<ItemDto> dtos)
+    {
+        var list = new List<ItemModel>();
+        foreach (var item in dtos)
+        {
+            list.Add(Map(item));
+        }
+
+        return list;
+    }
 }

@@ -8,4 +8,6 @@ public interface IItemModelMapper
     ItemDto Map(ItemModel model);
 
     ItemModel Map(ItemDto model);
+
+    IEnumerable<ItemModel> Map(IEnumerable<ItemDto> model);
 }
