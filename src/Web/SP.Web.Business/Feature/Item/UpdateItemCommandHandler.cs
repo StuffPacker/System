@@ -15,7 +15,11 @@ public class UpdateItemCommandHandler : IRequestHandler<UpdateItemCommand, ItemV
 
     public async Task<ItemViewModel> Handle(UpdateItemCommand request, CancellationToken cancellationToken)
     {
-        var dto = new ItemEditInputDto();
+        var dto = new ItemEditInputDto
+        {
+            Name = request.Model.Name,
+            Weight = request.Model.Weight
+        };
         var result = await _itemClient.Update(request.UserId, request.Id, dto);
         return new ItemViewModel(result);
     }

@@ -30,7 +30,7 @@ public class ItemController : ControllerBase
         return Ok(result);
     }
 
-    [HttpPut("SpApi/v1/item/")]
+    [HttpPost("SpApi/v1/item/")]
     public async Task<ActionResult<string>> Create()
     {
         var result = await _mediator.Send(new CreateItemCommand(GetUser()));
@@ -70,10 +70,6 @@ public class ItemController : ControllerBase
     public async Task<ActionResult<string>> Update(string id, [FromBody] ItemEditInputDto inputModel)
     {
         var result = await _mediator.Send(new UpdateItemCommand(id, GetUser(), inputModel));
-        if (result.IsNullOrEmpty())
-        {
-            result = string.Empty;
-        }
 
         return Ok(result);
     }

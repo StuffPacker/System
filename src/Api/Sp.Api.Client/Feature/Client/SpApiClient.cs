@@ -74,9 +74,24 @@ public class SpApiClient : ISpApiClient
         throw new InvalidOperationException();
     }
 
+    public async Task<string> PatchSecure(string url, string userId, object dto)
+    {
+        var content = new StringContent(JsonExtensions.SerializeToJson(dto), Encoding.UTF8, "application/json");
+        var client = SecureClient(userId);
+        var httpResponseMessage = await client.PatchAsync(url, content);
+        if (httpResponseMessage.IsSuccessStatusCode)
+        {
+            var contentStream = await httpResponseMessage.Content.ReadAsStringAsync();
+
+            return contentStream;
+        }
+
+        throw new InvalidOperationException();
+    }
+
     public async Task<string> PutSecure(string url, string userId, object dto)
     {
-        var content = new StringContent(JsonExtensions.SerializeToJson(dto), Encoding.UTF8);
+        var content = new StringContent(JsonExtensions.SerializeToJson(dto), Encoding.UTF8, "application/json");
         var client = SecureClient(userId);
         var httpResponseMessage = await client.PutAsync(url, content);
         if (httpResponseMessage.IsSuccessStatusCode)

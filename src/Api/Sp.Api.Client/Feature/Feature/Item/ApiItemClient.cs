@@ -50,7 +50,7 @@ public class ApiItemClient : IApiItemClient
 
     public async Task<ItemModel> Update(Guid userId, string id, ItemEditInputDto dtoIn)
     {
-        var result = await _apiClient.PutSecure("SpApi/v1/item/", userId.ToString(), dtoIn);
+        var result = await _apiClient.PatchSecure("SpApi/v1/item/" + id + "/", userId.ToString(), dtoIn);
         var dto = JsonHandler.Deserialize<ItemDto>(result);
         var model = _itemModelMapper.Map(dto);
         return model;
