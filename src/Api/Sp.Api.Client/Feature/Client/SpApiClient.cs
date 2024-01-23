@@ -49,7 +49,7 @@ public class SpApiClient : ISpApiClient
 
     public async Task<string> PostSecure(string url, string userId, object dto)
     {
-        var content = new StringContent(JsonExtensions.SerializeToJson(dto), Encoding.UTF8);
+        var content = new StringContent(JsonExtensions.SerializeToJson(dto), Encoding.UTF8, "application/json");
         var client = SecureClient(userId);
         var httpResponseMessage = await client.PostAsync(url, content);
         if (httpResponseMessage.IsSuccessStatusCode)
@@ -96,6 +96,7 @@ public class SpApiClient : ISpApiClient
 // add new security
         var token = GetToken(userId);
         client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
         return client;
     }
 

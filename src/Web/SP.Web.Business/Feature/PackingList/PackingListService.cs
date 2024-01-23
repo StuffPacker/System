@@ -41,9 +41,9 @@ public class PackingListService : IPackingListService
         {
             Name = "new packing list",
             UserId = userId,
-            Groups = new List<PackListGroupModel>
+            Groups = new List<PackingListGroupModel>
             {
-                new PackListGroupModel
+                new PackingListGroupModel
                 {
                     Id = Guid.NewGuid().ToString(),
                     Name = "New Group",

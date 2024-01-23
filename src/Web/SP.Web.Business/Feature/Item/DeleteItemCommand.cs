@@ -2,7 +2,7 @@ using MediatR;
 
 namespace SP.Web.Business.Feature.Item;
 
-public class DeleteItemCommand : IRequest<List<ItemViewModel>>
+public class DeleteItemCommand : IRequest<string>
 {
     public DeleteItemCommand(string id, Guid userId)
     {

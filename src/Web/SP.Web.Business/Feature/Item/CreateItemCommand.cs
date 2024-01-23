@@ -2,7 +2,7 @@ using MediatR;
 
 namespace SP.Web.Business.Feature.Item;
 
-public class CreateItemCommand : IRequest<List<ItemViewModel>>
+public class CreateItemCommand : IRequest<ItemViewModel>
 {
     public CreateItemCommand(Guid userId)
     {

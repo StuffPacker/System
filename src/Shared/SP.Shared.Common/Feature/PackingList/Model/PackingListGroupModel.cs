@@ -1,6 +1,6 @@
 namespace SP.Shared.Common.Feature.PackingList.Model;
 
-public class PackListGroupModel
+public class PackingListGroupModel
 {
     public string Name { get; set; } = string.Empty;
 

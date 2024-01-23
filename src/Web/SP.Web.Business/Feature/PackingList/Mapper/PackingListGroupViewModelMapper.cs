@@ -5,7 +5,7 @@ namespace SP.Web.Business.Feature.PackingList.Mapper;
 
 public class PackingListGroupViewModelMapper
 {
-    public static PackingListGroupViewModel Map(PackListGroupModel item)
+    public static PackingListGroupViewModel Map(PackingListGroupModel item)
     {
         return new PackingListGroupViewModel
         {
@@ -15,9 +15,9 @@ public class PackingListGroupViewModelMapper
         };
     }
 
-    public static PackListGroupModel Map(PackingListGroupViewModel item)
+    public static PackingListGroupModel Map(PackingListGroupViewModel item)
     {
-        return new PackListGroupModel
+        return new PackingListGroupModel
         {
             Id = item.Id,
             Name = item.Name,

@@ -1,6 +1,9 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Sp.Api.Business.Feature.PackingList;
+using SP.Shared.Common.Feature.PackingList.Dto;
+using SP.Shared.Common.Feature.PackingList.Mapper;
+using SP.Shared.Common.Feature.PackingList.Model;
 
 namespace Sp.Api.Host.Controllers;
 
@@ -8,14 +11,35 @@ namespace Sp.Api.Host.Controllers;
 public class PackingListController : ControllerBase
 {
     private readonly IPackingListService _packingListService;
+    private readonly IPackingListMapper _packingListMapper;
 
-    public PackingListController(IPackingListService packingListService)
+    public PackingListController(IPackingListService packingListService, IPackingListMapper packingListMapper)
     {
         _packingListService = packingListService;
+        _packingListMapper = packingListMapper;
+    }
+
+    [HttpGet("SpApi/v1/packinglist/")]
+    public async Task<ActionResult<string>> Get()
+    {
+        var user = User.Claims.FirstOrDefault(x => x.Type == "UserId");
+        var dto = await _packingListService.GetPackingLists(Guid.Parse(user!.Value));
+
+        return Ok(dto);
+    }
+
+    [HttpPost("SpApi/v1/packinglist/")]
+    public async Task<ActionResult<string>> Create([FromBody] PackingListDto dtoIn)
+    {
+        var user = User.Claims.FirstOrDefault(x => x.Type == "UserId");
+        var model = _packingListMapper.Map(dtoIn);
+        var dto = await _packingListService.CreatePackingList(Guid.Parse(user!.Value), model);
+
+        return Ok(dto);
     }
 
     [HttpGet("SpApi/v1/packinglist/{id}")]
-    public async Task<ActionResult<string>> Get(string id)
+    public async Task<ActionResult<string>> GetById(string id)
     {
         var user = User.Claims.FirstOrDefault(x => x.Type == "UserId");
         var dto = await _packingListService.GetPackingListById(id);

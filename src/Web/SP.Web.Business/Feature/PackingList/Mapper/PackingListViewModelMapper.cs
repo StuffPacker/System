@@ -29,7 +29,7 @@ public static class PackingListViewModelMapper
         };
     }
 
-    private static List<PackingListGroupViewModel> GetGroups(List<PackListGroupModel> modelGroups)
+    private static List<PackingListGroupViewModel> GetGroups(List<PackingListGroupModel> modelGroups)
     {
         var list = new List<PackingListGroupViewModel>();
         foreach (var item in modelGroups)
@@ -40,9 +40,9 @@ public static class PackingListViewModelMapper
         return list;
     }
 
-    private static List<PackListGroupModel> GetGroups(List<PackingListGroupViewModel> modelGroups)
+    private static List<PackingListGroupModel> GetGroups(List<PackingListGroupViewModel> modelGroups)
     {
-        var list = new List<PackListGroupModel>();
+        var list = new List<PackingListGroupModel>();
         foreach (var item in modelGroups)
         {
             list.Add(PackingListGroupViewModelMapper.Map(item));

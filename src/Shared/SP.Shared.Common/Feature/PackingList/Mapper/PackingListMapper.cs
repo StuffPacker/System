@@ -12,7 +12,7 @@ public class PackingListMapper : IPackingListMapper
             Name = model.Name,
             IsPublic = model.IsPublic,
             UserId = model.UserId.ToString(),
-            Groups = GetGroups(model.Groups),
+            Groups = GetGroupsDto(model.Groups),
             Id = model.Id
         };
     }
@@ -36,7 +36,7 @@ public class PackingListMapper : IPackingListMapper
             Name = dto.Name,
             UserId = Guid.Parse(dto.UserId),
             IsPublic = dto.IsPublic,
-            Groups = GetGroups(dto.Groups)
+            Groups = GetGroupsModel(dto.Groups)
         };
     }
 
@@ -51,30 +51,29 @@ public class PackingListMapper : IPackingListMapper
         return list;
     }
 
-    private List<PackingListDto> GetGroups(List<PackListGroupModel> modelGroups)
+    private List<PackingListGroupDto> GetGroupsDto(List<PackingListGroupModel> modelGroups)
     {
-        var list = new List<PackingListDto>();
+        var list = new List<PackingListGroupDto>();
         foreach (var item in modelGroups)
         {
-            list.Add(new PackingListDto
+            list.Add(new PackingListGroupDto
             {
                 Name = item.Name,
                 Id = item.Id,
-                Items = GetItems(item.Items)
+                Items = GetItemsDto(item.Items)
             });
         }
 
         return list;
     }
 
-    private List<PackingListGroupItemDto> GetItems(List<PackingListGroupItemModel> itemItems)
+    private List<PackingListGroupItemDto> GetItemsDto(List<PackingListGroupItemModel> itemItems)
     {
         var list = new List<PackingListGroupItemDto>();
         foreach (var item in itemItems)
         {
             list.Add(new PackingListGroupItemDto
             {
-                Id = item.RefId,
                 Name = item.Name,
                 Quantity = item.Quantity,
                 WeightSufix = item.WeightSufix,
@@ -85,23 +84,23 @@ public class PackingListMapper : IPackingListMapper
         return list;
     }
 
-    private List<PackListGroupModel> GetGroups(List<PackingListDto> dtoGroups)
+    private List<PackingListGroupModel> GetGroupsModel(List<PackingListGroupDto> dtoGroups)
     {
-        var list = new List<PackListGroupModel>();
+        var list = new List<PackingListGroupModel>();
         foreach (var item in dtoGroups)
         {
-            list.Add(new PackListGroupModel
+            list.Add(new PackingListGroupModel
             {
                 Name = item.Name,
                 Id = item.Id,
-                Items = GetItems(item.Items)
+                Items = GetItemsModel(item.Items)
             });
         }
 
         return list;
     }
 
-    private List<PackingListGroupItemModel> GetItems(List<PackingListGroupItemDto> itemItems)
+    private List<PackingListGroupItemModel> GetItemsModel(List<PackingListGroupItemDto> itemItems)
     {
         var list = new List<PackingListGroupItemModel>();
         foreach (var item in itemItems)

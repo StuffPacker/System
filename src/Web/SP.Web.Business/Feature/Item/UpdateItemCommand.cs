@@ -2,7 +2,7 @@ using MediatR;
 
 namespace SP.Web.Business.Feature.Item;
 
-public class UpdateItemCommand : IRequest<List<ItemViewModel>>
+public class UpdateItemCommand : IRequest<ItemViewModel>
 {
     public UpdateItemCommand(string id, Guid userId, ItemEditInputViewModel model)
     {

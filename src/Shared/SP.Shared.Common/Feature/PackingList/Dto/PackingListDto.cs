@@ -6,11 +6,9 @@ public class PackingListDto
 
     public string Name { get; set; } = string.Empty;
 
-    public List<PackingListDto> Groups { get; set; } = null!;
+    public List<PackingListGroupDto> Groups { get; set; } = null!;
 
     public string Id { get; set; } = string.Empty;
 
     public bool IsPublic { get; set; }
-
-    public List<PackingListGroupItemDto> Items { get; set; } = null!;
 }

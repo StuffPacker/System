@@ -8,8 +8,8 @@ namespace Sp.Api.Business.Feature.PackingList;
 
 public class PackingListService : IPackingListService
 {
-    private readonly IPackingListRepository _packingListRepository;
     private readonly IPackingListMapper _packingListMapper;
+    private readonly IPackingListRepository _packingListRepository;
 
     public PackingListService(IPackingListRepository packingListRepository, IPackingListMapper packingListMapper)
     {
@@ -19,7 +19,7 @@ public class PackingListService : IPackingListService
 
     public async Task<PackingListDto> GetPackingListById(string id)
     {
-      return await GetById(id);
+        return await GetById(id);
     }
 
     public async Task<List<PackingListDto>> GetPackingLists(Guid userId)
@@ -52,56 +52,10 @@ public class PackingListService : IPackingListService
         await _packingListRepository.Delete(id);
     }
 
-    public async Task Update(PackingListDto viewModel)
+    public async Task Update(PackingListDto dto)
     {
-        var model = GetModel(viewModel);
+        var model = _packingListMapper.Map(dto);
         await _packingListRepository.Update(model);
-    }
-
-    private PackingListModel GetModel(PackingListDto viewModel)
-    {
-        return new PackingListModel
-        {
-            UserId = Guid.Parse(viewModel.UserId),
-            Name = viewModel.Name,
-            Groups = GetGroupModel(viewModel.Groups),
-            Id = viewModel.Id,
-            IsPublic = viewModel.IsPublic
-        };
-    }
-
-    private List<PackListGroupModel> GetGroupModel(List<PackingListDto> viewModelGroups)
-    {
-        var list = new List<PackListGroupModel>();
-        foreach (var item in viewModelGroups)
-        {
-            list.Add(new PackListGroupModel
-            {
-                Name = item.Name,
-                Items = GetItems(item.Items),
-                Id = item.Id
-            });
-        }
-
-        return list;
-    }
-
-    private List<PackingListGroupItemModel> GetItems(List<PackingListGroupItemDto> itemItems)
-    {
-        var list = new List<PackingListGroupItemModel>();
-        foreach (var item in itemItems)
-        {
-            list.Add(new PackingListGroupItemModel
-            {
-                Name = item.Name,
-                WeightSufix = item.WeightSufix,
-                RefId = item.Id,
-                Weight = Convert.ToDecimal(item.Weight),
-                Quantity = item.Quantity
-            });
-        }
-
-        return list;
     }
 
     private async Task<PackingListDto> GetById(string id)
