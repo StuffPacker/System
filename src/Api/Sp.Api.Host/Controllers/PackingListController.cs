@@ -56,14 +56,11 @@ public class PackingListController : SpControllerBase
     public async Task<ActionResult<string>> GetPublic(string id)
     {
         var dto = await _packingListService.GetPackingListById(id);
-        if (dto.IsPublic)
-        {
-            return Ok(dto);
-        }
 
-        return Forbid();
+        return Ok(dto);
     }
 
+    [AllowAnonymous]
     [HttpGet("SpApi/v1/packinglist/{id}/print")]
     public async Task<ActionResult<string>> GetPrint(string id)
     {

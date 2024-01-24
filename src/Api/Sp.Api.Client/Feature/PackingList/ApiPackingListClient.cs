@@ -28,10 +28,10 @@ public class ApiPackingListClient : IApiPackingListClient
 
     public async Task<PackingListModel> GetPackingListPublic(string id)
     {
-        var result = await _apiClient.Get("SpApi/v1/packinglist/" + id + "/public");
-        var dto = JsonHandler.Deserialize<PackingListDto>(result);
-        var model = _packingListMapper.Map(dto!);
-        return model;
+            var result = await _apiClient.Get("SpApi/v1/packinglist/" + id + "/public");
+            var dto = JsonHandler.Deserialize<PackingListDto>(result);
+            var model = _packingListMapper.Map(dto!);
+            return model;
     }
 
     public async Task<PackingListModel> GetPackingListPrint(string id)
