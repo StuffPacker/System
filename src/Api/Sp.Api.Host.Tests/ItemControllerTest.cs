@@ -95,7 +95,7 @@ public class ItemControllerTest
         };
         var result = await target.Update("123", new ItemEditInputDto());
         var okResult = (OkObjectResult)result.Result!;
-        okResult.Value.Should().BeEquivalentTo(string.Empty);
+        okResult.Value.Should().BeNull();
     }
 
     [TestMethod]
