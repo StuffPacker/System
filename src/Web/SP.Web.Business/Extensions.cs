@@ -1,11 +1,6 @@
 using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using SP.Database.Mongo;
-using SP.Database.Mongo.Feature.PackingList;
-using SP.Database.Mongo.Feature.UserItem;
-using SP.Shared.Common.Feature.Database.UserItem;
-using SP.Web.Business.Feature.Item;
 using SP.Web.Business.Feature.PackingList;
 
 namespace SP.Web.Business;
@@ -17,8 +12,8 @@ public static class Extensions
         IConfiguration configuration)
     {
         services.AddMediatR(typeof(Extensions));
-        services.AddInfrastructureMongoDb(configuration);
-        services.AddSingleton<IPackingListService, PackingListService>();
+        services.AddTransient<IPackingListService, PackingListService>();
+
         return services;
     }
 }

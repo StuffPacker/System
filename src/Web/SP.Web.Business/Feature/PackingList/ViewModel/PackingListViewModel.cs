@@ -1,3 +1,4 @@
+using SP.Shared.Common.Feature.PackingList.Model;
 using SP.Web.Business.Feature.Item;
 
 namespace SP.Web.Business.Feature.PackingList.ViewModel;

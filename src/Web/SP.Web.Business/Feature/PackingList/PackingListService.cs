@@ -1,5 +1,5 @@
-using System.Security.Authentication;
-using SP.Database.Mongo.Feature.PackingList;
+using Sp.Api.Client.Feature.PackingList;
+using SP.Shared.Common.Feature.PackingList.Mapper;
 using SP.Shared.Common.Feature.PackingList.Model;
 using SP.Web.Business.Feature.PackingList.Mapper;
 using SP.Web.Business.Feature.PackingList.ViewModel;
@@ -8,23 +8,26 @@ namespace SP.Web.Business.Feature.PackingList;
 
 public class PackingListService : IPackingListService
 {
-    private readonly IPackingListRepository _packingListRepository;
+    private readonly IApiPackingListClient _apiPackingListClient;
+    private readonly IPackingListMapper _packingListMapper;
 
-    public PackingListService(IPackingListRepository packingListRepository)
+    public PackingListService(IApiPackingListClient apiPackingListClient, IPackingListMapper packingListMapper)
     {
-        _packingListRepository = packingListRepository;
+        _apiPackingListClient = apiPackingListClient;
+        _packingListMapper = packingListMapper;
     }
 
     public async Task<PackingListViewModel> GetPackingListById(string id, Guid userId)
     {
-        return await GetById(id, userId);
+       var model = await _apiPackingListClient.GetPackingList(id, userId);
+       return PackingListViewModelMapper.Map(model);
     }
 
     public async Task<List<PackingListViewModel>> GetPackingLists(Guid userId)
     {
-        var result = await _packingListRepository.GetByUserId(userId);
+        var models = await _apiPackingListClient.GetPackingLists(userId);
         var list = new List<PackingListViewModel>();
-        foreach (var item in result)
+        foreach (var item in models)
         {
             list.Add(PackingListViewModelMapper.Map(item));
         }
@@ -38,9 +41,9 @@ public class PackingListService : IPackingListService
         {
             Name = "new packing list",
             UserId = userId,
-            Groups = new List<PackListGroupModel>
+            Groups = new List<PackingListGroupModel>
             {
-                new PackListGroupModel
+                new PackingListGroupModel
                 {
                     Id = Guid.NewGuid().ToString(),
                     Name = "New Group",
@@ -48,93 +51,17 @@ public class PackingListService : IPackingListService
                 }
             }
         };
-        var result = await _packingListRepository.Create(model);
-
-        return PackingListViewModelMapper.Map(result);
+        var response = await _apiPackingListClient.Create(userId, model);
+        return PackingListViewModelMapper.Map(response);
     }
 
-    public async Task Delete(string id, Guid userId)
+    public async Task Delete(string id, Guid getUserId)
     {
-        var model = await _packingListRepository.GetById(id);
-        if (!Access(PackingListViewModelMapper.Map(model), userId))
-        {
-            throw new AuthenticationException();
-        }
-
-        await _packingListRepository.Delete(id);
+        await _apiPackingListClient.Delete(id, getUserId);
     }
 
-    public async Task Update(PackingListViewModel viewModel)
+    public async Task Update(PackingListViewModel model, Guid userId)
     {
-        var model = GetModel(viewModel);
-        await _packingListRepository.Update(model);
-    }
-
-    private PackingListModel GetModel(PackingListViewModel viewModel)
-    {
-        return new PackingListModel
-        {
-            UserId = Guid.Parse(viewModel.UserId),
-            Name = viewModel.Name,
-            Groups = GetGroupModel(viewModel.Groups),
-            Id = viewModel.Id,
-            IsPublic = viewModel.IsPublic
-        };
-    }
-
-    private List<PackListGroupModel> GetGroupModel(List<PackingListGroupViewModel> viewModelGroups)
-    {
-        var list = new List<PackListGroupModel>();
-        foreach (var item in viewModelGroups)
-        {
-            list.Add(new PackListGroupModel
-            {
-                Name = item.Name,
-                Items = GetItems(item.Items),
-                Id = item.Id
-            });
-        }
-
-        return list;
-    }
-
-    private List<PackingListGroupItemModel> GetItems(List<PackingListGroupItemViewModel> itemItems)
-    {
-        var list = new List<PackingListGroupItemModel>();
-        foreach (var item in itemItems)
-        {
-            list.Add(new PackingListGroupItemModel
-            {
-                Name = item.Name,
-                WeightSufix = item.WeightSufix,
-                RefId = item.Id,
-                Weight = Convert.ToDecimal(item.Weight),
-                Quantity = item.Quantity
-            });
-        }
-
-        return list;
-    }
-
-    private async Task<PackingListViewModel> GetById(string id, Guid userId)
-    {
-        var result = await _packingListRepository.GetById(id);
-        var vm = PackingListViewModelMapper.Map(result);
-        if (!Access(vm, userId))
-        {
-            return null!;
-        }
-
-        return vm;
-    }
-
-    private bool Access(PackingListViewModel model, Guid userId)
-    {
-        if (Guid.Parse(model.UserId) == userId)
-        {
-            return true;
-        }
-
-        return false;
+        await _apiPackingListClient.Update(PackingListViewModelMapper.Map(model), userId);
     }
 }

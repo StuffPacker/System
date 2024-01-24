@@ -12,5 +12,5 @@ public interface IPackingListService
 
     Task Delete(string id, Guid getUserId);
 
-    Task Update(PackingListViewModel model);
+    Task Update(PackingListViewModel model, Guid userId);
 }

@@ -1,7 +1,6 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using SP.Shared.Common;
-using SP.Web.Business.Feature.PackingList.GetPackingList;
+using SP.Web.Business.Feature.PackingList;
 
 namespace SP.Web.Site.Features.PackingList.PackingListPublic;
 
@@ -17,7 +16,7 @@ public class PackingListPublicController : ControllerBase
     [Route("packinglist/{id}/public")]
     public async Task<ActionResult> Packinglist(string id)
     {
-        var model = await _mediator.Send(new GetPackingListCommand(id));
+        var model = await _mediator.Send(new GetPackingListPublicCommand(id));
         if (model.IsPublic)
         {
             return View("PackingListPublic", id);

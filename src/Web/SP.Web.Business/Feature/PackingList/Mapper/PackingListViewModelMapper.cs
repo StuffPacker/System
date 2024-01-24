@@ -17,9 +17,32 @@ public static class PackingListViewModelMapper
         };
     }
 
-    private static List<PackingListGroupViewModel> GetGroups(List<PackListGroupModel> modelGroups)
+    public static PackingListModel Map(PackingListViewModel model)
+    {
+        return new PackingListModel
+        {
+            Id = model.Id.ToString(),
+            Name = model.Name,
+            Groups = GetGroups(model.Groups),
+            UserId = Guid.Parse(model.UserId),
+            IsPublic = model.IsPublic
+        };
+    }
+
+    private static List<PackingListGroupViewModel> GetGroups(List<PackingListGroupModel> modelGroups)
     {
         var list = new List<PackingListGroupViewModel>();
+        foreach (var item in modelGroups)
+        {
+            list.Add(PackingListGroupViewModelMapper.Map(item));
+        }
+
+        return list;
+    }
+
+    private static List<PackingListGroupModel> GetGroups(List<PackingListGroupViewModel> modelGroups)
+    {
+        var list = new List<PackingListGroupModel>();
         foreach (var item in modelGroups)
         {
             list.Add(PackingListGroupViewModelMapper.Map(item));

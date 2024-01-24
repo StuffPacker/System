@@ -1,9 +1,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using SP.Shared.Common;
-using SP.Web.Business.Feature.Item;
-using SP.Web.Business.Feature.PackingList.GetPackingList;
+using SP.Web.Business.Feature.PackingList;
 using SP.Web.Business.Feature.PackingList.Mapper;
 
 namespace SP.Web.Site.Features.PackingList.Printable;
@@ -22,7 +20,7 @@ public class PackingListPrintController : ControllerBase
     [Route("")]
     public async Task<ActionResult> Packinglist(string id)
     {
-        var model = await _mediator.Send(new GetPackingListCommand(id));
+        var model = await _mediator.Send(new GetPackingListPrintCommand(id));
         if (model.IsPublic)
         {
             return View("PackingListPrint", PackingListViewModelMapper.Map(model));

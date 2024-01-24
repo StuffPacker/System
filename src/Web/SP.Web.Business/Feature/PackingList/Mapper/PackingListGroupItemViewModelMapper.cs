@@ -16,4 +16,16 @@ public static class PackingListGroupItemViewModelMapper
             Quantity = item.Quantity
         };
     }
+
+    public static PackingListGroupItemModel Map(PackingListGroupItemViewModel item)
+    {
+        return new PackingListGroupItemModel
+        {
+            Name = item.Name,
+            Weight = Convert.ToDecimal(item.Weight),
+            WeightSufix = item.WeightSufix,
+            RefId = item.Id,
+            Quantity = item.Quantity
+        };
+    }
 }

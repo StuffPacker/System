@@ -1,13 +1,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using SP.Shared.Common;
 using SP.Web.Business.Feature.Item;
-using SP.Web.Business.Feature.Item.CreateItem;
-using SP.Web.Business.Feature.Item.DeleteItem;
-using SP.Web.Business.Feature.Item.GetItemById;
-using SP.Web.Business.Feature.Item.GetItems;
-using SP.Web.Business.Feature.Item.UpdateItem;
 using SP.Web.Business.ViewModel;
 
 namespace SP.Web.Site.Features.Item;

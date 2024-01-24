@@ -17,7 +17,7 @@ public class PackingListTests
         var model = new PackingListModel()
         {
             Name = "name1",
-            Groups = new List<PackListGroupModel>(),
+            Groups = new List<PackingListGroupModel>(),
             UserId = userId
         };
         var name2 = "name2";

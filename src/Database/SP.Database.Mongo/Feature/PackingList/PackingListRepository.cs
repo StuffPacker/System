@@ -82,7 +82,7 @@ public class PackingListRepository : DataBaseFetchBase, IPackingListRepository
         };
     }
 
-    private List<PackingListGroupsEntity> GetGroups(List<PackListGroupModel> modelGroups)
+    private List<PackingListGroupsEntity> GetGroups(List<PackingListGroupModel> modelGroups)
     {
         var list = new List<PackingListGroupsEntity>();
         foreach (var item in modelGroups)
@@ -128,12 +128,12 @@ public class PackingListRepository : DataBaseFetchBase, IPackingListRepository
         };
     }
 
-    private List<PackListGroupModel> GetGroupsModel(List<PackingListGroupsEntity> resultsGroups)
+    private List<PackingListGroupModel> GetGroupsModel(List<PackingListGroupsEntity> resultsGroups)
     {
-        var list = new List<PackListGroupModel>();
+        var list = new List<PackingListGroupModel>();
         foreach (var item in resultsGroups)
         {
-            list.Add(new PackListGroupModel
+            list.Add(new PackingListGroupModel
             {
                 Name = item.Name,
                 Id = item.Id,

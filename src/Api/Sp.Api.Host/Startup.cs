@@ -2,7 +2,11 @@ using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using Sp.Api.Business;
+using SP.Shared.Common;
+using SP.Shared.Common.Feature.Item.Mapper;
 using SP.Shared.Common.Feature.Jwt;
+using SP.Shared.Common.Feature.PackingList.Mapper;
 
 namespace Sp.Api.Host;
 
@@ -21,7 +25,9 @@ public class Startup
     public void ConfigureServices(IServiceCollection services)
     {
         var key = Configuration.GetValue<string>("JwtOptions:Key");
-
+        services.AddSingleton<IItemModelMapper, ItemModelMapper>();
+        services.AddSingleton<IPackingListMapper, PackingListMapper>();
+        services.AddApiInfrastructureBusiness(Configuration);
         services.AddControllers();
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();

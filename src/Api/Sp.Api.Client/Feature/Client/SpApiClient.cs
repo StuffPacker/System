@@ -47,6 +47,63 @@ public class SpApiClient : ISpApiClient
         throw new InvalidOperationException();
     }
 
+    public async Task<string> PostSecure(string url, string userId, object dto)
+    {
+        var content = new StringContent(JsonExtensions.SerializeToJson(dto), Encoding.UTF8, "application/json");
+        var client = SecureClient(userId);
+        var httpResponseMessage = await client.PostAsync(url, content);
+        if (httpResponseMessage.IsSuccessStatusCode)
+        {
+            var contentStream = await httpResponseMessage.Content.ReadAsStringAsync();
+
+            return contentStream;
+        }
+
+        throw new InvalidOperationException();
+    }
+
+    public async Task DeleteSecure(string url, string userId)
+    {
+        var client = SecureClient(userId);
+        var httpResponseMessage = await client.DeleteAsync(url);
+        if (httpResponseMessage.IsSuccessStatusCode)
+        {
+            return;
+        }
+
+        throw new InvalidOperationException();
+    }
+
+    public async Task<string> PatchSecure(string url, string userId, object dto)
+    {
+        var content = new StringContent(JsonExtensions.SerializeToJson(dto), Encoding.UTF8, "application/json");
+        var client = SecureClient(userId);
+        var httpResponseMessage = await client.PatchAsync(url, content);
+        if (httpResponseMessage.IsSuccessStatusCode)
+        {
+            var contentStream = await httpResponseMessage.Content.ReadAsStringAsync();
+
+            return contentStream;
+        }
+
+        throw new InvalidOperationException();
+    }
+
+    public async Task<string> PutSecure(string url, string userId, object dto)
+    {
+        var content = new StringContent(JsonExtensions.SerializeToJson(dto), Encoding.UTF8, "application/json");
+        var client = SecureClient(userId);
+        var httpResponseMessage = await client.PutAsync(url, content);
+        if (httpResponseMessage.IsSuccessStatusCode)
+        {
+            var contentStream = await httpResponseMessage.Content.ReadAsStringAsync();
+
+            return contentStream;
+        }
+
+        throw new InvalidOperationException();
+    }
+
     private HttpClient SecureClient(string userId)
     {
         var client = _httpClientFactory.CreateClient("SpApi");
@@ -54,6 +111,7 @@ public class SpApiClient : ISpApiClient
 // add new security
         var token = GetToken(userId);
         client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
         return client;
     }
 

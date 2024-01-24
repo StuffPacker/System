@@ -18,6 +18,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\Shared\SP.Shared.Common\SP.Shared.Common.csproj" />
+      <ProjectReference Include="..\Sp.Api.Business\Sp.Api.Business.csproj" />
     </ItemGroup>
 
 </Project>
