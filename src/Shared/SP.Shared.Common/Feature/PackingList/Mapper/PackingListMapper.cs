@@ -77,7 +77,8 @@ public class PackingListMapper : IPackingListMapper
                 Name = item.Name,
                 Quantity = item.Quantity,
                 WeightSufix = item.WeightSufix,
-                Weight = item.Weight
+                Weight = item.Weight,
+                Id = item.RefId
             });
         }
 
