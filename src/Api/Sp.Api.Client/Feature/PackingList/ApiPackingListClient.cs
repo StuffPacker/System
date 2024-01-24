@@ -60,12 +60,12 @@ public class ApiPackingListClient : IApiPackingListClient
 
     public async Task Delete(string id, Guid userId)
     {
-        await _apiClient.DeleteSecure("SpApi/v1/packinglist/", userId.ToString());
+        await _apiClient.DeleteSecure("SpApi/v1/packinglist/" + id + "/", userId.ToString());
     }
 
     public async Task Update(PackingListModel model, Guid userId)
     {
         var dto = _packingListMapper.Map(model);
-        var result = await _apiClient.PutSecure("SpApi/v1/packinglist/", userId.ToString(), dto);
+        var result = await _apiClient.PutSecure("SpApi/v1/packinglist/" + model.Id + "/", userId.ToString(), dto);
     }
 }

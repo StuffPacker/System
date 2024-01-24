@@ -8,7 +8,7 @@ using SP.Shared.Common.Feature.PackingList.Model;
 namespace Sp.Api.Host.Controllers;
 
 [Authorize]
-public class PackingListController : ControllerBase
+public class PackingListController : SpControllerBase
 {
     private readonly IPackingListService _packingListService;
     private readonly IPackingListMapper _packingListMapper;
@@ -75,5 +75,25 @@ public class PackingListController : ControllerBase
         }
 
         return Forbid();
+    }
+
+    [HttpDelete("SpApi/v1/packinglist/{id}")]
+    public async Task<ActionResult<string>> Delete(string id)
+    {
+        await _packingListService.Delete(id, GetUser());
+        return Ok();
+    }
+
+    [HttpPut("SpApi/v1/packinglist/{id}")]
+    public async Task<ActionResult<string>> Update(string id, [FromBody]PackingListDto dto)
+    {
+        var pl = await _packingListService.GetPackingListById(id);
+        if (pl.UserId != GetUser().ToString())
+        {
+            return Forbid();
+        }
+
+        await _packingListService.Update(dto);
+        return Ok();
     }
 }

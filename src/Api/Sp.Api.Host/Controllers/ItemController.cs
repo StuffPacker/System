@@ -13,7 +13,7 @@ using SP.Shared.Common.Feature.PackingList.Dto;
 namespace Sp.Api.Host.Controllers;
 
 [Authorize]
-public class ItemController : ControllerBase
+public class ItemController : SpControllerBase
 {
     private readonly IMediator _mediator;
 
@@ -72,27 +72,5 @@ public class ItemController : ControllerBase
         var result = await _mediator.Send(new UpdateItemCommand(id, GetUser(), inputModel));
 
         return Ok(result);
-    }
-
-    private Guid GetUser()
-    {
-        if (User == null)
-        {
-            throw new AuthenticationException("No User pressent");
-        }
-
-        var user = User.Claims.FirstOrDefault(x => x.Type == "UserId");
-        if (user == null)
-        {
-            throw new AuthenticationException("No userid pressent");
-        }
-
-        var parsed = Guid.TryParse(user!.Value, out var validUser);
-        if (parsed == false)
-        {
-            throw new Exception("Cant parse userId");
-        }
-
-        return validUser;
     }
 }
