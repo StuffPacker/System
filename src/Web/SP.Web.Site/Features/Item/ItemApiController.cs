@@ -2,6 +2,7 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SP.Web.Business.Feature.Item;
+using SP.Web.Business.Feature.Item.Update;
 using SP.Web.Business.ViewModel;
 
 namespace SP.Web.Site.Features.Item;
@@ -51,7 +52,7 @@ public class ItemApiController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    public async Task<ActionResult> Update(string id, [FromBody] ItemEditInputViewModel model)
+    public async Task<ActionResult> Update(string id, [FromBody] ItemUpdateInputViewModel model)
     {
         await _mediator.Send(new UpdateItemCommand(id, GetUserId(), model));
         return Ok(new ResultJsonModel

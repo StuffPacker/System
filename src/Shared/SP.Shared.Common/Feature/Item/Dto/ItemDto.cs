@@ -11,4 +11,6 @@ public class ItemDto
     public string WeightSufix { get; set; } = string.Empty;
 
     public string UserId { get; set; } = string.Empty;
+
+    public string Description { get; set; } = string.Empty;
 }

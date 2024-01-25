@@ -14,7 +14,8 @@ public class ItemModelMapper : IItemModelMapper
             Id = model.Id,
             UserId = model.UserId.ToString(),
             Weight = model.Weight,
-            WeightSufix = model.WeightSufix
+            WeightSufix = model.WeightSufix,
+            Description = model.Description
         };
     }
 
@@ -26,7 +27,8 @@ public class ItemModelMapper : IItemModelMapper
             Id = model.Id,
             UserId = Guid.Parse(model.UserId),
             Weight = model.Weight,
-            WeightSufix = model.WeightSufix
+            WeightSufix = model.WeightSufix,
+            Description = model.Description
         };
     }
 

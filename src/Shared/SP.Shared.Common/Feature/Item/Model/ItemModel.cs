@@ -14,6 +14,8 @@ public class ItemModel
 
     public Guid UserId { get; set; }
 
+    public string Description { get; set; } = string.Empty;
+
     public void ChangeWeight(string weight)
     {
         weight = weight.Replace(",", ".");

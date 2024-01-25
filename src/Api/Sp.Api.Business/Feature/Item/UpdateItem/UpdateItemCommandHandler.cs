@@ -1,6 +1,7 @@
 using System.Security.Authentication;
 using MediatR;
 using SP.Shared.Common.Feature.Database.UserItem;
+using SP.Shared.Common.Feature.Item.Dto;
 using SP.Shared.Common.Feature.Item.Mapper;
 using SP.Shared.Common.Feature.PackingList.Dto;
 
@@ -22,7 +23,7 @@ public class UpdateItemCommandHandler : IRequestHandler<UpdateItemCommand, ItemD
         return await UpdateItem(request.Id, request.UserId, request.InputModel);
     }
 
-    private async Task<ItemDto> UpdateItem(string id, Guid userId, ItemEditInputDto inputModel)
+    private async Task<ItemDto> UpdateItem(string id, Guid userId, ItemUpdateInputDto inputModel)
     {
         var model = await _userItemRepository.GetById(id);
         if (model.UserId != userId)
@@ -31,7 +32,8 @@ public class UpdateItemCommandHandler : IRequestHandler<UpdateItemCommand, ItemD
         }
 
         model.Name = inputModel.Name;
-        model.ChangeWeight(inputModel.Weight);
+        model.ChangeWeight(inputModel.Weight.ToString());
+        model.Description = inputModel.Description;
         await _userItemRepository.Update(model);
         return _itemModelMapper.Map(model);
     }

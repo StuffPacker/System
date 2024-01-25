@@ -8,6 +8,7 @@ using Sp.Api.Business.Feature.Item.DeleteItem;
 using Sp.Api.Business.Feature.Item.GetItemById;
 using Sp.Api.Business.Feature.Item.GetItems;
 using Sp.Api.Business.Feature.Item.UpdateItem;
+using SP.Shared.Common.Feature.Item.Dto;
 using SP.Shared.Common.Feature.PackingList.Dto;
 
 namespace Sp.Api.Host.Controllers;
@@ -66,8 +67,8 @@ public class ItemController : SpControllerBase
         return Ok(result);
     }
 
-    [HttpPatch("SpApi/v1/item/{id}")]
-    public async Task<ActionResult<string>> Update(string id, [FromBody] ItemEditInputDto inputModel)
+    [HttpPut("SpApi/v1/item/{id}")]
+    public async Task<ActionResult<string>> Update(string id, [FromBody] ItemUpdateInputDto inputModel)
     {
         var result = await _mediator.Send(new UpdateItemCommand(id, GetUser(), inputModel));
 
