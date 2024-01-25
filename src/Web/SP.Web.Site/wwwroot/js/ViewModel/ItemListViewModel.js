@@ -40,6 +40,7 @@ function ILVMAddItem(self,dto)
     item.Weight=dto.Weight;
     item.WeightSufix=dto.WeightSufix;
     item.Link="/item/"+dto.Id;
+    item.Description=dto.Description;
     item.Delete = function ()
     {
         SPApiDelete('/api/v1/items/'+dto.Id,function (obj) {
@@ -56,11 +57,13 @@ function ILVMAddItem(self,dto)
         m.Name=dto.Name;
         m.Id = dto.Id;
         m.Weight = dto.Weight;
+        m.Description=dto.Description;
         m.Save = function ()
         {
             var data= {};
             data.Name=m.Name; 
             data.Weight=m.Weight.toString();
+            data.Description=m.Description;
             
             SPApiPut('/api/v1/items/'+m.Id,data, function (obj) {
                 if (obj != null) {

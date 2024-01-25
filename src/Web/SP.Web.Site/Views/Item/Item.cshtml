@@ -2,11 +2,22 @@
     Layout = "_Layout";
 }
 <div id="Item">
-    
-
-    <h1 class="page-header" data-bind="text:Name"></h1>
-    
-  
+    <div data-bind="hidden:EditMode">
+        <h1 class="page-header" data-bind="text:Name"></h1> <input value="Edit" class="btn-primary" type="button" data-bind="click:ChangeEditMode"/>
+        <b>Weight: </b><span data-bind="text:Weight"></span><span data-bind="text:WeightSufix"></span><br/><br/>
+        <b>Description:</b><br/>
+        <span data-bind="text:Description"></span>
+    </div>
+    <div data-bind="visible:EditMode">
+        <input data-bind="value:Name" type="text" class="form-control" placeholder="Name">
+        <div class="input-group">
+            <input data-bind="value:Weight" type="text" class="form-control" placeholder="Weight">
+            <span class="input-group-addon" id="basic-addon2">grams</span>
+        </div>
+        <textarea class="form-control" rows="3" data-bind="value:Description"></textarea><br/>
+        <input type="button" class="btn-primary" value="Cancel" data-bind="click:Cancel"/>
+         <input type="button" class="btn-success" value="Save" data-bind="click:Save"/>
+    </div>
 </div>
 
 @section footerjs

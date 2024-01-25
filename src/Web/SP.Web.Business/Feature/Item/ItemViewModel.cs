@@ -10,7 +10,10 @@ public class ItemViewModel
         Id = model.Id.ToString();
         Weight = model.Weight;
         WeightSufix = model.WeightSufix;
+        Description = model.Description;
     }
+
+    public string Description { get; set; }
 
     public string WeightSufix { get; set; }
 

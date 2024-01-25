@@ -9,6 +9,7 @@ using Sp.Api.Business.Feature.Item.DeleteItem;
 using Sp.Api.Business.Feature.Item.GetItems;
 using Sp.Api.Business.Feature.Item.UpdateItem;
 using Sp.Api.Host.Controllers;
+using SP.Shared.Common.Feature.Item.Dto;
 using SP.Shared.Common.Feature.PackingList.Dto;
 
 namespace Sp.Api.Host.Tests;
@@ -93,7 +94,7 @@ public class ItemControllerTest
         {
             HttpContext = new DefaultHttpContext() { User = GetUser(false) }
         };
-        var result = await target.Update("123", new ItemEditInputDto());
+        var result = await target.Update("123", new ItemUpdateInputDto());
         var okResult = (OkObjectResult)result.Result!;
         okResult.Value.Should().BeNull();
     }

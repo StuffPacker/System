@@ -82,7 +82,8 @@ public class UserItemRepository : DataBaseFetchBase, IUserItemRepository
             UserId = model.UserId.ToString(),
             Name = model.Name,
             WeightSufix = model.WeightSufix,
-            Weight = model.Weight
+            Weight = model.Weight,
+            Description = model.Description
         };
     }
 
@@ -94,7 +95,8 @@ public class UserItemRepository : DataBaseFetchBase, IUserItemRepository
             Id = results.Id,
             WeightSufix = results.WeightSufix,
             UserId = Guid.Parse(results.UserId),
-            Weight = results.Weight
+            Weight = results.Weight,
+            Description = results.Description
         };
     }
 }

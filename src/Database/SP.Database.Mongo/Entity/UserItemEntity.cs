@@ -9,4 +9,6 @@ public class UserItemEntity : BaseEntity
     public string WeightSufix { get; set; }
 
     public decimal Weight { get; set; }
+
+    public string Description { get; set; }
 }
