@@ -24,29 +24,22 @@
       gtag('config', '@googleAnalytics.Value.Code');
     </script>
 </head>
- <body>
+<body>
 @await Html.PartialAsync("_TopMenu")
- <div class="container-fluid" style="background-color: #fff;">
-     <div class="row">
-         <div class="col-sm-3 col-md-2">
-             @await Html.PartialAsync("_LeftMenu")
-         </div>
-         <div class="col-sm-9  col-md-10 main">
-             @RenderBody()
-         </div>
-     </div>
- </div>
- <div id="footer"   style="background-color: #cccccc"> 
-       <div class="container">
-         <p class="muted credit">Contact Stuffpacker <a href="mailto:stuffpacker23@gmail.com">stuffpacker mail</a> or see project page at <a href="https://github.com/StuffPacker/System">Stuffpacker project site</a>.</p>
-       </div>
-     </div>
-      <script src="/js/jquery-3.7.1.min.js"></script>
- <script src="/js/site.js"></script>
+<div class="container-fluid" style="background-color: #fff;">
+    @RenderBody()
+</div>
+<div id="footer"   style="background-color: #cccccc"> 
+    <div class="container">
+        <p class="muted credit">Contact Stuffpacker <a href="mailto:stuffpacker23@gmail.com">stuffpacker mail</a> or see project page at <a href="https://github.com/StuffPacker/System">Stuffpacker project site</a>.</p>
+    </div>
+</div>
+<script src="/js/jquery-3.7.1.min.js"></script>
+<script src="/js/site.js"></script>
    
  
- <script src="/lib/bootstrap/dist/js/bootstrap.min.js"></script>
- <script src="/js/knockout-3.5.1.js"></script>
- @RenderSection("footerjs", required: false)
- </body>
+<script src="/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/js/knockout-3.5.1.js"></script>
+@RenderSection("footerjs", required: false)
+</body>
 </html>
