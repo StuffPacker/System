@@ -40,7 +40,6 @@ public class PackingListViewModel
         var item = group.Items.FirstOrDefault(x => x.Id == vm.Id);
         if (item != null)
         {
-            item.Quantity++;
             return;
         }
 
@@ -59,5 +58,26 @@ public class PackingListViewModel
         var group = Groups.First(x => x.Id == groupId);
         var item = group.Items.First(x => x.Id == itemId);
         item.Quantity = quantity;
+    }
+
+    public void RemoveItemsFromGroup(string groupId, List<string> selectedItems)
+    {
+        var group = Groups.First(x => x.Id == groupId);
+        var listToRemove = new List<PackingListGroupItemViewModel>();
+        foreach (var item in group.Items)
+        {
+            // check if it is selected
+            var match = selectedItems.Exists(x => x.Contains(item.Id));
+            if (!match)
+            {
+                listToRemove.Add(item);
+            }
+        }
+
+        foreach (var item in listToRemove)
+        {
+            var removeItem = group.Items.First(x => x.Id == item.Id);
+            group.Items.Remove(removeItem);
+        }
     }
 }

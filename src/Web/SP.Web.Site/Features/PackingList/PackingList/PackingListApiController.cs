@@ -186,4 +186,15 @@ public class PackingListApiController : ControllerBase
             ResultData = string.Empty
         });
     }
+
+    [HttpPatch("{id}/group/{groupid}/item")]
+    public async Task<ActionResult> UpdateGroupItems(string id, string groupId, [FromBody] UpdateGroupItemsInputViewModel input)
+    {
+        var result = await _mediator.Send(new UpdateGroupItemsCommand(id, groupId, input.SelectedItems, GetUserId()));
+        return Ok(new ResultJsonModel
+        {
+            Meta = new MetaModel { Code = 200 },
+            ResultData = result
+        });
+    }
 }
