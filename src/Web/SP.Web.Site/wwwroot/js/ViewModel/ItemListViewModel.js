@@ -1,25 +1,20 @@
 function ItemListViewModel() {
     var self = this;
     var Items = [];
-    self.Items = ko.observableArray(Items);   
-    var editModel=new Object();
-    editModel.Name="";
-    editModel.Id="";
-    editModel.Save = function (){};
-    editModel.Cancle = function (){};
-    self.EditModel = ko.observable(editModel);
+    self.Items = ko.observableArray(Items);
     self.EditItem=ko.observable(false);
     ILVMGetAllItems(self);   
     self.Create = function ()
     {
-        ILVMCreateUserItem(self);
+        ILVMCreateUserItem();
     }    
 }
-function ILVMCreateUserItem(self)
+function ILVMCreateUserItem()
 {
     SPApiPost('/api/v1/items/',"", function (obj) {
-        if (obj != null) {
-            ILVMAddItem(self,obj);            
+        if (obj != null) {           
+
+            window.location.href = "/item/" + obj.Id + "?edit=true";
         }
     });    
 }
@@ -52,35 +47,7 @@ function ILVMAddItem(self,dto)
     }
     item.Edit = function ()
     {
-        self.EditItem(true);
-        var m = self.EditModel();
-        m.Name=dto.Name;
-        m.Id = dto.Id;
-        m.Weight = dto.Weight;
-        m.Description=dto.Description;
-        m.Save = function ()
-        {
-            var data= {};
-            data.Name=m.Name; 
-            data.Weight=m.Weight.toString();
-            data.Description=m.Description;
-            
-            SPApiPut('/api/v1/items/'+m.Id,data, function (obj) {
-                if (obj != null) {
-                    self.Items.removeAll();
-                    ILVMGetAllItems(self);
-                    self.EditItem(false);
-                }
-            });
-        };
-            m.Cancle=function ()
-            {
-                m.Name="";
-                m.Id = "";
-                m.Weight="";
-                self.EditItem(false);
-            };
-        self.EditModel(m);
+        window.location.href = "/item/" + dto.Id + "?edit=true";        
     }
     self.Items.push(item);
 }
