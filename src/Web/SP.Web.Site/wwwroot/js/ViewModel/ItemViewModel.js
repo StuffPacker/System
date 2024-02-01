@@ -1,10 +1,14 @@
-function ItemViewModel(id) {
+function ItemViewModel(id,edit) {    
     var self = this;
     self.Name=ko.observable("")
     self.Weight=ko.observable("")
     self.WeightSufix=ko.observable("")
     self.Description=ko.observable("")
     self.EditMode=ko.observable(false);
+    if(edit.toLowerCase()=="true")
+    {        
+        self.EditMode(true);
+    }
     IVMGetItem(self,id);
     self.ChangeEditMode = function ()
     {        

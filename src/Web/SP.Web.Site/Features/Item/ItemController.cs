@@ -13,8 +13,8 @@ public class ItemController : Controller
     }
 
     [Route("item/{id}")]
-    public ActionResult GetById(string id)
+    public ActionResult GetById(string id, [FromQuery] bool edit)
     {
-        return View("Item", id);
+        return View("Item", new ItemPageViewModel { Id = id, Edit = edit });
     }
 }

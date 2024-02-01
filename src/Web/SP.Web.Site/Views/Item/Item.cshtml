@@ -22,7 +22,7 @@
 
 @section footerjs
 {
-    <script type="text/javascript">  
-  ko.applyBindings(ItemViewModel('@Model'), document.getElementById('Item'));  
+    <script type="text/javascript">      
+  ko.applyBindings(ItemViewModel('@Model.Id','@Model.Edit'), document.getElementById('Item'));  
   </script>
 }
