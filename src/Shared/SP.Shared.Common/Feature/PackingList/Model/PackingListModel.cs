@@ -11,4 +11,6 @@ public class PackingListModel
     public Guid UserId { get; set; }
 
     public bool IsPublic { get; set; }
+
+    public string Language { get; set; } = string.Empty;
 }

@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Sp.Api.Business.Feature.Language;
 using Sp.Api.Business.Feature.PackingList;
 using SP.Database.Mongo;
 using SP.Shared.Common.Feature.Item.Mapper;
@@ -14,10 +15,12 @@ public static class Extensions
         this IServiceCollection services,
         IConfiguration configuration)
     {
+        services.Configure<LanguageServiceOptions>(configuration.GetSection("LanguageServiceOptions"));
         services.AddSingleton<IPackingListService, PackingListService>();
 
         services.AddMediatR(typeof(Extensions));
         services.AddInfrastructureMongoDb(configuration);
+        services.AddSingleton<ILanguageService, LanguageService>();
 
         return services;
     }

@@ -78,7 +78,8 @@ public class PackingListRepository : DataBaseFetchBase, IPackingListRepository
             UserId = model.UserId.ToString(),
             Name = model.Name,
             Groups = GetGroups(model.Groups),
-            IsPublic = model.IsPublic
+            IsPublic = model.IsPublic,
+            Language = model.Language
         };
     }
 
@@ -124,7 +125,8 @@ public class PackingListRepository : DataBaseFetchBase, IPackingListRepository
             Id = results.Id,
             Groups = GetGroupsModel(results.Groups),
             UserId = Guid.Parse(results.UserId),
-            IsPublic = results.IsPublic
+            IsPublic = results.IsPublic,
+            Language = results.Language
         };
     }
 
