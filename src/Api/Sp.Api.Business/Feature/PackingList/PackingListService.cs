@@ -1,4 +1,6 @@
 using System.Security.Authentication;
+using Microsoft.Extensions.Logging;
+using Sp.Api.Business.Feature.Language;
 using SP.Database.Mongo.Feature.PackingList;
 using SP.Shared.Common.Feature.PackingList.Dto;
 using SP.Shared.Common.Feature.PackingList.Mapper;
@@ -10,11 +12,15 @@ public class PackingListService : IPackingListService
 {
     private readonly IPackingListMapper _packingListMapper;
     private readonly IPackingListRepository _packingListRepository;
+    private readonly ILanguageService _languageService;
+    private readonly ILogger<PackingListService> _logger;
 
-    public PackingListService(IPackingListRepository packingListRepository, IPackingListMapper packingListMapper)
+    public PackingListService(IPackingListRepository packingListRepository, IPackingListMapper packingListMapper, ILanguageService languageService, ILogger<PackingListService> logger)
     {
         _packingListRepository = packingListRepository;
         _packingListMapper = packingListMapper;
+        _languageService = languageService;
+        _logger = logger;
     }
 
     public async Task<PackingListDto> GetPackingListById(string id)
@@ -55,7 +61,27 @@ public class PackingListService : IPackingListService
     public async Task Update(PackingListDto dto)
     {
         var model = _packingListMapper.Map(dto);
+        model.Language = GetLanguage(model.Language, model.Name);
         await _packingListRepository.Update(model);
+    }
+
+    private string GetLanguage(string oldValue, string name)
+    {
+        try
+        {
+            var result = _languageService.GetLanguage(name);
+            return result.Iso6391Name;
+        }
+        catch (Exception e)
+        {
+           _logger.LogError(e.ToString());
+           if (string.IsNullOrEmpty(oldValue))
+           {
+               return string.Empty;
+           }
+
+           return oldValue;
+        }
     }
 
     private async Task<PackingListDto> GetById(string id)

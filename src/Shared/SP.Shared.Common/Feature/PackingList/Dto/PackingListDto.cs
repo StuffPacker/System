@@ -11,4 +11,6 @@ public class PackingListDto
     public string Id { get; set; } = string.Empty;
 
     public bool IsPublic { get; set; }
+
+    public string Language { get; set; } = string.Empty;
 }
