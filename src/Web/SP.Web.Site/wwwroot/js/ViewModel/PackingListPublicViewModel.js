@@ -2,6 +2,7 @@ function PackingListPublicViewModel(id) {
     var self = this;
     var Groups = [];
     self.Name = ko.observable("");
+    self.Description=ko.observable("");
     self.Groups = ko.observableArray(Groups);
 
     PLPVMGetPackingList(self, id);
@@ -11,6 +12,7 @@ function PLPVMGetPackingList(self,id)
     SPApiGet('/api/v1/packinglist/'+id+'/public', function (obj) {
         if (obj != null) {
             self.Name(obj.Name);  
+            self.Description(obj.Description);
             ko.utils.arrayForEach(obj.Groups, function (dto) {
                 PLPVMAddGroup(self,id,dto);
             });

@@ -14,7 +14,8 @@ public static class PackingListViewModelMapper
             Groups = GetGroups(model.Groups),
             UserId = model.UserId.ToString(),
             IsPublic = model.IsPublic,
-            Language = model.Language
+            Language = model.Language,
+            Description = model.Description
         };
         if (string.IsNullOrEmpty(vm.Language))
         {
@@ -33,7 +34,8 @@ public static class PackingListViewModelMapper
             Groups = GetGroups(model.Groups),
             UserId = Guid.Parse(model.UserId),
             IsPublic = model.IsPublic,
-            Language = model.Language
+            Language = model.Language,
+            Description = model.Description
         };
     }
 

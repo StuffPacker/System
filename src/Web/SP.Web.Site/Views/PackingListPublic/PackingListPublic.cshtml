@@ -5,6 +5,9 @@
 }
 <div id="PackingListPublic">
     <h1 data-bind="text:Name" class="page-header">List</h1>
+    <span data-bind="text:Description"></span>
+    <br/><br/>
+    
     <!-- ko foreach: Groups -->
      @await Html.PartialAsync("PackinglistGroup")
     <!-- /ko -->

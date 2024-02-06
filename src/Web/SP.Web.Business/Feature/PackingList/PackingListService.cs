@@ -39,6 +39,7 @@ public class PackingListService : IPackingListService
     {
         var model = new PackingListModel
         {
+            Description = string.Empty,
             Name = "new packing list",
             UserId = userId,
             Groups = new List<PackingListGroupModel>

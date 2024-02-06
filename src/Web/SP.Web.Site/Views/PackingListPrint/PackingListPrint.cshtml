@@ -4,7 +4,9 @@
     Layout = "";
     
 }
-<h1>@Model.Name</h1>
+<h1>@Model.Name</h1>  
+@Model.Description
+                        <br/><br/>
 @{
     foreach (var group in Model.Groups.OrderBy(x=>x.Name))
     {

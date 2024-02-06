@@ -123,6 +123,19 @@ public class PackingListApiController : ControllerBase
         });
     }
 
+    [HttpPatch("{id}/Description")]
+    public async Task<ActionResult> UpdateDescription(string id, [FromBody] ChangeDescriptionInputViewModel input)
+    {
+        var model = await _packingListService.GetPackingListById(id, GetUserId());
+        model.Description = input.Description;
+        await _packingListService.Update(model, GetUserId());
+        return Ok(new ResultJsonModel
+        {
+            Meta = new MetaModel { Code = 200 },
+            ResultData = string.Empty
+        });
+    }
+
     [HttpPatch("{id}/Group/{groupid}/Name")]
     public async Task<ActionResult> UpdateGroupName(string id, [FromBody] ChangeNameInputViewModel input, string groupid)
     {
