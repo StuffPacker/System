@@ -31,6 +31,12 @@ public class PackingListMapper : IPackingListMapper
 
     public PackingListModel Map(PackingListDto dto)
     {
+        var language = string.Empty;
+        if (dto.Language != null)
+        {
+            language = dto.Language;
+        }
+
         return new PackingListModel
         {
             Id = dto.Id,
@@ -38,7 +44,7 @@ public class PackingListMapper : IPackingListMapper
             UserId = Guid.Parse(dto.UserId),
             IsPublic = dto.IsPublic,
             Groups = GetGroupsModel(dto.Groups),
-            Language = dto.Language
+            Language = language
         };
     }
 

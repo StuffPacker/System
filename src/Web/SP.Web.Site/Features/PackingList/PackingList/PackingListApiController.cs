@@ -23,6 +23,18 @@ public class PackingListApiController : ControllerBase
         _mediator = mediator;
     }
 
+    [AllowAnonymous]
+    [HttpGet("public/packinglist")]
+    public async Task<ActionResult> PackingListsPublic()
+    {
+        var result = await _packingListService.GetPackingListsPublic();
+        return Ok(new ResultJsonModel
+        {
+            Meta = new MetaModel { Code = 200 },
+            ResultData = result
+        });
+    }
+
     [Route("{id}")]
     public async Task<ActionResult> PackingList(string id)
     {

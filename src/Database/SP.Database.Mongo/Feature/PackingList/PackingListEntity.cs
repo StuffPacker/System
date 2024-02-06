@@ -12,5 +12,5 @@ public class PackingListEntity : BaseEntity
 
     public bool IsPublic { get; set; }
 
-    public string Language { get; set; }
+    public string Language { get; set; } = string.Empty;
 }

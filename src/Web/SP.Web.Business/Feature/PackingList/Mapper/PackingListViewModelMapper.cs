@@ -7,14 +7,21 @@ public static class PackingListViewModelMapper
 {
     public static PackingListViewModel Map(PackingListModel model)
     {
-        return new PackingListViewModel
+        var vm = new PackingListViewModel
         {
             Id = model.Id.ToString(),
             Name = model.Name,
             Groups = GetGroups(model.Groups),
             UserId = model.UserId.ToString(),
-            IsPublic = model.IsPublic
+            IsPublic = model.IsPublic,
+            Language = model.Language
         };
+        if (string.IsNullOrEmpty(vm.Language))
+        {
+            vm.Language = "NoLang";
+        }
+
+        return vm;
     }
 
     public static PackingListModel Map(PackingListViewModel model)
@@ -25,7 +32,8 @@ public static class PackingListViewModelMapper
             Name = model.Name,
             Groups = GetGroups(model.Groups),
             UserId = Guid.Parse(model.UserId),
-            IsPublic = model.IsPublic
+            IsPublic = model.IsPublic,
+            Language = model.Language
         };
     }
 

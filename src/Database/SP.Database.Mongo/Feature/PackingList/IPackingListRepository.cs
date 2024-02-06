@@ -13,4 +13,6 @@ public interface IPackingListRepository
     Task Delete(string id);
 
     Task<IEnumerable<PackingListModel>> GetByUserId(Guid userId);
+
+    Task<IEnumerable<PackingListModel>> GetPublic();
 }

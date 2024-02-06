@@ -17,7 +17,7 @@ public class PackingListsApiController : ControllerBase
         _packingListService = packingListService;
     }
 
-    [Route("")]
+    [HttpGet("")]
     public async Task<ActionResult> PackingLists()
     {
         var result = await _packingListService.GetPackingLists(GetUserId());

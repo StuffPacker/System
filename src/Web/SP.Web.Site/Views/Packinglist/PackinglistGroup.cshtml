@@ -1,8 +1,9 @@
 <div class="row">
     <div class="container-fluid">
-        <div class="row" style="background-color: #5ea379; color: white; border-radius: 15px 15px 0px 0px; box-shadow: 2px 4px 0px 0px #4e8563;">
-            <div style="float: left; padding: 10px;">
+        <div class="row" style="background-color: #5ea379; color: white; border-radius: 5px 5px 0px 0px; box-shadow: 2px 4px 0px 0px #4e8563;">
+            <div style="float: left; padding: 3px;">
                 <b style=" font-size: medium" data-bind="text:Name, hidden:EditGroupName, click:ChangeEditGroupNameState"></b>
+                 <input data-bind="click: AddToList" type="button" class="btn btn-primary" value="Add item"/>
                 <div data-bind="visible:EditGroupName">
                     <input type="text" data-bind="value:Name" style="color: black;"/>
                     <input type="button" class="btn-primary" value="Save" data-bind="click:Save"/>
@@ -16,7 +17,7 @@
         <div class="row" style="margin-top: 1%;">
             @* <select style="color: black;" data-bind="options: ExistingItems,optionsText: 'Name' , value: ExistingItemsSelectedValue, optionsCaption: 'Select a Value'"></select> *@
             @* *@
-            <input data-bind="click: AddToList" type="button" class="btn-primary" value="Add to list"/>
+           
             <div class="table-responsive">
                 <table class="table table-striped">
                     <thead>
