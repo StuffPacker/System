@@ -70,6 +70,23 @@ public class PackingListRepository : DataBaseFetchBase, IPackingListRepository
         return list;
     }
 
+    public async Task<IEnumerable<PackingListModel>> GetPublic()
+    {
+        var db = _databaseClient.GetDatabase();
+        var collection = db.GetCollection<PackingListEntity>(MongoDbNames.PackingListName);
+        var filter = Builders<PackingListEntity>.Filter.Eq("IsPublic", true);
+        var results = await (await collection.FindAsync(filter)).ToListAsync();
+
+        var list = new List<PackingListModel>();
+        foreach (var item in results)
+        {
+            var i = item;
+            list.Add(GetModel(i));
+        }
+
+        return list;
+    }
+
     private PackingListEntity GetEntity(PackingListModel model)
     {
         return new PackingListEntity()

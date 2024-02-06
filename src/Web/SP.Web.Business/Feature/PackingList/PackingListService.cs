@@ -64,4 +64,16 @@ public class PackingListService : IPackingListService
     {
         await _apiPackingListClient.Update(PackingListViewModelMapper.Map(model), userId);
     }
+
+    public async Task<List<PackingListViewModel>> GetPackingListsPublic()
+    {
+        var models = await _apiPackingListClient.GetPackingListsPublic();
+        var list = new List<PackingListViewModel>();
+        foreach (var item in models)
+        {
+            list.Add(PackingListViewModelMapper.Map(item));
+        }
+
+        return list;
+    }
 }

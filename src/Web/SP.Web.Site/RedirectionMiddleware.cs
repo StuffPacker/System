@@ -15,16 +15,15 @@ public class RedirectionMiddleware
 
     public async Task InvokeAsync(HttpContext context)
     {
-        var originalUrl = context.Request.GetDisplayUrl(); // Check the URL which you want to validate
-        _logger.LogWarning("check middlewere " + originalUrl);
-        if (originalUrl.Contains("https://stuffpacker.net"))
-        {
-            _logger.LogWarning("check middlewere redirect from " + originalUrl);
-            var redirectToAnotherURL = "https://beta.stuffpacker.net";
-
-            context.Response.Redirect(redirectToAnotherURL);
-        }
-
+        // var originalUrl = context.Request.GetDisplayUrl(); // Check the URL which you want to validate
+        // _logger.LogWarning("check middlewere " + originalUrl);
+        // if (originalUrl.Contains("https://stuffpacker.net"))
+        // {
+        //     _logger.LogWarning("check middlewere redirect from " + originalUrl);
+        //     var redirectToAnotherURL = "https://beta.stuffpacker.net";
+        //
+        //     context.Response.Redirect(redirectToAnotherURL);
+        // }
         await _next(context);
     }
 }

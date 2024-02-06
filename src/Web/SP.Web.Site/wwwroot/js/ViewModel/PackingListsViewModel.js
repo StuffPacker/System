@@ -1,8 +1,11 @@
 function PackingListsViewModel() {
     var self = this;
     var packingLists = [];
+  
     self.PackingLists = ko.observableArray(packingLists);
+    
     PLSVMGetAllPackingLists(self);
+   
     self.Create = function ()
     {
         PLSVMCreatePackingList(self);
@@ -26,6 +29,7 @@ function PLSVMGetAllPackingLists(self)
         }
     });
 }
+
 function PLSVMAddPackingList(self,dto)
 {
     var item = new Object();

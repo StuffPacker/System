@@ -2,11 +2,13 @@ function DashboardViewModel(id) {
     var self = this;
     var Items = [];
     self.Items = ko.observableArray(Items);
+    var packingListsPublic = [];
+    self.PackingListsPublic = ko.observableArray(packingListsPublic);
     DBVMGetAllItems(self);
     var packingLists = [];
     self.PackingLists = ko.observableArray(packingLists);
     DBVMGetAllPackingLists(self);
-
+    DBVMGetAllPackingListsPublic(self);
     
 }
 function DBVMGetAllPackingLists(self)
@@ -15,6 +17,25 @@ function DBVMGetAllPackingLists(self)
         if (obj != null) {
             ko.utils.arrayForEach(obj, function (dto) {
                 DBVMAddPackingList(self,dto);
+            });
+        }
+    });
+}
+function DBVMAddPackingListPublic(self,dto)
+{  
+    var item = new Object();
+    item.Name=dto.Name;
+    item.Link="/packinglist/" + dto.Id+"/public/";
+    item.Lang=dto.Language;     
+        item.FlagUrl="/img/flag/"+item.Lang+".png";   
+    self.PackingListsPublic.push(item);
+}
+function DBVMGetAllPackingListsPublic(self)
+{
+    SPApiGet('/api/v1/packinglist/public/packinglist', function (obj) {
+        if (obj != null) {
+            ko.utils.arrayForEach(obj, function (dto) {
+                DBVMAddPackingListPublic(self,dto);
             });
         }
     });

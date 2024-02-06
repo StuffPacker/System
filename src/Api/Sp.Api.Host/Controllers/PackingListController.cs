@@ -93,4 +93,12 @@ public class PackingListController : SpControllerBase
         await _packingListService.Update(dto);
         return Ok();
     }
+
+    [AllowAnonymous]
+    [HttpGet("SpApi/v1/packinglist/public")]
+    public async Task<ActionResult<string>> GetPublic()
+    {
+        var list = await _packingListService.GetPackingListsPublic();
+        return Ok(list);
+    }
 }

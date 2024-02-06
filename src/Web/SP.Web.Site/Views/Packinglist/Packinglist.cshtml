@@ -10,17 +10,17 @@
         <div class="col-sm-4">
             <a title="Printable" style="font-size:large;" data-bind="attr:{href:PrintLink}" target="_blank" class="glyphicon glyphicon-print" aria-hidden="true"></a>
             
-            <input type="button" class="btn-primary" value="Make public" data-bind="click:MakePublic,hidden:IsPublic"/>
+            <input type="button" class="btn btn-primary" value="Make public" data-bind="click:MakePublic,hidden:IsPublic"/>
             <a target="_blank" data-bind="visible:IsPublic, attr:{href:PublicLink}">Public link</a>
-            <input type="button" class="btn-primary" value="Make private" data-bind="click:MakePrivate,visible:IsPublic"/>
+            <input type="button" class="btn btn-primary" value="Make private" data-bind="click:MakePrivate,visible:IsPublic"/>
         </div>
     </div>
     <div data-bind="visible:EditName">
         <input type="text" data-bind="value:Name"/>
-        <input type="button" class="btn-primary" value="Save" data-bind="click:SaveName"/>
-        <input type="button" class="btn-primary" value="Cancel" data-bind="click:CancelName"/>
+        <input type="button" class="btn btn-primary" value="Save" data-bind="click:SaveName"/>
+        <input type="button" class="btn btn-primary" value="Cancel" data-bind="click:CancelName"/>
     </div>
-    <input type="button" class="btn-primary" value="Add group" data-bind="click:AddNewGroup"/>
+    <input type="button" class="btn btn-primary" value="Add group" data-bind="click:AddNewGroup"/>
     <br />
     <br />
     <!-- ko foreach: Groups -->

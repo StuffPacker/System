@@ -6,11 +6,19 @@ public static class JsonHandler
 {
     public static T Deserialize<T>(string dtoString)
     {
-        var options = new JsonSerializerOptions
+        try
         {
-            PropertyNameCaseInsensitive = true
-        };
-        var result = JsonSerializer.Deserialize<T>(dtoString, options);
-        return result!;
+            var options = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            };
+            var result = JsonSerializer.Deserialize<T>(dtoString, options);
+            return result!;
+        }
+        catch (Exception e)
+        {
+            var s = e;
+            throw;
+        }
     }
 }

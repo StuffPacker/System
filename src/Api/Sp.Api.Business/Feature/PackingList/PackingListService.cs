@@ -61,8 +61,29 @@ public class PackingListService : IPackingListService
     public async Task Update(PackingListDto dto)
     {
         var model = _packingListMapper.Map(dto);
-        model.Language = GetLanguage(model.Language, model.Name);
+        var input = model.Name + " ";
+        foreach (var item in model.Groups)
+        {
+            input += item.Name + " ";
+        }
+
+        model.Language = GetLanguage(model.Language, input);
         await _packingListRepository.Update(model);
+    }
+
+    public async Task<List<PackingListDto>> GetPackingListsPublic()
+    {
+        var result = await _packingListRepository.GetPublic();
+        var list = new List<PackingListDto>();
+        foreach (var item in result)
+        {
+            if (item.IsPublic)
+            {
+                list.Add(_packingListMapper.Map(item));
+            }
+        }
+
+        return list;
     }
 
     private string GetLanguage(string oldValue, string name)

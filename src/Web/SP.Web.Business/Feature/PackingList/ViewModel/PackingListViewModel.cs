@@ -13,6 +13,8 @@ public class PackingListViewModel
 
     public string UserId { get; set; } = string.Empty;
 
+    public string Language { get; set; } = string.Empty;
+
     public bool IsPublic { get; set; }
 
     public void DeleteGroup(string groupid)

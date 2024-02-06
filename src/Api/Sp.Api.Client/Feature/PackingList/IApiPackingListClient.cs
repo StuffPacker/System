@@ -17,4 +17,6 @@ public interface IApiPackingListClient
     Task Delete(string id, Guid getUserId);
 
     Task Update(PackingListModel model, Guid userId);
+
+    Task<IEnumerable<PackingListModel>> GetPackingListsPublic();
 }
