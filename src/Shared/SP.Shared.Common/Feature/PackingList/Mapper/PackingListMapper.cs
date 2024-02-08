@@ -14,7 +14,8 @@ public class PackingListMapper : IPackingListMapper
             UserId = model.UserId.ToString(),
             Groups = GetGroupsDto(model.Groups),
             Id = model.Id,
-            Language = model.Language
+            Language = model.Language,
+            Description = model.Description
         };
     }
 
@@ -44,7 +45,8 @@ public class PackingListMapper : IPackingListMapper
             UserId = Guid.Parse(dto.UserId),
             IsPublic = dto.IsPublic,
             Groups = GetGroupsModel(dto.Groups),
-            Language = language
+            Language = language,
+            Description = dto.Description
         };
     }
 

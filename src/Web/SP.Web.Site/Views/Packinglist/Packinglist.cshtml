@@ -5,21 +5,33 @@
 <div id="PackingList">
     <div class="container-fluid">
         <div class="col-sm-8">
-            <h1 data-bind="text:Name, hidden:EditName, click:ChangeEditNameState" class="page-header">List</h1>
+            <h1 data-bind="hidden:EditName" class="page-header"><span data-bind="text:Name"></span>&nbsp;<input type="button" class="btn btn-primary" data-bind="click:ChangeEditNameState" value="Edit"/></h1>
         </div>
         <div class="col-sm-4">
             <a title="Printable" style="font-size:large;" data-bind="attr:{href:PrintLink}" target="_blank" class="glyphicon glyphicon-print" aria-hidden="true"></a>
-            
             <input type="button" class="btn btn-primary" value="Make public" data-bind="click:MakePublic,hidden:IsPublic"/>
             <a target="_blank" data-bind="visible:IsPublic, attr:{href:PublicLink}">Public link</a>
             <input type="button" class="btn btn-primary" value="Make private" data-bind="click:MakePrivate,visible:IsPublic"/>
         </div>
     </div>
     <div data-bind="visible:EditName">
+        <b>Name</b><br/>
         <input type="text" data-bind="value:Name"/>
+        <br/><br/>
+         <b>Description</b><br/>
+                <textarea class="form-control" rows="10" data-bind="value:Description"></textarea>
+        <br/><br/>
         <input type="button" class="btn btn-primary" value="Save" data-bind="click:SaveName"/>
         <input type="button" class="btn btn-primary" value="Cancel" data-bind="click:CancelName"/>
     </div>
+    <br/>
+  
+     <div data-bind="hidden:EditName">
+             <span data-bind="text:Description"></span>
+             </div>
+    
+    <hr/>
+    <br/>
     <input type="button" class="btn btn-primary" value="Add group" data-bind="click:AddNewGroup"/>
     <br />
     <br />

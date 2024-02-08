@@ -6,6 +6,7 @@ function PackingListViewModel(id) {
     PLVMLoadExistingItems(self);
     var Groups = [];
     self.Name = ko.observable("");
+    self.Description = ko.observable("");
     self.Groups = ko.observableArray(Groups);
     self.EditName = ko.observable(false);
     self.IsPublic = ko.observable(false);
@@ -55,8 +56,15 @@ function PackingListViewModel(id) {
     }
     self.SaveName = function () {
         var data = {};
+        var data2 = {};
         data.Name = self.Name();
+        data2.Description = self.Description();
         SPApiPatch('/api/v1/packinglist/' + id + '/Name', data, function (obj) {
+            if (obj != null) {
+
+            }
+        });
+        SPApiPatch('/api/v1/packinglist/' + id + '/Description', data2, function (obj) {
             if (obj != null) {
 
             }
@@ -93,11 +101,12 @@ function PLVMGetPackingList(self, id) {
     SPApiGet('/api/v1/packinglist/' + id, function (obj) {
         if (obj != null) {
             self.Name(obj.Name);
+            self.Description(obj.Description);
             self.IsPublic(obj.IsPublic);
             if (self.IsPublic()) {
                 self.PublicLink("/packinglist/" + id + "/public");
             }
-self.Groups.removeAll();
+            self.Groups.removeAll();
             ko.utils.arrayForEach(obj.Groups, function (dto) {
                 PLVMAddGroup(self, id, dto);
             });

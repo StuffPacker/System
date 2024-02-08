@@ -96,7 +96,8 @@ public class PackingListRepository : DataBaseFetchBase, IPackingListRepository
             Name = model.Name,
             Groups = GetGroups(model.Groups),
             IsPublic = model.IsPublic,
-            Language = model.Language
+            Language = model.Language,
+            Description = model.Description
         };
     }
 
@@ -143,7 +144,8 @@ public class PackingListRepository : DataBaseFetchBase, IPackingListRepository
             Groups = GetGroupsModel(results.Groups),
             UserId = Guid.Parse(results.UserId),
             IsPublic = results.IsPublic,
-            Language = results.Language
+            Language = results.Language,
+            Description = results.Description
         };
     }
 

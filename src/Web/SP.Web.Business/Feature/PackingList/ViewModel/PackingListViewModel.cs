@@ -17,6 +17,8 @@ public class PackingListViewModel
 
     public bool IsPublic { get; set; }
 
+    public string Description { get; set; } = string.Empty;
+
     public void DeleteGroup(string groupid)
     {
         var item = Groups.First(x => x.Id == groupid);

@@ -40,10 +40,10 @@ public class HomeController : Controller
     public string CreateSitemapInRootDirectory()
     {
         var list = new List<SitemapNode>();
-        list.Add(new SitemapNode { LastModified = DateTime.UtcNow, Priority = 0.8, Url = "https://beta.stuffpacker.net", Frequency = SitemapFrequency.Daily });
-        list.Add(new SitemapNode { LastModified = DateTime.UtcNow, Priority = 0.8, Url = "https://beta.stuffpacker.net/packinglist/6509405ca3246bbcf127dfaa/public", Frequency = SitemapFrequency.Daily });
-        list.Add(new SitemapNode { LastModified = DateTime.UtcNow, Priority = 0.7, Url = "https://beta.stuffpacker.net/Login", Frequency = SitemapFrequency.Daily });
-        list.Add(new SitemapNode { LastModified = DateTime.UtcNow, Priority = 0.7, Url = "https://beta.stuffpacker.net/account/register", Frequency = SitemapFrequency.Daily });
+        list.Add(new SitemapNode { LastModified = DateTime.UtcNow, Priority = 0.8, Url = "https://stuffpacker.net", Frequency = SitemapFrequency.Daily });
+        list.Add(new SitemapNode { LastModified = DateTime.UtcNow, Priority = 0.8, Url = "https://stuffpacker.net/packinglist/6509405ca3246bbcf127dfaa/public", Frequency = SitemapFrequency.Daily });
+        list.Add(new SitemapNode { LastModified = DateTime.UtcNow, Priority = 0.7, Url = "https://stuffpacker.net/Login", Frequency = SitemapFrequency.Daily });
+        list.Add(new SitemapNode { LastModified = DateTime.UtcNow, Priority = 0.7, Url = "https://stuffpacker.net/account/register", Frequency = SitemapFrequency.Daily });
         new SitemapDocument().CreateSitemapXML(list, _env.ContentRootPath);
         return "sitemap.xml file should be create in root directory";
     }
