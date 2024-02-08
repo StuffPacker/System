@@ -4,6 +4,7 @@ using Sp.Api.Client.Feature.Client;
 using Sp.Api.Client.Feature.Feature.Item;
 using Sp.Api.Client.Feature.Health;
 using Sp.Api.Client.Feature.PackingList;
+using Sp.Api.Client.Feature.User;
 
 namespace Sp.Api.Client;
 public static class Extensions
@@ -17,6 +18,7 @@ public static class Extensions
         services.AddScoped<IApiHealthClient, ApiHealthClient>();
         services.AddScoped<IApiPackingListClient, ApiPackingListClient>();
         services.AddScoped<IApiItemClient, ApiItemClient>();
+        services.AddScoped<IApiUserClient, ApiUserClient>();
 
         services.AddHttpClient("SpApi", httpClient =>
         {

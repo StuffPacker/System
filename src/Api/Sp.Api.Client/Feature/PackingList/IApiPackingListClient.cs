@@ -4,7 +4,7 @@ namespace Sp.Api.Client.Feature.PackingList;
 
 public interface IApiPackingListClient
 {
-    Task<PackingListModel> GetPackingList(string id, Guid currentUser);
+    Task<PackingListModel?> GetPackingList(string id, Guid currentUser);
 
     Task<PackingListModel> GetPackingListPublic(string requestId);
 

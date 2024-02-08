@@ -20,7 +20,7 @@ public class PackingListService : IPackingListService
     public async Task<PackingListViewModel> GetPackingListById(string id, Guid userId)
     {
        var model = await _apiPackingListClient.GetPackingList(id, userId);
-       return PackingListViewModelMapper.Map(model);
+       return PackingListViewModelMapper.Map(model!);
     }
 
     public async Task<List<PackingListViewModel>> GetPackingLists(Guid userId)

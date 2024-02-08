@@ -18,9 +18,14 @@ public class ApiPackingListClient : IApiPackingListClient
         _packingListMapper = packingListMapper;
     }
 
-    public async Task<PackingListModel> GetPackingList(string id, Guid currentUser)
+    public async Task<PackingListModel?> GetPackingList(string id, Guid currentUser)
     {
         var result = await _apiClient.GetSecure("SpApi/v1/packinglist/" + id, currentUser.ToString());
+        if (string.IsNullOrEmpty(result))
+        {
+            return null;
+        }
+
         var dto = JsonHandler.Deserialize<PackingListDto>(result);
         var model = _packingListMapper.Map(dto!);
         return model;
@@ -45,6 +50,11 @@ public class ApiPackingListClient : IApiPackingListClient
     public async Task<IEnumerable<PackingListModel>> GetPackingLists(Guid userId)
     {
         var result = await _apiClient.GetSecure("SpApi/v1/packinglist/", userId.ToString());
+        if (result == null)
+        {
+            return new List<PackingListModel>();
+        }
+
         var dtos = JsonHandler.Deserialize<List<PackingListDto>>(result);
         var models = _packingListMapper.Map(dtos!);
         return models;

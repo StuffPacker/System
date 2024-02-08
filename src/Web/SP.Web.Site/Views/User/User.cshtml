@@ -1,0 +1,13 @@
+@model string
+@{
+    Layout = "_Layout";
+}
+<div id="userPage">
+    
+</div>
+@section footerjs
+{
+    <script type="text/javascript">  
+  ko.applyBindings(UserViewModel('@Model'), document.getElementById('userPage'));  
+  </script>
+}

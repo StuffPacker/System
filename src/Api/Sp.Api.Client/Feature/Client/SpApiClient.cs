@@ -1,4 +1,5 @@
 using System.IdentityModel.Tokens.Jwt;
+using System.Net;
 using System.Net.Http.Headers;
 using System.Security.Claims;
 using System.Text;
@@ -33,7 +34,7 @@ public class SpApiClient : ISpApiClient
         throw new InvalidOperationException();
     }
 
-    public async Task<string> GetSecure(string url, string userId)
+    public async Task<string?> GetSecure(string url, string userId)
     {
         var client = SecureClient(userId);
         var httpResponseMessage = await client.GetAsync(url);
@@ -42,6 +43,11 @@ public class SpApiClient : ISpApiClient
             var contentStream = await httpResponseMessage.Content.ReadAsStringAsync();
 
             return contentStream;
+        }
+
+        if (httpResponseMessage.StatusCode == HttpStatusCode.NotFound)
+        {
+            return null;
         }
 
         throw new InvalidOperationException();

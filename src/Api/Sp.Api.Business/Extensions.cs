@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Sp.Api.Business.Feature.Language;
 using Sp.Api.Business.Feature.PackingList;
+using Sp.Api.Business.Feature.User;
 using SP.Database.Mongo;
 using SP.Shared.Common.Feature.Item.Mapper;
 using SP.Shared.Common.Feature.PackingList.Mapper;
@@ -17,7 +18,7 @@ public static class Extensions
     {
         services.Configure<LanguageServiceOptions>(configuration.GetSection("LanguageServiceOptions"));
         services.AddSingleton<IPackingListService, PackingListService>();
-
+        services.AddSingleton<IUserService, UserService>();
         services.AddMediatR(typeof(Extensions));
         services.AddInfrastructureMongoDb(configuration);
         services.AddSingleton<ILanguageService, LanguageService>();

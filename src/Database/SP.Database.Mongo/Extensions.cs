@@ -1,6 +1,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SP.Database.Mongo.Feature.PackingList;
+using SP.Database.Mongo.Feature.User;
 using SP.Database.Mongo.Feature.UserItem;
 using SP.Shared.Common.Feature.Database.UserItem;
 
@@ -15,6 +16,8 @@ public static class Extensions
         services.AddSingleton<IDatabaseClient, DatabaseClient>();
         services.AddSingleton<IUserItemRepository, UserItemRepository>();
         services.AddSingleton<IPackingListRepository, PackingListRepository>();
+        services.AddSingleton<IUserRepository, UserRepository>();
+
         services.Configure<MongoDbDatabaseOptions>(configuration.GetSection("MongoDbDatabaseOptions"));
         return services;
     }

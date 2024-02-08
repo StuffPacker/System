@@ -8,7 +8,8 @@
       "wwwroot/js/ViewModel/PackingListPublicViewModel.js",
       "wwwroot/js/ViewModel/PackingListsViewModel.js",
       "wwwroot/js/ViewModel/PackingListViewModel.js",
-      "wwwroot/js/ViewModel/HomeViewModel.js"
+      "wwwroot/js/ViewModel/HomeViewModel.js",
+      "wwwroot/js/ViewModel/UserViewModel.js"      
     ]
   }
 ]
