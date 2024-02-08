@@ -36,4 +36,11 @@ public class ApiUserClient : IApiUserClient
         var dto = _userProfileMapper.Map(model);
         var result = await _apiClient.PostSecure("SpApi/v1/user/", currentUserId.ToString(), dto);
     }
+
+    public async Task<object> UpdateUser(Guid currentUserId, UserProfileModel model)
+    {
+        var dto = _userProfileMapper.Map(model);
+        var result = await _apiClient.PutSecure("SpApi/v1/user/" + model.Id + "/", currentUserId.ToString(), dto);
+        return result;
+    }
 }

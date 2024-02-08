@@ -41,4 +41,24 @@ public class UserController : SpControllerBase
         var resultDto = _userProfileMapper.Map(result);
         return Ok(resultDto);
     }
+
+    [HttpPut("SpApi/v1/user/{id}")]
+    public async Task<ActionResult<string>> Update(string id, [FromBody] UserProfileDto dto)
+    {
+        var user = GetUser();
+        if (dto.Id != id)
+        {
+            return BadRequest();
+        }
+
+        var model = _userProfileMapper.Map(dto);
+        if (user != model.UserId)
+        {
+            return StatusCode(301);
+        }
+
+        var result = await _userService.UpdateUser(user, model);
+        var resultDto = _userProfileMapper.Map(result);
+        return Ok(resultDto);
+    }
 }

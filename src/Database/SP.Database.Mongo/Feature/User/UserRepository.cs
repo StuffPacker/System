@@ -37,6 +37,25 @@ public class UserRepository : DataBaseFetchBase, IUserRepository
         return model;
     }
 
+    public async Task<UserProfileModel> Update(UserProfileModel model)
+    {
+        var entity = GetEntity(model);
+        var db = _databaseClient.GetDatabase();
+        var collection = db.GetCollection<UserProfileEntity>(MongoDbNames.UserProfileName);
+        await collection.ReplaceOneAsync(x => x.Id == entity.Id, entity);
+        return GetModel(entity);
+    }
+
+    private UserProfileEntity GetEntity(UserProfileModel model)
+    {
+        return new UserProfileEntity
+        {
+            Id = model.Id,
+            UserId = model.UserId.ToString(),
+            Name = model.Name
+        };
+    }
+
     private UserProfileModel GetModel(UserProfileEntity entity)
     {
         return new UserProfileModel

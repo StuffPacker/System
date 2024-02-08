@@ -13,6 +13,10 @@ public class UserProfileEntity : BaseEntity
         Name = model.Name;
     }
 
+    public UserProfileEntity()
+    {
+    }
+
     public string Name { get; set; }
 
     public string UserId { get; set; }

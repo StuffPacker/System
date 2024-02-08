@@ -3,7 +3,30 @@
     Layout = "_Layout";
 }
 <div id="userPage">
+    <div class="row">
+        <div class="col-md-4">
+            <h1 data-bind="text:Name"></h1>
+            <div data-bind="visible:IsOwner">
+                <input type="button" data-bind="hidden:EditMode , click:ChangeEditMode" class="btn, btn-primary" value="Edit profile"/>
+            </div>
+            <div data-bind="visible:EditMode">
+                <b>Name</b><br/>
+                <input type="text" data-bind="value:Name" class=""/>
+                <br/>
+                <br/>
+                <input type="button" class="btn btn-close" data-bind="click:ChangeEditMode" value="Cancel"/>
+                <input type="button" class="btn btn-success" data-bind="click:Update" value="Update"/>
+            </div>
+        </div>
+        <div class="col-md-8">
+            &nbsp;
+        </div>
+    </div>
     
+    
+    
+    
+  
 </div>
 @section footerjs
 {

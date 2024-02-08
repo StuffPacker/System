@@ -25,4 +25,10 @@ public class UserService : IUserService
         var result = await _userRepository.CreateUserProfile(model);
         return result;
     }
+
+    public async Task<UserProfileModel> UpdateUser(Guid user, UserProfileModel model)
+    {
+        var result = await _userRepository.Update(model);
+        return result;
+    }
 }
