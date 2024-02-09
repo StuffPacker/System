@@ -31,4 +31,10 @@ public class UserService : IUserService
         var result = await _userRepository.Update(model);
         return result;
     }
+
+    public async Task<IEnumerable<UserProfileModel>> GetUserList(Guid currentUser)
+    {
+        var result = await _userRepository.GetUsers();
+        return result;
+    }
 }

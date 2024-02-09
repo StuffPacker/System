@@ -32,6 +32,16 @@ public class UserController : SpControllerBase
         return Ok(dto);
     }
 
+    [HttpGet("SpApi/v1/user/")]
+    public async Task<ActionResult<string>> GetList()
+    {
+        var user = GetUser();
+        var model = await _userService.GetUserList(user);
+
+        var dto = _userProfileMapper.Map(model);
+        return Ok(dto);
+    }
+
     [HttpPost("SpApi/v1/user")]
     public async Task<ActionResult<string>> Create([FromBody] UserProfileDto dto)
     {

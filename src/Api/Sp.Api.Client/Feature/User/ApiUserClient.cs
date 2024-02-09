@@ -43,4 +43,13 @@ public class ApiUserClient : IApiUserClient
         var result = await _apiClient.PutSecure("SpApi/v1/user/" + model.Id + "/", currentUserId.ToString(), dto);
         return result;
     }
+
+    public async Task<IEnumerable<UserProfileModel>> GetUserList(Guid currentUser)
+    {
+        var result = await _apiClient.GetSecure("SpApi/v1/user/", currentUser.ToString());
+
+        var dto = JsonHandler.Deserialize<IEnumerable<UserProfileDto>>(result!);
+        var model = _userProfileMapper.Map(dto);
+        return model;
+    }
 }

@@ -9,4 +9,6 @@ public interface IApiUserClient
     Task CreateUser(Guid currentUserId, UserProfileModel model);
 
     Task<object> UpdateUser(Guid currentUserId, UserProfileModel model);
+
+    Task<IEnumerable<UserProfileModel>> GetUserList(Guid currentUser);
 }

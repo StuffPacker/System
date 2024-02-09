@@ -18,6 +18,12 @@ public class UserController : ControllerBase
         _userManager = userManager;
     }
 
+    [Route("user")]
+    public ActionResult Userlist()
+    {
+        return View("userList");
+    }
+
     [Route("user/{id}")]
     public async Task<ActionResult> Packinglist(string id)
     {

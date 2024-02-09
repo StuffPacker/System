@@ -9,4 +9,6 @@ public interface IUserRepository
     Task<UserProfileModel> CreateUserProfile(UserProfileModel model);
 
     Task<UserProfileModel> Update(UserProfileModel model);
+
+    Task<IEnumerable<UserProfileModel>> GetUsers();
 }

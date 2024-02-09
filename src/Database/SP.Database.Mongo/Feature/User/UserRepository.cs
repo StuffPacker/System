@@ -46,6 +46,22 @@ public class UserRepository : DataBaseFetchBase, IUserRepository
         return GetModel(entity);
     }
 
+    public async Task<IEnumerable<UserProfileModel>> GetUsers()
+    {
+        var db = _databaseClient.GetDatabase();
+        var collection = db.GetCollection<UserProfileEntity>(MongoDbNames.UserProfileName);
+
+        var filter = MongoDB.Driver.Builders<UserProfileEntity>.Filter.Empty; // .Eq("UserId", userId.ToString());
+        var results = await (await collection.FindAsync(filter)).ToListAsync();
+        var list = new List<UserProfileModel>();
+        foreach (var item in results)
+        {
+            list.Add(GetModel(item));
+        }
+
+        return list;
+    }
+
     private UserProfileEntity GetEntity(UserProfileModel model)
     {
         return new UserProfileEntity

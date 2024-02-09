@@ -6,6 +6,7 @@ using SP.Web.Business.Feature.PackingList;
 using SP.Web.Business.Feature.PackingList.Mapper;
 using SP.Web.Business.Feature.PackingList.ViewModel;
 using SP.Web.Business.Feature.User.GetUser;
+using SP.Web.Business.Feature.User.GetUserList;
 using SP.Web.Business.Feature.User.UpdateUser;
 using SP.Web.Business.ViewModel;
 using SP.Web.Site.Features.Item;
@@ -48,6 +49,23 @@ public class UserApiController : ControllerBase
             Meta = new MetaModel { Code = 200 },
             ResultData = vm
         });
+    }
+
+    [Route("")]
+    public async Task<ActionResult> GetUsers()
+    {
+        var result = await _mediator.Send(new GetUserListCommand(GetUserId()));
+        var list = new List<UserProfileViewModel>();
+        foreach (var item in result)
+        {
+            list.Add(new UserProfileViewModel(item));
+        }
+
+        return Ok(new ResultJsonModel
+            {
+                Meta = new MetaModel { Code = 200 },
+                ResultData = list
+            });
     }
 
     [HttpPatch("{id}")]

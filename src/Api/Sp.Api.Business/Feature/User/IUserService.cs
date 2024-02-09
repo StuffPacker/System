@@ -10,4 +10,6 @@ public interface IUserService
     Task<UserProfileModel> CreateUser(Guid user, UserProfileModel model);
 
     Task<UserProfileModel> UpdateUser(Guid user, UserProfileModel model);
+
+    Task<IEnumerable<UserProfileModel>> GetUserList(Guid currentUser);
 }
