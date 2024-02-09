@@ -84,8 +84,9 @@ public class Startup
 
         app.UseMiddleware<RedirectionMiddleware>();
         app.UseHttpsRedirection();
+
+        // app.UseXMLSitemap(env.WebRootPath);
         app.UseStaticFiles();
-        app.UseXMLSitemap(env.ContentRootPath);
         app.UseRouting();
         app.UseAuthentication();
         app.UseAuthorization();
