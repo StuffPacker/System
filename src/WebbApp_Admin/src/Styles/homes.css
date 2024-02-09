@@ -1,0 +1,142 @@
+/* homes.css */
+
+.register-button{
+    margin-top: 0px;
+    margin-bottom: 2px;
+    padding: 2px 12px;
+    background-color:#f2ae39;
+    border-radius: 50px;
+    border: 0;
+    border-style: groove;
+    font-size: 10px;
+    font-weight: 200;
+    color: #fff;
+    line-height: 34px;
+    cursor: pointer; /* Add pointer cursor for better usability */
+    transition: background-color 0.3s ease;
+  }
+  /*--------Gallery--------------*/
+  .gallery {
+    margin-top: 50px;
+    flex: 0 0 auto;
+    width: 100%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .gallery1 {
+    gap: 20px; /* Adjust the gap between items */
+    width: 100%;
+    display: flex;
+    max-width: 1200px; /* Adjust the maximum width of the gallery */
+    align-items: center;
+    padding-top: 30px; /* Adjust the top padding */
+    padding-left: 20px; /* Adjust the left padding */
+    padding-right: 20px; /* Adjust the right padding */
+    flex-direction: column;
+    padding-bottom: 30px; /* Adjust the bottom padding */
+  }
+  
+  .gallery-sub-heading {
+    color: rgb(153, 153, 153);
+    text-align: center;
+    line-height: 1.6;
+    padding-left: 20px; /* Adjust the left padding */
+    padding-right: 20px; /* Adjust the right padding */
+  }
+  
+  .image-container {
+    width: 50%;
+    height: 50%;
+    display: inline-block;
+   
+    object-fit: cover;
+    grid-gap: 20px; /* Adjust the gap between grid items */
+    margin-top: 2px;
+    border-radius: 8px;
+    grid-template-columns: repeat(3, 1fr); /* 4 columns */
+  }
+  
+  
+  .body {
+    font-family: 'Nunito Sans', sans-serif; /* Apply Nunito Sans as the default font for the entire page */
+  }
+  .mulish-font {
+    font-family: 'Mulish', sans-serif; /* Apply Mulish font to elements with class mulish-font */
+  }
+  .hero {
+    height: 20vh;
+    position: relative;
+    z-index: 3;
+    
+   border-radius: 5%;
+   border-color: #291477;
+  }
+  @font-face {
+    font-family: 'Mulish';
+    font-style: normal;
+    font-weight: 900;
+    src: url(./fonts/Mulish-Regular.ttf) format('woff2');
+    /* ... other properties ... */
+  }
+  .grey-green-container {
+    height: 20vh;
+    padding: 30px;
+    display: flex;
+   
+    align-items: center;
+    justify-content: center;
+  
+  }
+  
+  .third-container {
+    max-width: 800px;
+    text-align: center;
+   
+  }
+  .grey-background {
+    background-color: #f0f0f0;
+    padding: 50px 0; /* Adjust padding as needed */
+  }
+  
+  .grey-green-background {
+     /* Adjust background color as needed */
+    padding: 50px 0; /* Adjust padding as needed */
+  }
+  
+  .custom-card {
+    width: 100%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    /* Add more custom styles if needed */
+  }
+  
+  /*.overlay {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+  }
+  */
+  .hero-text {
+    padding-top: 5%;
+    padding-bottom: 8%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 20em;
+    font-size: 18px;
+    text-align: center;
+    line-height: 1.6;
+    color: #fcf6f6;
+  }
+  
+  
+  /*----------------------------*/
