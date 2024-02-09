@@ -20,6 +20,6 @@ public class ApiHealthClient : IApiHealthClient
     public async Task<string> SecureHealth(string userId)
     {
         var result = await _apiClient.GetSecure("secureHealth", userId);
-        return result;
+        return result!;
     }
 }

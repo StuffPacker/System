@@ -7,6 +7,7 @@ using SP.Shared.Common;
 using SP.Shared.Common.Feature.Item.Mapper;
 using SP.Shared.Common.Feature.Jwt;
 using SP.Shared.Common.Feature.PackingList.Mapper;
+using SP.Shared.Common.Feature.User.Mapper;
 
 namespace Sp.Api.Host;
 
@@ -26,6 +27,8 @@ public class Startup
     {
         var key = Configuration.GetValue<string>("JwtOptions:Key");
         services.AddSingleton<IItemModelMapper, ItemModelMapper>();
+        services.AddSingleton<IUserProfileMapper, UserProfileMapper>();
+
         services.AddSingleton<IPackingListMapper, PackingListMapper>();
         services.AddApiInfrastructureBusiness(Configuration);
         services.AddControllers();

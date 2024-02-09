@@ -17,6 +17,11 @@ public class UpdateItemCommandHandler : IRequestHandler<UpdateItemCommand, ItemV
     public async Task<ItemViewModel> Handle(UpdateItemCommand request, CancellationToken cancellationToken)
     {
         var item = await _itemClient.GetById(request.Id, request.UserId);
+        if (item == null)
+        {
+            throw new KeyNotFoundException();
+        }
+
         if (item.UserId != request.UserId)
         {
             throw new AuthenticationException();

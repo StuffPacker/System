@@ -7,7 +7,7 @@ public interface IPackingListService
 {
     Task<PackingListDto> GetPackingListById(string id);
 
-    Task<List<PackingListDto>> GetPackingLists(Guid userId);
+    Task<List<PackingListDto>> GetPackingListsByUserId(Guid userId);
 
     Task<PackingListDto> CreatePackingList(Guid userId, PackingListModel model);
 

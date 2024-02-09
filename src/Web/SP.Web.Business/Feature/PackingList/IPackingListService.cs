@@ -15,4 +15,6 @@ public interface IPackingListService
     Task Update(PackingListViewModel model, Guid userId);
 
     Task<List<PackingListViewModel>> GetPackingListsPublic();
+
+    Task<List<PackingListViewModel>> GetPackingListsPublicByUserId(Guid userId, Guid currentUserId);
 }

@@ -7,6 +7,7 @@ using SP.Shared.Common;
 using SP.Shared.Common.Feature.Item.Mapper;
 using SP.Shared.Common.Feature.Jwt;
 using SP.Shared.Common.Feature.PackingList.Mapper;
+using SP.Shared.Common.Feature.User.Mapper;
 using SP.Web.Business;
 using SP.Web.Site.Features.EmailSender;
 using SP.Web.Site.Model;
@@ -54,6 +55,8 @@ public class Startup
         });
         services.AddSingleton<IItemModelMapper, ItemModelMapper>();
         services.AddSingleton<IPackingListMapper, PackingListMapper>();
+        services.AddSingleton<IUserProfileMapper, UserProfileMapper>();
+
         services.AddInfrastructureBusiness(Configuration);
         var apiConfig = Configuration.GetSection("SpApiOptions").Get<SpApiOptions>();
         services.AddInfrastructureApiClient(Configuration, apiConfig!);

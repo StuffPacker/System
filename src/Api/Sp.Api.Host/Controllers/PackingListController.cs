@@ -23,7 +23,7 @@ public class PackingListController : SpControllerBase
     public async Task<ActionResult<string>> Get()
     {
         var user = User.Claims.FirstOrDefault(x => x.Type == "UserId");
-        var dto = await _packingListService.GetPackingLists(Guid.Parse(user!.Value));
+        var dto = await _packingListService.GetPackingListsByUserId(Guid.Parse(user!.Value));
 
         return Ok(dto);
     }

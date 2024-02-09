@@ -15,6 +15,6 @@ public class GetItemByIdCommandHandler : IRequestHandler<GetItemByIdCommand, Ite
     public async Task<ItemViewModel> Handle(GetItemByIdCommand request, CancellationToken cancellationToken)
     {
         var result = await _itemClient.GetById(request.Id, request.UserId);
-        return new ItemViewModel(result);
+        return new ItemViewModel(result!);
     }
 }
