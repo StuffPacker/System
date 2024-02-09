@@ -80,4 +80,26 @@ public class UserApiController : ControllerBase
             ResultData = result
         });
     }
+
+    [HttpPatch("{id}")]
+    public async Task<ActionResult> GetUser(string id, [FromBody] UserProfileUpdateViewModel model)
+    {
+        try
+        {
+            var result = await _mediator.Send(new UpdateUserCommand(Guid.Parse(id), model, GetUserId()));
+            return Ok(new ResultJsonModel
+            {
+                Meta = new MetaModel { Code = 200 },
+                ResultData = string.Empty
+            });
+        }
+        catch (Exception)
+        {
+            return Ok(new ResultJsonModel
+            {
+                Meta = new MetaModel { Code = 500 },
+                ResultData = string.Empty
+            });
+        }
+    }
 }
