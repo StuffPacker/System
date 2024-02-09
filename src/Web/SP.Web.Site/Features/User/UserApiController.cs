@@ -18,10 +18,12 @@ namespace SP.Web.Site.Features.User;
 public class UserApiController : ControllerBase
 {
     private readonly IMediator _mediator;
+    private readonly IPackingListService _packingListService;
 
-    public UserApiController(IMediator mediator)
+    public UserApiController(IMediator mediator, IPackingListService packingListService)
     {
         _mediator = mediator;
+        _packingListService = packingListService;
     }
 
     [AllowAnonymous]
@@ -68,25 +70,14 @@ public class UserApiController : ControllerBase
             });
     }
 
-    [HttpPatch("{id}")]
-    public async Task<ActionResult> GetUser(string id, [FromBody] UserProfileUpdateViewModel model)
+    [HttpGet("{id}/publicPackingList/")]
+    public async Task<ActionResult> GetUserPublicPackingLists(string id)
     {
-        try
+        var result = await _packingListService.GetPackingListsPublicByUserId(Guid.Parse(id), GetUserId());
+        return Ok(new ResultJsonModel
         {
-            var result = await _mediator.Send(new UpdateUserCommand(Guid.Parse(id), model, GetUserId()));
-            return Ok(new ResultJsonModel
-            {
-                Meta = new MetaModel { Code = 200 },
-                ResultData = string.Empty
-            });
-        }
-        catch (Exception)
-        {
-            return Ok(new ResultJsonModel
-            {
-                Meta = new MetaModel { Code = 500 },
-                ResultData = string.Empty
-            });
-        }
+            Meta = new MetaModel { Code = 200 },
+            ResultData = result
+        });
     }
 }

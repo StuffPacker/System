@@ -12,11 +12,11 @@ function UsrLVMLoadUsers(self)
                 UsrLVMAddUsers(self,dto);
             });
         }
-    });
+    });   
 }
 function UsrLVMAddUsers(self,dto)
 {
-    var obj= new Object();
+    var obj=new Object();
     obj.Name=dto.Name;
     obj.Id=dto.Id;
     obj.ProfileUrl="/user/"+dto.Id;

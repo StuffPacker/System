@@ -86,4 +86,13 @@ public class ApiPackingListClient : IApiPackingListClient
         var models = _packingListMapper.Map(dtos!);
         return models;
     }
+
+    public async Task<IEnumerable<PackingListModel>> GetPackingListsByUserId(Guid userId, Guid currentUserId)
+    {
+        var result = await _apiClient.GetSecure("SpApi/v1/user/" + userId.ToString() + "/packinglist/", currentUserId.ToString());
+
+        var dtos = JsonHandler.Deserialize<List<PackingListDto>>(result!);
+        var models = _packingListMapper.Map(dtos!);
+        return models;
+    }
 }

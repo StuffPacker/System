@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Sp.Api.Business.Feature.PackingList;
 using Sp.Api.Business.Feature.User;
 using SP.Shared.Common.Feature.User.Dto;
 using SP.Shared.Common.Feature.User.Mapper;
@@ -11,11 +12,13 @@ public class UserController : SpControllerBase
 {
     private readonly IUserService _userService;
     private readonly IUserProfileMapper _userProfileMapper;
+    private readonly IPackingListService _packingListService;
 
-    public UserController(IUserService userService, IUserProfileMapper userProfileMapper)
+    public UserController(IUserService userService, IUserProfileMapper userProfileMapper, IPackingListService packingListService)
     {
         _userService = userService;
         _userProfileMapper = userProfileMapper;
+        _packingListService = packingListService;
     }
 
     [HttpGet("SpApi/v1/user/{id}")]
@@ -70,5 +73,12 @@ public class UserController : SpControllerBase
         var result = await _userService.UpdateUser(user, model);
         var resultDto = _userProfileMapper.Map(result);
         return Ok(resultDto);
+    }
+
+    [HttpGet("SpApi/v1/user/{id}/packinglist/")]
+    public async Task<ActionResult<string>> GetPackingListsByUser(string id)
+    {
+        var dto = await _packingListService.GetPackingListsByUserId(Guid.Parse(id));
+        return Ok(dto);
     }
 }

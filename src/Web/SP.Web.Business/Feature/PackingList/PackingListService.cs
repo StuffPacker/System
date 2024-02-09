@@ -77,4 +77,19 @@ public class PackingListService : IPackingListService
 
         return list;
     }
+
+    public async Task<List<PackingListViewModel>> GetPackingListsPublicByUserId(Guid userId, Guid currentUserId)
+    {
+        var models = await _apiPackingListClient.GetPackingListsByUserId(userId, currentUserId);
+        var list = new List<PackingListViewModel>();
+        foreach (var item in models)
+        {
+            if (item.IsPublic)
+            {
+                list.Add(PackingListViewModelMapper.Map(item));
+            }
+        }
+
+        return list;
+    }
 }

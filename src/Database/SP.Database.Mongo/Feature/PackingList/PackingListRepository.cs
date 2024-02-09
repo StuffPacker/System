@@ -152,6 +152,11 @@ public class PackingListRepository : DataBaseFetchBase, IPackingListRepository
     private List<PackingListGroupModel> GetGroupsModel(List<PackingListGroupsEntity> resultsGroups)
     {
         var list = new List<PackingListGroupModel>();
+        if (resultsGroups == null)
+        {
+            return list;
+        }
+
         foreach (var item in resultsGroups)
         {
             list.Add(new PackingListGroupModel

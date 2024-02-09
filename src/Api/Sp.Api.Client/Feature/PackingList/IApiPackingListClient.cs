@@ -19,4 +19,6 @@ public interface IApiPackingListClient
     Task Update(PackingListModel model, Guid userId);
 
     Task<IEnumerable<PackingListModel>> GetPackingListsPublic();
+
+    Task<IEnumerable<PackingListModel>> GetPackingListsByUserId(Guid userId, Guid currentUserId);
 }

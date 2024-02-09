@@ -19,15 +19,33 @@
             </div>
         </div>
         <div class="col-md-8">
-            &nbsp;
+            <h2 class="sub-header">Public Packing lists</h2>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody data-bind="foreach: PackingListsPublic">
+                    <tr>
+                        <td>
+                            <a data-bind="attr:{href:Link, title:Name},text:Name"></a>
+                        </td>
+                        <td>
+                            <img alt="Language" style="width: 40px;" data-bind="attr:{src:FlagUrl}"/>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-    
-    
-    
-    
-  
+
+
 </div>
+
 @section footerjs
 {
     <script type="text/javascript">  
