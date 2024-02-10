@@ -6,7 +6,6 @@ using SP.Web.Business.Feature.PackingList.Mapper;
 
 namespace SP.Web.Site.Features.PackingList.Printable;
 
-[Authorize]
 [Route("packinglist/{id}/print")]
 public class PackingListPrintController : ControllerBase
 {
