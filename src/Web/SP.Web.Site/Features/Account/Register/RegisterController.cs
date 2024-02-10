@@ -1,6 +1,8 @@
+using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SP.Web.Business.Feature.Account.Register;
+using SP.Web.Business.Feature.User.CreateUser;
 using SP.Web.Site.Model;
 
 namespace SP.Web.Site.Features.Account.Register;
@@ -11,6 +13,7 @@ public class RegisterController : Controller
     private readonly SignInManager<StuffPackerUser> _signInManager;
     private readonly UserManager<StuffPackerUser> _userManager;
     private readonly IUserStore<StuffPackerUser> _userStore;
+    private readonly IMediator _mediator;
 
     // private readonly IUserEmailStore<IdentityUser> _emailStore;
     private readonly ILogger<RegisterController> _logger;
@@ -20,7 +23,8 @@ public class RegisterController : Controller
         UserManager<StuffPackerUser> userManager,
         IUserStore<StuffPackerUser> userStore,
         SignInManager<StuffPackerUser> signInManager,
-        ILogger<RegisterController> logger)
+        ILogger<RegisterController> logger,
+        IMediator mediator)
     {
         _userManager = userManager;
         _userStore = userStore;
@@ -28,6 +32,7 @@ public class RegisterController : Controller
         // _emailStore = GetEmailStore();
         _signInManager = signInManager;
         _logger = logger;
+        _mediator = mediator;
 
         // _emailSender = emailSender;
     }
@@ -58,6 +63,17 @@ public class RegisterController : Controller
                 }
 
                 await _signInManager.SignInAsync(user, false);
+
+                try
+                {
+                    var user2 = await _userManager.FindByEmailAsync(inputModel.Email);
+                    await _mediator.Send(new CreateUserCommand(Guid.Parse(user2!.Id), Guid.Parse(user2!.Id)));
+                }
+                catch (Exception e)
+                {
+                    _logger.LogError(e.ToString());
+                }
+
                 return LocalRedirect(returnUrl);
             }
 

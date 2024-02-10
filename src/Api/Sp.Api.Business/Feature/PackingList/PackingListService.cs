@@ -28,7 +28,7 @@ public class PackingListService : IPackingListService
         return await GetById(id);
     }
 
-    public async Task<List<PackingListDto>> GetPackingLists(Guid userId)
+    public async Task<List<PackingListDto>> GetPackingListsByUserId(Guid userId)
     {
         var result = await _packingListRepository.GetByUserId(userId);
         var list = new List<PackingListDto>();

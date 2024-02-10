@@ -12,7 +12,7 @@ public interface IApiItemClient
 
     Task Delete(string id, Guid userId);
 
-    Task<ItemModel> GetById(string id, Guid userId);
+    Task<ItemModel?> GetById(string id, Guid userId);
 
     Task<ItemModel> Update(Guid userId, string id, ItemUpdateInputDto model);
 }

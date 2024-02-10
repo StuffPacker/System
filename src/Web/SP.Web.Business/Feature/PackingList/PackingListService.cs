@@ -20,7 +20,7 @@ public class PackingListService : IPackingListService
     public async Task<PackingListViewModel> GetPackingListById(string id, Guid userId)
     {
        var model = await _apiPackingListClient.GetPackingList(id, userId);
-       return PackingListViewModelMapper.Map(model);
+       return PackingListViewModelMapper.Map(model!);
     }
 
     public async Task<List<PackingListViewModel>> GetPackingLists(Guid userId)
@@ -73,6 +73,21 @@ public class PackingListService : IPackingListService
         foreach (var item in models)
         {
             list.Add(PackingListViewModelMapper.Map(item));
+        }
+
+        return list;
+    }
+
+    public async Task<List<PackingListViewModel>> GetPackingListsPublicByUserId(Guid userId, Guid currentUserId)
+    {
+        var models = await _apiPackingListClient.GetPackingListsByUserId(userId, currentUserId);
+        var list = new List<PackingListViewModel>();
+        foreach (var item in models)
+        {
+            if (item.IsPublic)
+            {
+                list.Add(PackingListViewModelMapper.Map(item));
+            }
         }
 
         return list;

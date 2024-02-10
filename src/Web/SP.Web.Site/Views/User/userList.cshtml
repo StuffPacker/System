@@ -1,0 +1,28 @@
+@{
+    Layout = "_Layout";
+}
+<div id="userListPage">
+    <div class="row">
+       <!-- ko foreach: Users -->
+               <div class="col-md-2">
+                      <div class="thumbnail" style="overflow: hidden;">
+                           <img src="/img/hiking.jpg" alt="user image">
+                           <div class="caption">
+                             <h3 data-bind="text:Name"></h3>
+                             <p></p>
+                               <p>
+                                   <a href="#" data-bind="attr:{href:ProfileUrl}" class="btn btn-primary">Go to profile</a>
+                               </p>
+                           </div>
+                         </div>
+                      </div>
+           <!-- /ko -->
+    </div>
+</div>
+
+@section footerjs
+{
+    <script type="text/javascript">  
+  ko.applyBindings(UserListViewModel(), document.getElementById('userListPage'));  
+  </script>
+}
