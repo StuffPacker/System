@@ -20,7 +20,7 @@ public class PackingListPrintController : ControllerBase
     [Route("")]
     public async Task<ActionResult> Packinglist(string id)
     {
-        var model = await _mediator.Send(new GetPackingListPrintCommand(id));
+        var model = await _mediator.Send(new GetPackingListPrintCommand(id, GetUserId()));
         if (model.IsPublic)
         {
             return View("PackingListPrint", PackingListViewModelMapper.Map(model));

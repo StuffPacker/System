@@ -8,7 +8,7 @@ public interface IApiPackingListClient
 
     Task<PackingListModel> GetPackingListPublic(string requestId);
 
-    Task<PackingListModel> GetPackingListPrint(string requestId);
+    Task<PackingListModel> GetPackingListPrint(string requestId, Guid currentUser);
 
     Task<IEnumerable<PackingListModel>> GetPackingLists(Guid userId);
 

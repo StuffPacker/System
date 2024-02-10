@@ -4,7 +4,7 @@ function PackingListPublicViewModel(id) {
     self.Name = ko.observable("");
     self.Description=ko.observable("");
     self.Groups = ko.observableArray(Groups);
-
+    self.PrintLink = ko.observable("/packinglist/" + id + "/print");
     PLPVMGetPackingList(self, id);
 }
 function PLPVMGetPackingList(self,id)
