@@ -60,7 +60,6 @@ public class PackingListController : SpControllerBase
         return Ok(dto);
     }
 
-    [AllowAnonymous]
     [HttpGet("SpApi/v1/packinglist/{id}/print")]
     public async Task<ActionResult<string>> GetPrint(string id)
     {

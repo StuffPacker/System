@@ -18,7 +18,7 @@ public class GetPackingListPrintCommandHandler : IRequestHandler<GetPackingListP
 
     public async Task<PackingListModel> Handle(GetPackingListPrintCommand request, CancellationToken cancellationToken)
     {
-        var model = await _apiPackingListClient.GetPackingListPrint(request.Id);
+        var model = await _apiPackingListClient.GetPackingListPrint(request.Id, request.CurrentUser);
         return model;
     }
 }
