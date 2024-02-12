@@ -1,6 +1,8 @@
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Sp.Api.Client.Feature.Client;
 using SP.Web.Business.Feature.Item;
 using SP.Web.Business.Feature.PackingList;
 using SP.Web.Business.Feature.PackingList.Mapper;
@@ -10,6 +12,7 @@ using SP.Web.Business.Feature.User.GetUserList;
 using SP.Web.Business.Feature.User.UpdateUser;
 using SP.Web.Business.ViewModel;
 using SP.Web.Site.Features.Item;
+using SP.Web.Site.Model;
 
 namespace SP.Web.Site.Features.User;
 
@@ -19,11 +22,15 @@ public class UserApiController : ControllerBase
 {
     private readonly IMediator _mediator;
     private readonly IPackingListService _packingListService;
+    private readonly UserManager<StuffPackerUser> _userManager;
+    private readonly ISpApiClient _spApiClient;
 
-    public UserApiController(IMediator mediator, IPackingListService packingListService)
+    public UserApiController(IMediator mediator, IPackingListService packingListService, UserManager<StuffPackerUser> userManager, ISpApiClient spApiClient)
     {
         _mediator = mediator;
         _packingListService = packingListService;
+        _userManager = userManager;
+        _spApiClient = spApiClient;
     }
 
     [AllowAnonymous]
@@ -101,5 +108,19 @@ public class UserApiController : ControllerBase
                 ResultData = string.Empty
             });
         }
+    }
+
+    [AllowAnonymous]
+    [Route("GetToken")]
+    public async Task<ActionResult> GetTokenString(string email, string password)
+    {
+        var user = await _userManager.FindByEmailAsync(email);
+        if (await _userManager.CheckPasswordAsync(user!, password))
+        {
+            var token = _spApiClient.GetToken(user!.Id);
+            return Ok(token);
+        }
+
+        return NotFound();
     }
 }
