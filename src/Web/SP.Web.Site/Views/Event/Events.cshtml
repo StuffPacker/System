@@ -1,0 +1,40 @@
+@{
+    Layout = "_Layout";
+}
+<div id="EventsPage">
+    <h1>Events</h1>
+    <input type="button" class="btn-primary" data-bind="click:Create" value="Create new event"/>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody data-bind="foreach: Events">
+            <tr>
+                <td>&nbsp;</td>
+                <td>
+                    <a target="_blank" data-bind="attr:{href:Link}">
+                        <span data-bind="text:Name"></span>
+                    </a>
+                </td>
+                <td>
+                    @* <input type="button" class="btn-primary" value="edit" data-bind="click:Edit"/> *@
+                    @* <span title="Delete" style="color: red; font-size:large;  " class="glyphicon glyphicon-trash" aria-hidden="true" data-bind="click:Delete"></span> *@
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section footerjs
+{
+    <script type="text/javascript">  
+  ko.applyBindings(EventsViewModel, document.getElementById('EventsPage'));  
+  </script>
+}

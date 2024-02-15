@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Sp.Api.Client;
 using SP.Shared.Common;
+using SP.Shared.Common.Feature.Event.Mapper;
 using SP.Shared.Common.Feature.Item.Mapper;
 using SP.Shared.Common.Feature.Jwt;
 using SP.Shared.Common.Feature.PackingList.Mapper;
@@ -54,6 +55,8 @@ public class Startup
             conf.LoginPath = "/login";
         });
         services.AddSingleton<IItemModelMapper, ItemModelMapper>();
+        services.AddSingleton<IEventMapper, EventMapper>();
+
         services.AddSingleton<IPackingListMapper, PackingListMapper>();
         services.AddSingleton<IUserProfileMapper, UserProfileMapper>();
 
