@@ -15,4 +15,6 @@ public interface ISpApiClient
     Task<string> PatchSecure(string url, string userId, object dto);
 
     Task<string> PutSecure(string url, string userId, object dto);
+
+    string GetToken(string id);
 }

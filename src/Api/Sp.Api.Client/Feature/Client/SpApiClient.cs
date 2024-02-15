@@ -110,18 +110,7 @@ public class SpApiClient : ISpApiClient
         throw new InvalidOperationException();
     }
 
-    private HttpClient SecureClient(string userId)
-    {
-        var client = _httpClientFactory.CreateClient("SpApi");
-
-// add new security
-        var token = GetToken(userId);
-        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-
-        return client;
-    }
-
-    private string GetToken(string userid)
+    public string GetToken(string userid)
     {
         var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtOptions.Key));
         var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
@@ -135,5 +124,16 @@ public class SpApiClient : ISpApiClient
             signingCredentials: credentials);
 
         return new JwtSecurityTokenHandler().WriteToken(token);
+    }
+
+    private HttpClient SecureClient(string userId)
+    {
+        var client = _httpClientFactory.CreateClient("SpApi");
+
+// add new security
+        var token = GetToken(userId);
+        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+        return client;
     }
 }
