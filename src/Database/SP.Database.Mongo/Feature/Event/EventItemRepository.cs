@@ -46,21 +46,74 @@ public class EventItemRepository : DataBaseFetchBase, IEventItemRepository
         return model;
     }
 
+    public async Task<IEnumerable<EventModel>> GetByUserId(Guid currentUserId)
+    {
+        var db = _databaseClient.GetDatabase();
+        var collection = db.GetCollection<EventEntity>(MongoDbNames.EventTableName);
+        var builder = Builders<EventEntity>.Filter;
+        var filter = builder.Eq(f => f.UserId, currentUserId.ToString()) | builder.AnyEq(f => f.Users, currentUserId.ToString());
+
+        var results = (await collection.FindAsync(filter)).ToList();
+        if (results == null)
+        {
+            return null!;
+        }
+
+        var list = new List<EventModel>();
+        foreach (var item in results)
+        {
+            list.Add(GetModel(item));
+        }
+
+        return list;
+    }
+
+    public async Task Delete(string id)
+    {
+        var db = _databaseClient.GetDatabase();
+        var collection = db.GetCollection<EventEntity>(MongoDbNames.EventTableName);
+        await collection.DeleteOneAsync(x => x.Id == id.ToString());
+    }
+
+    public async Task<EventModel> GetById(string id)
+    {
+        var db = _databaseClient.GetDatabase();
+        var collection = db.GetCollection<EventEntity>(MongoDbNames.EventTableName);
+        var filter = Builders<EventEntity>.Filter.Eq("Id", id.ToString());
+
+        var results = await (await collection.FindAsync(filter)).FirstOrDefaultAsync();
+        if (results == null)
+        {
+            return null!;
+        }
+
+        return GetModel(results);
+    }
+
     private EventEntity GetEntity(EventModel model)
     {
         return new EventEntity
         {
             Id = model.Id,
-            Name = model.Name
+            Name = model.Name,
+            UserId = model.UserId.ToString()
         };
     }
 
     private EventModel GetModel(EventEntity entity)
     {
+        var users = new List<Guid>();
+        if (entity.Users != null)
+        {
+            users = entity.Users.Select(user => Guid.Parse(user)).ToList();
+        }
+
         return new EventModel
         {
             Id = entity.Id,
-            Name = entity.Name
+            Name = entity.Name,
+            UserId = Guid.Parse(entity.UserId),
+            Users = users
         };
     }
 }

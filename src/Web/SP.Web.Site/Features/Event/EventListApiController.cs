@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SP.Web.Business.Feature.Event;
 using SP.Web.Business.Feature.Event.CreateEvent;
+using SP.Web.Business.Feature.Event.DeleteEvent;
 using SP.Web.Business.Feature.Event.GetEvents;
 using SP.Web.Business.ViewModel;
 
@@ -23,7 +24,7 @@ public class EventListApiController : ControllerBase
     public async Task<ActionResult> EventList()
     {
         var result = await _mediator.Send(new GetEventsCommand(GetUserId().ToString()));
-        var vm = EventViewModelMapper.Map(result);
+        var vm = EventViewModelMapper.Map(result, GetUserId());
 
         return Ok(new ResultJsonModel
         {
@@ -40,7 +41,19 @@ public class EventListApiController : ControllerBase
         return Ok(new ResultJsonModel
         {
             Meta = new MetaModel { Code = 200 },
-            ResultData = EventViewModelMapper.Map(item)
+            ResultData = EventViewModelMapper.Map(item, GetUserId())
+        });
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<ActionResult> Delete(string id)
+    {
+        var item = await _mediator.Send(new DeleteEventCommand(id, GetUserId()));
+
+        return Ok(new ResultJsonModel
+        {
+            Meta = new MetaModel { Code = 200 },
+            ResultData = item
         });
     }
 }

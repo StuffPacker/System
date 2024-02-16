@@ -15,7 +15,7 @@ public class GetEventsCommandHandler : IRequestHandler<GetEventsCommand, List<Ev
 
     public async Task<List<EventModel>> Handle(GetEventsCommand request, CancellationToken cancellationToken)
     {
-        var result = await _apiEventClient.Get(request.UserId);
+        var result = await _apiEventClient.GetByUser(request.UserId);
         return result;
     }
 }

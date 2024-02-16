@@ -21,7 +21,9 @@ public class EventMapper : IEventMapper
         return new()
         {
             Id = dto.Id,
-            Name = dto.Name
+            Name = dto.Name,
+            UserId = Guid.Parse(dto.UserId),
+            Users = dto.Users.Select(user => Guid.Parse(user)).ToList()
         };
     }
 
@@ -41,7 +43,9 @@ public class EventMapper : IEventMapper
         return new EventDto
         {
             Id = dto.Id,
-            Name = dto.Name
+            Name = dto.Name,
+            UserId = dto.UserId.ToString(),
+            Users = dto.Users.Select(item => item.ToString()).ToList()
         };
     }
 }

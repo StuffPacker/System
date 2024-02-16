@@ -30,6 +30,19 @@ public class ApiEventClient : IApiEventClient
         return models;
     }
 
+    public async Task<List<EventModel>> GetByUser(string currentUser)
+    {
+        var result = await _apiClient.GetSecure("SpApi/v1/user/" + currentUser + "/event/", currentUser.ToString());
+        if (result == null)
+        {
+            return new List<EventModel>();
+        }
+
+        var dtos = JsonHandler.Deserialize<List<EventDto>>(result);
+        var models = _eventMapper.Map(dtos!);
+        return models;
+    }
+
     public async Task<EventModel> Create(Guid currentUser)
     {
         var dto = new EventDto
@@ -39,5 +52,23 @@ public class ApiEventClient : IApiEventClient
         var result = await _apiClient.PostSecure("SpApi/v1/event/", currentUser.ToString(), dto);
         var newDto = JsonHandler.Deserialize<EventDto>(result);
         return _eventMapper.Map(newDto);
+    }
+
+    public async Task<EventModel> GetById(string id, Guid userId)
+    {
+        var result = await _apiClient.GetSecure("SpApi/v1/event/" + id, userId.ToString());
+        if (result == null)
+        {
+            return null!;
+        }
+
+        var dtos = JsonHandler.Deserialize<EventDto>(result);
+        var model = _eventMapper.Map(dtos!);
+        return model;
+    }
+
+    public async Task Delete(string id, Guid userId)
+    {
+        await _apiClient.DeleteSecure("SpApi/v1/event/" + id, userId.ToString());
     }
 }

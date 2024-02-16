@@ -8,4 +8,10 @@ public interface IEventItemRepository
     Task<IEnumerable<EventModel>> Get();
 
     Task<EventModel> Create(EventModel model);
+
+    Task<IEnumerable<EventModel>> GetByUserId(Guid currentUserId);
+
+    Task Delete(string id);
+
+    Task<EventModel> GetById(string id);
 }

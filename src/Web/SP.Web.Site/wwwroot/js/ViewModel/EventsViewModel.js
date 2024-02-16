@@ -5,14 +5,23 @@ function EventsViewModel() {
     EventListVMGetAllItems(self);
     self.Create = function ()
     {
-        EventListVMCreateUserItem();
-    }
+        EventListVMCreateEvent();
+    }   
 }
-function EventListVMCreateUserItem()
+function EventListVMDeleteEvent(self,id)
+{
+    SPApiDelete('/api/v1/event/'+id, function (obj) {
+        if (obj != null) {
+            self.Events.removeAll();
+            EventListVMGetAllItems(self);
+        }
+    });
+}
+function EventListVMCreateEvent()
 {
     SPApiPost('/api/v1/event/',"", function (obj) {
         if (obj != null) {
-            // window.location.href = "/event/" + obj.Id + "?edit=true";
+             window.location.href = "/event/" + obj.Id + "?edit=true";
         }
     });
 }
@@ -31,6 +40,11 @@ function EventListVMAddEvent(self,dto)
     var obj=new Object();
     obj.Name=dto.Name;
     obj.Id=dto.Id;
-    obj.Link="/event/"+dto.Id
+    obj.Link="/event/"+dto.Id;
+    obj.IsOwner=dto.IsOwner;
+    obj.Delete = function ()
+    {
+        EventListVMDeleteEvent(self,dto.Id);
+    }
     self.Events.push(obj);
 }

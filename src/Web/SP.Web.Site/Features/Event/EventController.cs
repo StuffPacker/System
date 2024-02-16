@@ -9,4 +9,10 @@ public class EventController : Controller
     {
         return View("Events");
     }
+
+    [Route("event/{id}")]
+    public ActionResult Event(string id)
+    {
+        return View("Event", id);
+    }
 }

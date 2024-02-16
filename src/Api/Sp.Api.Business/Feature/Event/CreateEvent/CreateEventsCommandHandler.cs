@@ -18,6 +18,7 @@ public class CreateEventsCommandHandler : IRequestHandler<CreateEventsCommand, E
 
     public async Task<EventDto> Handle(CreateEventsCommand request, CancellationToken cancellationToken)
     {
+        request.Dto.UserId = request.CurrentUser.ToString();
         var model = _eventModelMapper.Map(request.Dto);
         var result = await _eventItemRepository.Create(model);
         return _eventModelMapper.Map(result!);

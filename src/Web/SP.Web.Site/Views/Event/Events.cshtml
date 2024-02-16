@@ -23,8 +23,7 @@
                     </a>
                 </td>
                 <td>
-                    @* <input type="button" class="btn-primary" value="edit" data-bind="click:Edit"/> *@
-                    @* <span title="Delete" style="color: red; font-size:large;  " class="glyphicon glyphicon-trash" aria-hidden="true" data-bind="click:Delete"></span> *@
+                    <span title="Delete" style="color: red; font-size:large;  " class="glyphicon glyphicon-trash" aria-hidden="true" data-bind="visible:IsOwner, click:Delete"></span>
                 </td>
             </tr>
             </tbody>

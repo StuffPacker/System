@@ -11,7 +11,8 @@
       "wwwroot/js/ViewModel/HomeViewModel.js",
       "wwwroot/js/ViewModel/UserViewModel.js",
       "wwwroot/js/ViewModel/UserListViewModel.js",
-      "wwwroot/js/ViewModel/EventsViewModel.js"      
+      "wwwroot/js/ViewModel/EventsViewModel.js",
+      "wwwroot/js/ViewModel/EventPageViewModel.js"      
     ]
   }
 ]
