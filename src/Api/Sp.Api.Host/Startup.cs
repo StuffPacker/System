@@ -4,6 +4,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Sp.Api.Business;
 using SP.Shared.Common;
+using SP.Shared.Common.Feature.Event.Mapper;
 using SP.Shared.Common.Feature.Item.Mapper;
 using SP.Shared.Common.Feature.Jwt;
 using SP.Shared.Common.Feature.PackingList.Mapper;
@@ -27,6 +28,8 @@ public class Startup
     {
         var key = Configuration.GetValue<string>("JwtOptions:Key");
         services.AddSingleton<IItemModelMapper, ItemModelMapper>();
+        services.AddSingleton<IEventMapper, EventMapper>();
+
         services.AddSingleton<IUserProfileMapper, UserProfileMapper>();
 
         services.AddSingleton<IPackingListMapper, PackingListMapper>();

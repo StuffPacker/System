@@ -1,5 +1,7 @@
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Sp.Api.Business.Feature.Event.GetEventByUser;
 using Sp.Api.Business.Feature.PackingList;
 using Sp.Api.Business.Feature.User;
 using SP.Shared.Common.Feature.User.Dto;
@@ -13,12 +15,14 @@ public class UserController : SpControllerBase
     private readonly IUserService _userService;
     private readonly IUserProfileMapper _userProfileMapper;
     private readonly IPackingListService _packingListService;
+    private readonly IMediator _mediator;
 
-    public UserController(IUserService userService, IUserProfileMapper userProfileMapper, IPackingListService packingListService)
+    public UserController(IUserService userService, IUserProfileMapper userProfileMapper, IPackingListService packingListService, IMediator mediator)
     {
         _userService = userService;
         _userProfileMapper = userProfileMapper;
         _packingListService = packingListService;
+        _mediator = mediator;
     }
 
     [HttpGet("SpApi/v1/user/{id}")]
@@ -80,5 +84,12 @@ public class UserController : SpControllerBase
     {
         var dto = await _packingListService.GetPackingListsByUserId(Guid.Parse(id));
         return Ok(dto);
+    }
+
+    [HttpGet("SpApi/v1/user/{id}/event/")]
+    public async Task<ActionResult<string>> GetEventByUser(string id)
+    {
+        var result = await _mediator.Send(new GetEventByUserCommand(GetUser()));
+        return Ok(result);
     }
 }

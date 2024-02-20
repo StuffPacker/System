@@ -1,0 +1,16 @@
+@{
+    Layout = "_Layout";
+}
+<div id="EventPage">
+    <h1>Event</h1>
+    <p>
+        Here you soon will find new functions.
+        The event is a way to create a common list with your friends.
+    </p>
+</div>
+@section footerjs
+{
+    <script type="text/javascript">      
+  ko.applyBindings(EventPageViewModel('@Model'), document.getElementById('EventPage'));  
+  </script>
+}

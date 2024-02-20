@@ -32,6 +32,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Features\Event\EventList\" />
     <Folder Include="wwwroot\img\" />
   </ItemGroup>
 

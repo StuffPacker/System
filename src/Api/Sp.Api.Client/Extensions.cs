@@ -1,6 +1,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Sp.Api.Client.Feature.Client;
+using Sp.Api.Client.Feature.Event;
 using Sp.Api.Client.Feature.Feature.Item;
 using Sp.Api.Client.Feature.Health;
 using Sp.Api.Client.Feature.PackingList;
@@ -19,6 +20,7 @@ public static class Extensions
         services.AddScoped<IApiPackingListClient, ApiPackingListClient>();
         services.AddScoped<IApiItemClient, ApiItemClient>();
         services.AddScoped<IApiUserClient, ApiUserClient>();
+        services.AddScoped<IApiEventClient, ApiEventClient>();
 
         services.AddHttpClient("SpApi", httpClient =>
         {
